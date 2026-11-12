@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Antia Diaz — Structural Foundation</title>
+    <meta
+      name="description"
+      content="Structural foundation and three-space horizontal navigation system for antiadiaz.com (Writing, Home, Illustration)."
+    />
+    <meta property="og:title" content="Antia Diaz" />
+    <meta
+      property="og:description"
+      content="Structural foundation and three-space horizontal navigation system for antiadiaz.com."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="site-shell" id="site-shell">
+      <!-- Persistent Top Header -->
+      <header class="site-header" role="banner">
+        <nav class="site-nav" aria-label="Primary Space Navigation">
+          <button
+            type="button"
+            class="site-nav__link site-nav__brand"
+            data-nav-space="home"
+            aria-controls="space-home"
+          >
+            ANTIA DIAZ
+          </button>
+        </nav>
+      </header>
+
+      <!-- Horizontal Three-Space Viewport -->
+      <main class="spaces-viewport" id="spaces-viewport">
+        <div
+          class="spaces-track"
+          id="spaces-track"
+          data-active-space="home"
+        >
+          <!-- LEFT SPACE: WRITING -->
+          <section
+            id="space-writing"
+            class="space space--writing"
+            data-space="writing"
+            aria-label="Writing space"
+          >
+            <div class="space__inner">
+              <div class="space__topbar">
+                <button
+                  type="button"
+                  class="space__return-btn"
+                  data-nav-space="home"
+                >
+                  Return to HOME &rarr;
+                </button>
+              </div>
+
+              <div class="space__header-block">
+                <h1 class="space__title">WRITING</h1>
+              </div>
+
+              <div
+                id="writing-content"
+                class="space__placeholder-container"
+                aria-label="Writing content container"
+              ></div>
+            </div>
+          </section>
+
+          <!-- CENTRAL SPACE: HOME -->
+          <section
+            id="space-home"
+            class="space space--home"
+            data-space="home"
+            aria-label="Home space"
+          >
+            <div class="home-sections">
+              <!-- 1. HERO -->
+              <section id="hero" class="home-section home-section--hero" aria-labelledby="heading-hero">
+                <div class="hero-stage">
+                  <div class="hero-headline-wrap">
+                    <div class="hero-headline-band">
+                      <button
+                        type="button"
+                        class="hero-side-link hero-side-link--left"
+                        data-nav-space="writing"
+                        aria-controls="space-writing"
+                      >
+                        <svg
+                          class="hero-side-link__arrow"
+                          width="15"
+                          height="15"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M13 8H3M3 8L7.5 3.5M3 8L7.5 12.5"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                        <span>WRITING</span>
+                      </button>
+
+                      <h1 id="heading-hero" class="hero-headline" aria-label="web dev &amp; design">
+                        <span class="hero-line hero-line--1">
+                          <span class="hero-word-mask">
+                            <span class="hero-word hero-word--sans" style="--word-i: 0">web dev</span>
+                          </span>
+                        </span>
+                        <span class="hero-line hero-line--2">
+                          <span class="hero-word-mask">
+                            <span class="hero-word hero-word--serif" style="--word-i: 1">&amp;</span>
+                          </span>
+                          <span class="hero-word-mask">
+                            <span class="hero-word hero-word--serif" style="--word-i: 2">design</span>
+                          </span>
+                        </span>
+                      </h1>
+
+                      <button
+                        type="button"
+                        class="hero-side-link hero-side-link--right"
+                        data-nav-space="illustration"
+                        aria-controls="space-illustration"
+                      >
+                        <span>ILLUSTRATION</span>
+                        <svg
+                          class="hero-side-link__arrow"
+                          width="15"
+                          height="15"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="hero-masonry-viewport" id="hero-masonry-viewport">
+                    <div class="hero-masonry" id="hero-masonry" aria-label="Selected visual gallery">
+                    <!-- Column 1 -->
+                    <div class="hero-masonry__col hero-masonry__col--1">
+                      <button
+                        type="button"
+                        class="hero-card hero-card--tall"
+                        style="--card-i: 0"
+                        data-tags="design"
+                        data-caption="Architectural Space — Concrete & Daylight"
+                      >
+                        <img
+                          src="/src/assets/images/hero_masonry_arch_1794514819888.jpg"
+                          alt="Minimalist concrete gallery interior with afternoon sunlight"
+                          loading="eager"
+                          referrerpolicy="no-referrer"
+                        />
+                      </button>
+
+                      <button
+                        type="button"
+                        class="hero-card hero-card--square"
+                        style="--card-i: 4"
+                        data-tags="dev"
+                        data-caption="Digital Craft — Web Grid Architecture"
+                      >
+                        <img
+                          src="/src/assets/images/hero_masonry_digital_1794514822260.jpg"
+                          alt="Silver laptop displaying typographic web grid on concrete plinth"
+                          loading="eager"
+                          referrerpolicy="no-referrer"
+                        />
+                      </button>
+                    </div>
+
+                    <!-- Column 2 (Overlaps text higher) -->
+                    <div class="hero-masonry__col hero-masonry__col--2">
+                      <button
+                        type="button"
+                        class="hero-card hero-card--square"
+                        style="--card-i: 1"
+                        data-tags="design"
+                        data-caption="Studio Portrait — Monochrome Silhouette"
+                      >
+                        <img
+                          src="/src/assets/images/hero_masonry_portrait_1794514820509.jpg"
+                          alt="Black and white editorial studio fashion portrait"
+                          loading="eager"
+                          referrerpolicy="no-referrer"
+                        />
+                      </button>
+
+                      <button
+                        type="button"
+                        class="hero-card hero-card--tall"
+                        style="--card-i: 5"
+                        data-tags="dev"
+                        data-caption="Materiality — Smoked Glass & Aluminum"
+                      >
+                        <img
+                          src="/src/assets/images/hero_masonry_object_1794514821367.jpg"
+                          alt="Smoked glass prism and brushed aluminum cylinder with refracted light"
+                          loading="eager"
+                          referrerpolicy="no-referrer"
+                        />
+                      </button>
+                    </div>
+
+                    <!-- Column 3 (Leaves breathing room for headline) -->
+                    <div class="hero-masonry__col hero-masonry__col--3">
+                      <button
+                        type="button"
+                        class="hero-card hero-card--landscape"
+                        style="--card-i: 2"
+                        data-tags="dev"
+                        data-caption="Atmosphere — Coastal Horizon"
+                      >
+                        <img
+                          src="/src/assets/images/hero_masonry_light_1794514821116.jpg"
+                          alt="Brutalist concrete terrace overlooking calm pale sea"
+                          loading="eager"
+                          referrerpolicy="no-referrer"
+                        />
+                      </button>
+
+                      <button
+                        type="button"
+                        class="hero-card hero-card--tall"
+                        style="--card-i: 6"
+                        data-tags="design"
+                        data-caption="Print Direction — Typographic Systems"
+                      >
+                        <img
+                          src="/src/assets/images/hero_masonry_print_1794514820326.jpg"
+                          alt="Minimalist Swiss typographic print posters on pale oak table"
+                          loading="eager"
+                          referrerpolicy="no-referrer"
+                        />
+                      </button>
+                    </div>
+
+                    <!-- Column 4 (Overlaps text right side) -->
+                    <div class="hero-masonry__col hero-masonry__col--4">
+                      <button
+                        type="button"
+                        class="hero-card hero-card--tall"
+                        style="--card-i: 3"
+                        data-tags="dev"
+                        data-caption="Atelier — Creative Direction Space"
+                      >
+                        <img
+                          src="/src/assets/images/hero_masonry_studio_1794514822086.jpg"
+                          alt="Contemporary creative workspace with industrial windows and natural light"
+                          loading="eager"
+                          referrerpolicy="no-referrer"
+                        />
+                      </button>
+
+                      <button
+                        type="button"
+                        class="hero-card hero-card--landscape"
+                        style="--card-i: 7"
+                        data-tags="design"
+                        data-caption="Editorial Study — Sculptural Form"
+                      >
+                        <img
+                          src="/src/assets/images/hero_masonry_still_1794514819392.jpg"
+                          alt="Ceramic vessel and art monograph on pale travertine surface"
+                          loading="eager"
+                          referrerpolicy="no-referrer"
+                        />
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Gallery Floating Sticky Glass Filter (stops 20px from gallery bottom) -->
+                  <nav class="home-anchors" aria-label="Gallery Filters">
+                    <ul class="home-anchors__list">
+                      <li>
+                        <button
+                          type="button"
+                          class="home-anchors__link is-active"
+                          data-filter="all"
+                          aria-pressed="true"
+                        >
+                          ALL
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          class="home-anchors__link"
+                          data-filter="dev"
+                          aria-pressed="false"
+                        >
+                          DEV
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          class="home-anchors__link"
+                          data-filter="design"
+                          aria-pressed="false"
+                        >
+                          DESIGN
+                        </button>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </section>
+
+              <!-- 2. CONTACT -->
+              <section
+                id="contact"
+                class="home-section home-section--contact"
+                aria-labelledby="heading-contact"
+              >
+                <div class="contact-layout">
+                  <div class="contact-intro">
+                    <h2 id="heading-contact" class="contact-heading">
+                      Let’s work <em class="contact-heading__italic">together</em>
+                    </h2>
+                    <p class="contact-copy">
+                      Available for custom web development, digital design systems, and selected
+                      creative collaborations.
+                    </p>
+                    <p class="contact-direct">hola@antiadiaz.com</p>
+                  </div>
+
+                  <form id="contact-form" class="contact-form" novalidate>
+                    <div class="contact-form__row">
+                      <div class="contact-field">
+                        <label for="contact-name" class="contact-label">Name</label>
+                        <input
+                          id="contact-name"
+                          name="name"
+                          type="text"
+                          class="contact-input"
+                          placeholder="Your name"
+                          autocomplete="name"
+                        />
+                      </div>
+
+                      <div class="contact-field">
+                        <label for="contact-email" class="contact-label">Email</label>
+                        <input
+                          id="contact-email"
+                          name="email"
+                          type="email"
+                          class="contact-input"
+                          placeholder="you@domain.com"
+                          autocomplete="email"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="contact-field">
+                      <label for="contact-subject" class="contact-label">Subject</label>
+                      <input
+                        id="contact-subject"
+                        name="subject"
+                        type="text"
+                        class="contact-input"
+                        placeholder="Web development, design..."
+                      />
+                    </div>
+
+                    <div class="contact-field">
+                      <label for="contact-message" class="contact-label">Message</label>
+                      <textarea
+                        id="contact-message"
+                        name="message"
+                        rows="4"
+                        class="contact-input contact-textarea"
+                        placeholder="Tell me about your project"
+                      ></textarea>
+                    </div>
+
+                    <div class="contact-form__actions">
+                      <button type="submit" class="contact-submit">
+                        <span>Send message</span>
+                        <svg
+                          class="contact-submit__arrow"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </section>
+            </div>
+          </section>
+
+          <!-- RIGHT SPACE: ILLUSTRATION -->
+          <section
+            id="space-illustration"
+            class="space space--illustration"
+            data-space="illustration"
+            aria-label="Illustration space"
+          >
+            <div class="space__inner">
+              <div class="space__topbar">
+                <button
+                  type="button"
+                  class="space__return-btn"
+                  data-nav-space="home"
+                >
+                  &larr; Return to HOME
+                </button>
+              </div>
+
+              <div class="space__header-block">
+                <h1 class="space__title">ILLUSTRATION</h1>
+              </div>
+
+              <div
+                id="illustration-content"
+                class="space__placeholder-container"
+                aria-label="Illustration content container"
+              ></div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <!-- Fullscreen Pop-Up Lightbox for Hero Masonry -->
+      <div
+        id="hero-lightbox"
+        class="hero-lightbox"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="hero-lightbox-title"
+        hidden
+      >
+        <button
+          type="button"
+          id="hero-lightbox-close"
+          class="hero-lightbox__close"
+          aria-label="Cerrar pop-up"
+        >
+          &times;
+        </button>
+        <figure class="hero-lightbox__figure">
+          <img id="hero-lightbox-img" class="hero-lightbox__img" src="" alt="" />
+          <figcaption class="hero-lightbox__meta">
+            <h2 id="hero-lightbox-title" class="hero-lightbox__title"></h2>
+            <p id="hero-lightbox-desc" class="hero-lightbox__desc">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>

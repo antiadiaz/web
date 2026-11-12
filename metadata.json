@@ -1,0 +1,6 @@
+{
+  "name": "antiadiaz.com",
+  "description": "Structural foundation and three-space horizontal navigation system for antiadiaz.com (Writing, Home, Illustration).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
