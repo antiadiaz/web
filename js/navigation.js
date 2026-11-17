@@ -3,7 +3,7 @@
  *
  * Manages:
  * 1. Horizontal space switching between WRITING (left), HOME (center), and ILLUSTRATION (right).
- * 2. Independent vertical anchor navigation inside HOME (HERO, CONTACT).
+ * 2. Independent vertical anchor navigation inside HOME (HERO, ABOUT, CONTACT).
  * 3. Accessibility state (inert & aria-current) so off-screen spaces cannot steal keyboard focus.
  */
 
@@ -14,7 +14,7 @@ export const SPACES = Object.freeze({
 });
 
 const VALID_SPACES = new Set(Object.values(SPACES));
-const HOME_SECTIONS = ['hero', 'contact'];
+const HOME_SECTIONS = ['hero', 'about', 'contact'];
 
 export function initNavigation() {
   const track = document.getElementById('spaces-track');

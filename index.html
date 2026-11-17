@@ -330,7 +330,107 @@
                 </div>
               </section>
 
-              <!-- 2. CONTACT -->
+              <!-- 2. ABOUT ME -->
+              <section
+                id="about"
+                class="home-section home-section--about"
+                aria-labelledby="heading-about"
+              >
+                <div class="about-layout">
+                  <div class="about-intro">
+                    <h2 id="heading-about" class="about-heading">
+                      About <em class="about-heading__italic">me</em>
+                    </h2>
+                    <div class="contact-links">
+                      <a
+                        href="https://www.instagram.com/antiadiaz/"
+                        class="contact-direct"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span>Instagram</span>
+                        <svg
+                          class="contact-direct__arrow"
+                          width="13"
+                          height="13"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div class="about-content">
+                    <p class="about-lead">
+                      Front-End &amp; WordPress Developer with 10+ years of experience, expanding
+                      into AI-powered web platforms and mobile applications.
+                    </p>
+                    <p class="about-copy">
+                      Bridging Graphic Design, UI/UX, and Front-End Engineering, I take digital
+                      projects from concept to deployment with full end-to-end ownership. Since
+                      2021, I have partnered independently with national and international
+                      brands—including an ongoing collaboration with Multiópticas (~16 campaign
+                      landing pages/month, Salesforce, and multi-site WordPress management) as well
+                      as Hyundai, Leroy Merlin, Yamaha, and El Corte Inglés.
+                    </p>
+                    <p class="about-copy">
+                      Today, I combine that technical and creative foundation with AI-assisted
+                      development to architect and build complex, fully functional websites, web
+                      apps, and mobile experiences.
+                    </p>
+
+                    <dl class="about-roles" aria-label="Core areas">
+                      <div class="about-role">
+                        <dt class="about-role__title">Front-End, WordPress &amp; AI Development</dt>
+                        <dd class="about-role__desc">
+                          HTML5, CSS3, JavaScript, jQuery &amp; React. Custom WordPress and
+                          WooCommerce (PHP, Bricks, ACF Pro, Elementor, WPML), technical SEO, Git,
+                          Twig &amp; Salesforce—plus AI-assisted development of complex websites,
+                          web apps, and mobile apps.
+                        </dd>
+                      </div>
+                      <div class="about-role">
+                        <dt class="about-role__title">UI/UX Design &amp; Product Strategy</dt>
+                        <dd class="about-role__desc">
+                          UX Research (interviews, questionnaires, benchmarking), user personas,
+                          Customer Journey Mapping, information architecture, Card Sorting, user
+                          flows, Design Thinking, usability &amp; Nielsen&apos;s heuristics,
+                          heuristic evaluation, UX Writing, accessibility, behavioral/persuasive
+                          design, and dark pattern detection.
+                        </dd>
+                      </div>
+                      <div class="about-role">
+                        <dt class="about-role__title">UI Design, Prototyping &amp; Optimization</dt>
+                        <dd class="about-role__desc">
+                          Figma, wireframing, interactive prototyping, interface design, visual
+                          hierarchy, color theory, typography, grid systems, Atomic Design, Design
+                          Systems, Responsive &amp; Mobile First design, user &amp; A/B testing,
+                          heatmaps, eye tracking, and iterative optimization.
+                        </dd>
+                      </div>
+                      <div class="about-role">
+                        <dt class="about-role__title">Graphic Design &amp; Illustration</dt>
+                        <dd class="about-role__desc">
+                          Degree in Graphic Design and Master&apos;s in Web Development. Adobe
+                          Photoshop &amp; Illustrator, visual direction, digital and print design,
+                          and published author and illustrator.
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
+                </div>
+              </section>
+
+              <!-- 3. CONTACT -->
               <section
                 id="contact"
                 class="home-section home-section--contact"
@@ -345,13 +445,51 @@
                       Available for custom web development, digital design systems, and selected
                       creative collaborations.
                     </p>
-                    <p class="contact-direct">hola@antiadiaz.com</p>
+                    <div class="contact-links">
+                      <a href="mailto:hola@antiadiaz.com" class="contact-direct">
+                        hola@antiadiaz.com
+                      </a>
+                      <a
+                        href="https://www.linkedin.com/in/antiadiaz/"
+                        class="contact-direct"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span>LinkedIn</span>
+                        <svg
+                          class="contact-direct__arrow"
+                          width="13"
+                          height="13"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </a>
+                    </div>
                   </div>
 
                   <form id="contact-form" class="contact-form" novalidate>
+                    <input
+                      id="contact-honey"
+                      name="_honey"
+                      type="text"
+                      class="contact-honey"
+                      tabindex="-1"
+                      autocomplete="off"
+                      aria-hidden="true"
+                    />
+
                     <div class="contact-form__row">
                       <div class="contact-field">
-                        <label for="contact-name" class="contact-label">Name</label>
+                        <label for="contact-name" class="contact-label">Name *</label>
                         <input
                           id="contact-name"
                           name="name"
@@ -359,11 +497,12 @@
                           class="contact-input"
                           placeholder="Your name"
                           autocomplete="name"
+                          required
                         />
                       </div>
 
                       <div class="contact-field">
-                        <label for="contact-email" class="contact-label">Email</label>
+                        <label for="contact-email" class="contact-label">Email *</label>
                         <input
                           id="contact-email"
                           name="email"
@@ -371,6 +510,7 @@
                           class="contact-input"
                           placeholder="you@domain.com"
                           autocomplete="email"
+                          required
                         />
                       </div>
                     </div>
@@ -382,19 +522,53 @@
                         name="subject"
                         type="text"
                         class="contact-input"
-                        placeholder="Web development, design..."
+                        placeholder="Web development, design, AI app..."
                       />
                     </div>
 
                     <div class="contact-field">
-                      <label for="contact-message" class="contact-label">Message</label>
+                      <label for="contact-message" class="contact-label">Message *</label>
                       <textarea
                         id="contact-message"
                         name="message"
                         rows="4"
                         class="contact-input contact-textarea"
                         placeholder="Tell me about your project"
+                        required
                       ></textarea>
+                    </div>
+
+                    <div class="contact-consent">
+                      <label for="contact-privacy" class="contact-checkbox-label">
+                        <input
+                          id="contact-privacy"
+                          name="privacy"
+                          type="checkbox"
+                          class="contact-checkbox"
+                          required
+                        />
+                        <span>
+                          I have read and accept the
+                          <button
+                            type="button"
+                            class="contact-inline-link"
+                            data-legal-doc="privacy"
+                          >
+                            Privacy Policy
+                          </button>
+                          and consent to the processing of my data to respond to my inquiry.
+                        </span>
+                      </label>
+
+                      <p class="contact-gdpr">
+                        <strong>Basic Data Protection Info (GDPR / Spanish LOPDGDD):</strong>
+                        Controller: Antía Díaz (hola@antiadiaz.com, Spain). Purpose: Handle and
+                        reply to your inquiry. Legal basis: Your consent (Art. 6.1.a GDPR).
+                        Recipients: Technical delivery via FormSubmit to hola@antiadiaz.com; no
+                        third-party commercial sharing. Rights: Access, rectification, erasure,
+                        objection, restriction, and portability at hola@antiadiaz.com, or before the
+                        Spanish Data Protection Agency (AEPD).
+                      </p>
                     </div>
 
                     <div class="contact-form__actions">
@@ -417,11 +591,36 @@
                           />
                         </svg>
                       </button>
+                      <p
+                        id="contact-status"
+                        class="contact-status"
+                        role="status"
+                        aria-live="polite"
+                        hidden
+                      ></p>
                     </div>
                   </form>
                 </div>
               </section>
             </div>
+
+            <!-- Home Footer with Required Spanish Legal Links -->
+            <footer class="site-footer" role="contentinfo">
+              <div class="site-footer__inner">
+                <p class="site-footer__copy">&copy; 2026 Antía Díaz &middot; Spain</p>
+                <nav class="site-footer__nav" aria-label="Legal navigation">
+                  <a href="#legal-notice" class="site-footer__link" data-legal-doc="legal">
+                    Legal Notice
+                  </a>
+                  <a href="#privacy-policy" class="site-footer__link" data-legal-doc="privacy">
+                    Privacy Policy
+                  </a>
+                  <a href="#cookie-policy" class="site-footer__link" data-legal-doc="cookies">
+                    Cookie Policy
+                  </a>
+                </nav>
+              </div>
+            </footer>
           </section>
 
           <!-- RIGHT SPACE: ILLUSTRATION -->
@@ -484,6 +683,199 @@
             </p>
           </figcaption>
         </figure>
+      </div>
+
+      <!-- Legal Notice, Privacy Policy & Cookie Policy Modal (Spain: LSSI-CE / RGPD / LOPDGDD) -->
+      <div
+        id="legal-modal"
+        class="legal-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Legal information"
+        hidden
+      >
+        <div class="legal-modal__dialog">
+          <div class="legal-modal__header">
+            <div class="legal-modal__tabs" role="tablist" aria-label="Legal documents">
+              <button
+                type="button"
+                role="tab"
+                class="legal-modal__tab is-active"
+                data-legal-tab="legal"
+                aria-selected="true"
+              >
+                Legal Notice
+              </button>
+              <button
+                type="button"
+                role="tab"
+                class="legal-modal__tab"
+                data-legal-tab="privacy"
+                aria-selected="false"
+              >
+                Privacy Policy
+              </button>
+              <button
+                type="button"
+                role="tab"
+                class="legal-modal__tab"
+                data-legal-tab="cookies"
+                aria-selected="false"
+              >
+                Cookie Policy
+              </button>
+            </div>
+
+            <button
+              type="button"
+              id="legal-modal-close"
+              class="legal-modal__close"
+              aria-label="Close legal information"
+            >
+              &times;
+            </button>
+          </div>
+
+          <div class="legal-modal__body">
+            <!-- 1. LEGAL NOTICE (LSSI-CE) -->
+            <article class="legal-doc" data-legal-panel="legal">
+              <h2 class="legal-doc__title">Legal Notice</h2>
+              <p class="legal-doc__meta">
+                In compliance with Law 34/2002 on Information Society Services and Electronic
+                Commerce (LSSI-CE), Spain.
+              </p>
+
+              <h3>1. Website Owner</h3>
+              <p>
+                This website (<strong>antiadiaz.com</strong>) is a professional portfolio owned and
+                operated by <strong>Antía Díaz</strong>, freelance Front-End Developer, WordPress
+                Specialist, and Digital Designer based in Spain. Contact email:
+                <a href="mailto:hola@antiadiaz.com">hola@antiadiaz.com</a>.
+              </p>
+
+              <h3>2. Purpose &amp; Terms of Use</h3>
+              <p>
+                Access to and browsing of this website is free of charge and attributes the status
+                of User, implying acceptance of the terms stated herein. The website presents
+                Antía Díaz&apos;s professional services, selected work, and contact channels.
+              </p>
+
+              <h3>3. Intellectual &amp; Industrial Property</h3>
+              <p>
+                All source code, layouts, texts, graphic designs, illustrations, photography, and
+                visual assets displayed on this site belong to Antía Díaz or are used under valid
+                client/project authorization. Total or partial reproduction, distribution, or
+                public communication without prior written authorization is prohibited.
+              </p>
+
+              <h3>4. Liability &amp; External Links</h3>
+              <p>
+                Antía Díaz is not responsible for the content, availability, or privacy practices of
+                external websites linked from this portfolio (such as LinkedIn or Instagram).
+              </p>
+
+              <h3>5. Applicable Law &amp; Jurisdiction</h3>
+              <p>
+                This Legal Notice is governed by Spanish legislation. Any dispute arising from
+                access or use of this site shall be submitted to the competent courts and tribunals
+                of Spain in accordance with applicable consumer and civil regulations.
+              </p>
+            </article>
+
+            <!-- 2. PRIVACY POLICY (GDPR / SPANISH LOPDGDD) -->
+            <article class="legal-doc" data-legal-panel="privacy" hidden>
+              <h2 class="legal-doc__title">Privacy Policy</h2>
+              <p class="legal-doc__meta">
+                In accordance with Regulation (EU) 2016/679 (GDPR / RGPD) and Spanish Organic Law
+                3/2018 on Personal Data Protection and Guarantee of Digital Rights (LOPDGDD).
+              </p>
+
+              <h3>1. Data Controller</h3>
+              <p>
+                <strong>Controller:</strong> Antía Díaz<br />
+                <strong>Location:</strong> Spain<br />
+                <strong>Email for data protection inquiries:</strong>
+                <a href="mailto:hola@antiadiaz.com">hola@antiadiaz.com</a>
+              </p>
+
+              <h3>2. Data Collected &amp; Purpose of Processing</h3>
+              <p>
+                When you submit the contact form on this site, we collect your name, email address,
+                optional subject, and message content exclusively to review, manage, and respond to
+                your inquiry or professional proposal. No automated profiling or unsolicited
+                commercial communications are carried out.
+              </p>
+
+              <h3>3. Legal Basis</h3>
+              <p>
+                Processing is based on your explicit, freely given consent (Art. 6.1.a GDPR),
+                granted by checking the consent box prior to submitting the form. Providing the
+                starred fields is necessary to respond to your message.
+              </p>
+
+              <h3>4. Data Retention</h3>
+              <p>
+                Your personal data will be kept only for as long as necessary to address your
+                request and maintain any resulting professional correspondence, and thereafter for
+                the statutory limitation periods required by Spanish law.
+              </p>
+
+              <h3>5. Recipients &amp; Technical Processors</h3>
+              <p>
+                Your data is never sold or disclosed to third parties for marketing purposes.
+                Contact form submissions are technically routed through <strong>FormSubmit</strong>
+                exclusively to deliver your message to <a href="mailto:hola@antiadiaz.com">hola@antiadiaz.com</a>.
+              </p>
+
+              <h3>6. Your Rights</h3>
+              <p>
+                Under GDPR and LOPDGDD, you may exercise your rights of access, rectification,
+                erasure, objection, restriction of processing, data portability, and withdrawal of
+                consent at any time by writing to
+                <a href="mailto:hola@antiadiaz.com">hola@antiadiaz.com</a>. You also have the right
+                to file a complaint before the
+                <strong>Spanish Data Protection Agency (AEPD)</strong> at
+                <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>.
+              </p>
+            </article>
+
+            <!-- 3. COOKIE POLICY (LSSI-CE ART. 22.2 & AEPD) -->
+            <article class="legal-doc" data-legal-panel="cookies" hidden>
+              <h2 class="legal-doc__title">Cookie Policy</h2>
+              <p class="legal-doc__meta">
+                In accordance with Article 22.2 of Law 34/2002 (LSSI-CE) and the Spanish Data
+                Protection Agency (AEPD) Cookie Guidelines.
+              </p>
+
+              <h3>1. What Are Cookies?</h3>
+              <p>
+                Cookies are small text files stored in your browser when visiting websites to enable
+                technical functionality or remember user preferences.
+              </p>
+
+              <h3>2. Cookies Used on This Website</h3>
+              <p>
+                <strong>antiadiaz.com does not use analytics, advertising, or behavioral tracking cookies.</strong>
+                Because no non-essential cookies are placed on your device, no tracking consent
+                banner is required under current AEPD and LSSI-CE exemptions for strictly technical
+                operation.
+              </p>
+
+              <h3>3. Third-Party Technical Resources</h3>
+              <p>
+                This website loads typography stylesheets from Google Fonts (Inter and Playfair
+                Display) strictly to render visual typography. Standard browser connection requests
+                may transmit your IP address to the font CDN for technical delivery.
+              </p>
+
+              <h3>4. Managing Browser Settings</h3>
+              <p>
+                You can block, restrict, or delete cookies and site data at any time through your
+                browser&apos;s privacy settings (Chrome, Firefox, Safari, or Edge).
+              </p>
+            </article>
+          </div>
+        </div>
       </div>
     </div>
 

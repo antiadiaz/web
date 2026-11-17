@@ -4,15 +4,11 @@
 
 import { initNavigation } from './navigation.js';
 import { initHero } from './hero.js';
+import { initContact, initLegalModal } from './contact.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   initHero();
-
-  const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (event) => {
-      event.preventDefault();
-    });
-  }
+  initContact();
+  initLegalModal();
 });
