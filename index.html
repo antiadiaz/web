@@ -26,18 +26,128 @@
   <body>
     <div class="site-shell" id="site-shell">
       <!-- Persistent Top Header -->
-      <header class="site-header" role="banner">
+      <header id="site-header" class="site-header" role="banner">
         <nav class="site-nav" aria-label="Primary Space Navigation">
           <button
             type="button"
             class="site-nav__link site-nav__brand"
             data-nav-space="home"
             aria-controls="space-home"
+            aria-label="Antia Diaz — Home"
           >
-            ANTIA DIAZ
+            <img
+              src="./assets/aistudio/antia_diaz_logo_transparent_437e4f32.png"
+              alt="ANTIA DIAZ"
+              class="site-nav__logo"
+            />
+          </button>
+
+          <ul
+            id="site-header-menu"
+            class="site-nav__menu"
+            aria-label="Section navigation"
+            aria-hidden="true"
+            inert
+          >
+            <li>
+              <button
+                type="button"
+                class="site-nav__item"
+                data-anchor-target="about"
+              >
+                About me
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="site-nav__item"
+                data-anchor-target="contact"
+              >
+                Contact
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="site-nav__item"
+                data-nav-space="writing"
+                aria-controls="space-writing"
+              >
+                Writing
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="site-nav__item"
+                data-nav-space="illustration"
+                aria-controls="space-illustration"
+              >
+                Illustration
+              </button>
+            </li>
+          </ul>
+
+          <button
+            type="button"
+            id="mobile-menu-toggle"
+            class="mobile-menu-toggle"
+            aria-controls="mobile-nav-drawer"
+            aria-expanded="false"
+            aria-label="Open navigation menu"
+          >
+            <span class="mobile-menu-toggle__line mobile-menu-toggle__line--top" aria-hidden="true"></span>
+            <span class="mobile-menu-toggle__line mobile-menu-toggle__line--mid" aria-hidden="true"></span>
+            <span class="mobile-menu-toggle__line mobile-menu-toggle__line--bot" aria-hidden="true"></span>
           </button>
         </nav>
       </header>
+
+      <!-- Mobile Slide-Over Navigation Drawer -->
+      <div id="mobile-menu-backdrop" class="mobile-drawer-backdrop" hidden></div>
+      <aside
+        id="mobile-nav-drawer"
+        class="mobile-drawer"
+        aria-label="Mobile navigation"
+        aria-hidden="true"
+        hidden
+      >
+        <nav class="mobile-drawer__nav" aria-label="Section navigation">
+          <ul class="mobile-drawer__list">
+            <li>
+              <button type="button" class="mobile-drawer__link" data-anchor-target="about">
+                About me
+              </button>
+            </li>
+            <li>
+              <button type="button" class="mobile-drawer__link" data-anchor-target="contact">
+                Contact
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="mobile-drawer__link"
+                data-nav-space="writing"
+                aria-controls="space-writing"
+              >
+                Writing
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="mobile-drawer__link"
+                data-nav-space="illustration"
+                aria-controls="space-illustration"
+              >
+                Illustration
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </aside>
 
       <!-- Horizontal Three-Space Viewport -->
       <main class="spaces-viewport" id="spaces-viewport">
@@ -87,6 +197,7 @@
               <!-- 1. HERO -->
               <section id="hero" class="home-section home-section--hero" aria-labelledby="heading-hero">
                 <div class="hero-stage">
+                  <canvas id="hero-halftone" class="hero-halftone" aria-hidden="true"></canvas>
                   <div class="hero-headline-wrap">
                     <div class="hero-headline-band">
                       <button
@@ -436,6 +547,11 @@
                 class="home-section home-section--contact"
                 aria-labelledby="heading-contact"
               >
+                <canvas
+                  id="contact-halftone"
+                  class="contact-halftone"
+                  aria-hidden="true"
+                ></canvas>
                 <div class="contact-layout">
                   <div class="contact-intro">
                     <h2 id="heading-contact" class="contact-heading">
@@ -670,7 +786,20 @@
           class="hero-lightbox__close"
           aria-label="Cerrar pop-up"
         >
-          &times;
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M3.5 3.5L12.5 12.5M12.5 3.5L3.5 12.5"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+          </svg>
         </button>
         <figure class="hero-lightbox__figure">
           <img id="hero-lightbox-img" class="hero-lightbox__img" src="" alt="" />
@@ -732,7 +861,20 @@
               class="legal-modal__close"
               aria-label="Close legal information"
             >
-              &times;
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3.5 3.5L12.5 12.5M12.5 3.5L3.5 12.5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </svg>
             </button>
           </div>
 

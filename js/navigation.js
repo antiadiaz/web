@@ -29,6 +29,11 @@ export function initNavigation() {
     return null;
   }
 
+  const siteHeader = document.getElementById('site-header');
+  const headerMenu = document.getElementById('site-header-menu');
+  const mobileToggle = document.getElementById('mobile-menu-toggle');
+  const mobileDrawer = document.getElementById('mobile-nav-drawer');
+  const mobileBackdrop = document.getElementById('mobile-menu-backdrop');
   const spaceButtons = Array.from(document.querySelectorAll('[data-nav-space]'));
   const anchorLinks = Array.from(document.querySelectorAll('[data-anchor-target]'));
   const sectionElements = HOME_SECTIONS.map((id) => document.getElementById(id)).filter(
@@ -37,6 +42,56 @@ export function initNavigation() {
 
   let activeSpace = SPACES.HOME;
   let activeSection = 'hero';
+  let isMobileMenuOpen = false;
+  let mobileMenuHideTimer = null;
+
+  function setMobileMenuOpen(open) {
+    if (!mobileToggle || !mobileDrawer || !mobileBackdrop) return;
+    if (isMobileMenuOpen === open) return;
+
+    isMobileMenuOpen = open;
+    if (mobileMenuHideTimer !== null) {
+      window.clearTimeout(mobileMenuHideTimer);
+      mobileMenuHideTimer = null;
+    }
+
+    mobileToggle.setAttribute('aria-expanded', String(open));
+    mobileToggle.setAttribute(
+      'aria-label',
+      open ? 'Close navigation menu' : 'Open navigation menu'
+    );
+    mobileDrawer.setAttribute('aria-hidden', String(!open));
+    if (siteHeader) {
+      siteHeader.classList.toggle('is-menu-open', open);
+    }
+
+    if (open) {
+      mobileDrawer.hidden = false;
+      mobileBackdrop.hidden = false;
+      requestAnimationFrame(() => {
+        mobileDrawer.classList.add('is-open');
+      });
+    } else {
+      mobileDrawer.classList.remove('is-open');
+      mobileBackdrop.hidden = true;
+      mobileMenuHideTimer = window.setTimeout(() => {
+        mobileMenuHideTimer = null;
+        if (!isMobileMenuOpen) {
+          mobileDrawer.hidden = true;
+        }
+      }, 540);
+    }
+  }
+
+  function syncHeaderScrollState() {
+    if (!siteHeader) return;
+    const isScrolled = activeSpace === SPACES.HOME && homeSpace.scrollTop > 48;
+    siteHeader.classList.toggle('is-scrolled', isScrolled);
+    if (headerMenu) {
+      headerMenu.inert = !isScrolled;
+      headerMenu.setAttribute('aria-hidden', String(!isScrolled));
+    }
+  }
 
   /**
    * Updates header active button states and marks inactive off-screen spaces as inert.
@@ -61,6 +116,8 @@ export function initNavigation() {
         button.removeAttribute('aria-current');
       }
     });
+
+    syncHeaderScrollState();
   }
 
   /**
@@ -132,12 +189,49 @@ export function initNavigation() {
     }
   }
 
+  homeSpace.addEventListener('scroll', syncHeaderScrollState, { passive: true });
+
+  if (mobileToggle) {
+    mobileToggle.addEventListener('click', () => {
+      setMobileMenuOpen(!isMobileMenuOpen);
+    });
+  }
+
+  if (mobileBackdrop) {
+    mobileBackdrop.addEventListener('click', () => {
+      setMobileMenuOpen(false);
+    });
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && isMobileMenuOpen) {
+      setMobileMenuOpen(false);
+      if (mobileToggle) mobileToggle.focus();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && isMobileMenuOpen) {
+      setMobileMenuOpen(false);
+    }
+  });
+
   /**
    * Handles clicks on header navigation items and in-space return buttons.
    */
   spaceButtons.forEach((button) => {
     button.addEventListener('click', () => {
+      setMobileMenuOpen(false);
       const targetSpace = button.getAttribute('data-nav-space');
+      if (
+        targetSpace === SPACES.HOME &&
+        activeSpace === SPACES.HOME &&
+        button.classList.contains('site-nav__brand')
+      ) {
+        homeSpace.scrollTo({ top: 0, behavior: 'smooth' });
+        syncAnchorState('hero');
+        return;
+      }
       goToSpace(targetSpace);
     });
   });
@@ -148,6 +242,7 @@ export function initNavigation() {
   anchorLinks.forEach((link) => {
     link.addEventListener('click', (event) => {
       event.preventDefault();
+      setMobileMenuOpen(false);
       const targetSection = link.getAttribute('data-anchor-target');
       goToHomeSection(targetSection);
     });

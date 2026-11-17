@@ -2,6 +2,8 @@
  * ANTIADIAZ.COM — CONTACT FORM (FORMSUBMIT + GDPR/LOPDGDD) & LEGAL MODAL
  */
 
+import { initSectionHalftone } from './halftone.js';
+
 const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/hola@antiadiaz.com';
 
 const LEGAL_HASH_MAP = Object.freeze({
@@ -11,6 +13,18 @@ const LEGAL_HASH_MAP = Object.freeze({
 });
 
 export function initContact() {
+  initSectionHalftone({
+    section: document.getElementById('contact'),
+    canvas: document.getElementById('contact-halftone'),
+    variant: 'contact',
+    protectedSelectors: [
+      '.contact-heading',
+      '.contact-copy',
+      '.contact-links',
+      '.contact-form',
+    ],
+  });
+
   const form = document.getElementById('contact-form');
   if (!form) {
     return;
@@ -261,3 +275,4 @@ export function initLegalModal() {
     openModal(LEGAL_HASH_MAP[initialHash]);
   }
 }
+

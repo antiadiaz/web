@@ -2,11 +2,25 @@
  * ANTIADIAZ.COM — HERO ENTRANCE, EDGE-PANNING MASONRY, FILTERS & LIGHTBOX
  */
 
+import { initSectionHalftone } from './halftone.js';
+
 export function initHero() {
   const heroSection = document.getElementById('hero');
   if (!heroSection) {
     return;
   }
+
+  initSectionHalftone({
+    section: heroSection,
+    canvas: document.getElementById('hero-halftone'),
+    variant: 'hero-top',
+    protectedSelectors: [
+      '.hero-headline',
+      '.hero-side-link--left',
+      '.hero-side-link--right',
+      '#hero-masonry-viewport',
+    ],
+  });
 
   const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
