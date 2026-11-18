@@ -556,6 +556,29 @@ button *,
   padding-bottom: clamp(64px, 10vh, 108px);
 }
 
+.about-statement {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto clamp(72px, 11vh, 124px);
+  font-family: var(--font-serif);
+  font-size: clamp(1.45rem, 3.05vw, 2.85rem);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--color-ink);
+}
+
+.about-statement em {
+  font-style: italic;
+  font-weight: 500;
+}
+
+.about-statement__nowrap {
+  white-space: nowrap;
+}
+
 .about-layout {
   display: grid;
   grid-template-columns: minmax(240px, 0.48fr) minmax(0, 1.52fr);
@@ -598,16 +621,6 @@ button *,
   width: 100%;
 }
 
-.about-lead {
-  margin: 0;
-  font-family: var(--font-sans);
-  font-size: clamp(1.125rem, 1.8vw, 1.375rem);
-  font-weight: 500;
-  line-height: 1.45;
-  letter-spacing: -0.02em;
-  color: var(--color-ink);
-}
-
 .about-copy {
   margin: 0;
   font-size: 0.9375rem;
@@ -616,32 +629,70 @@ button *,
 }
 
 .about-roles {
-  margin: 14px 0 0;
-  padding: 26px 0 0;
+  margin: clamp(44px, 6.5vh, 72px) 0 0;
+  padding: clamp(32px, 4.5vh, 48px) 0 0;
   border-top: 1px solid rgba(17, 17, 17, 0.12);
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 28px 36px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 2.4vw, 36px);
+  align-items: start;
 }
 
 .about-role {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+}
+
+.about-role__heading {
+  margin: 0;
+}
+
+.about-role__trigger {
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+  color: var(--color-ink);
+  cursor: inherit;
+  pointer-events: none;
 }
 
 .about-role__title {
+  font-family: var(--font-sans);
   font-size: 0.75rem;
   font-weight: 600;
+  line-height: 1.4;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-ink);
 }
 
+.about-role__chevron {
+  display: none;
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: var(--color-ink);
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.about-role__panel {
+  display: block;
+}
+
+.about-role__panel-inner {
+  overflow: visible;
+}
+
 .about-role__desc {
   margin: 0;
   font-size: 0.875rem;
-  line-height: 1.6;
+  line-height: 1.62;
   color: var(--color-muted);
 }
 
@@ -1562,6 +1613,11 @@ button *,
     padding: 0 0 32px;
   }
 
+  .about-roles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 32px;
+  }
+
   .home-section--contact {
     padding: clamp(96px, 14vh, 144px) 0 clamp(96px, 13vh, 136px);
   }
@@ -1753,14 +1809,65 @@ button *,
     min-height: auto;
   }
 
+  .about-statement {
+    font-size: clamp(1.45rem, 6.2vw, 2.05rem);
+    line-height: 1.24;
+    margin-bottom: 48px;
+  }
+
+  .about-statement__br {
+    display: none;
+  }
+
   .about-layout {
     grid-template-columns: 1fr;
     gap: 24px;
   }
 
   .about-roles {
+    margin: 28px 0 0;
+    padding: 0;
+    border-top: 1px solid rgba(17, 17, 17, 0.14);
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 0;
+  }
+
+  .about-role {
+    gap: 0;
+    border-bottom: 1px solid rgba(17, 17, 17, 0.14);
+  }
+
+  .about-role__trigger {
+    pointer-events: auto;
+    align-items: center;
+    padding: 16px 0;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M18.5 18.5L3.5 3.5M3.5 3.5H14M3.5 3.5V14' stroke='%23ffffff' stroke-width='4.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M18.5 18.5L3.5 3.5M3.5 3.5H14M3.5 3.5V14' stroke='%23111111' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 3 3, pointer;
+  }
+
+  .about-role__chevron {
+    display: inline-block;
+  }
+
+  .about-role.is-open .about-role__chevron {
+    transform: rotate(180deg);
+  }
+
+  .about-role__panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 360ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .about-role.is-open .about-role__panel {
+    grid-template-rows: 1fr;
+  }
+
+  .about-role__panel-inner {
+    overflow: hidden;
+  }
+
+  .about-role__desc {
+    padding-bottom: 18px;
   }
 
   .home-section--contact {
@@ -1886,6 +1993,10 @@ button *,
   .site-nav__brand,
   .site-nav__logo,
   .site-nav__menu,
+  .mobile-drawer,
+  .mobile-menu-toggle__line,
+  .about-role__panel,
+  .about-role__chevron,
   .hero-word,
   .hero-card,
   .hero-card img,
