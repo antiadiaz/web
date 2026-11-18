@@ -103,8 +103,8 @@ export function initHero() {
 
     computeMaxPan();
     window.addEventListener('resize', computeMaxPan);
-    homeSpace.addEventListener('pointermove', handlePointerMove, { passive: true });
-    homeSpace.addEventListener('pointerleave', handlePointerLeave);
+    viewport.addEventListener('pointermove', handlePointerMove, { passive: true });
+    viewport.addEventListener('pointerleave', handlePointerLeave);
   }
 
   // 3. Gallery filtering (ALL / DEV / DESIGN) with fade + background-upward depth motion
@@ -285,10 +285,14 @@ export function initHero() {
     });
   }
 
-  // 4. Lightbox viewer for masonry photography
+  // 4. Lightbox multi-slide viewer for project showcase (Home + internal pages)
   const lightbox = document.getElementById('hero-lightbox');
   const lightboxImg = document.getElementById('hero-lightbox-img');
+  const lightboxPrev = document.getElementById('hero-lightbox-prev');
+  const lightboxNext = document.getElementById('hero-lightbox-next');
   const lightboxTitle = document.getElementById('hero-lightbox-title');
+  const lightboxDesc = document.getElementById('hero-lightbox-desc');
+  const lightboxLink = document.getElementById('hero-lightbox-link');
   const lightboxClose = document.getElementById('hero-lightbox-close');
 
   if (!lightbox || !lightboxImg || cards.length === 0) {
@@ -296,16 +300,118 @@ export function initHero() {
   }
 
   let lastTrigger = null;
+  let currentSlides = [];
+  let activeSlideIndex = 0;
+  let fadeTimer = null;
+  let slideToken = 0;
+
+  function renderActiveSlide(animateFade) {
+    if (currentSlides.length === 0) return;
+    const slide = currentSlides[activeSlideIndex];
+    const title = lightboxTitle ? lightboxTitle.textContent : '';
+    const nextAlt = `${title} — ${slide.label}`;
+    slideToken += 1;
+    const token = slideToken;
+
+    if (fadeTimer !== null) {
+      window.clearTimeout(fadeTimer);
+      fadeTimer = null;
+    }
+
+    const applySlideSrc = () => {
+      if (token !== slideToken) return;
+      const reveal = () => {
+        if (token !== slideToken) return;
+        requestAnimationFrame(() => {
+          lightboxImg.classList.remove('is-fading');
+        });
+      };
+
+      lightboxImg.onload = reveal;
+      lightboxImg.onerror = reveal;
+      lightboxImg.alt = nextAlt;
+      lightboxImg.src = slide.src;
+
+      if (lightboxImg.complete && lightboxImg.naturalWidth > 0) {
+        reveal();
+      }
+    };
+
+    if (!animateFade || reducedMotionQuery.matches) {
+      lightboxImg.classList.remove('is-fading');
+      lightboxImg.alt = nextAlt;
+      lightboxImg.src = slide.src;
+      return;
+    }
+
+    lightboxImg.classList.add('is-fading');
+    fadeTimer = window.setTimeout(() => {
+      fadeTimer = null;
+      applySlideSrc();
+    }, 180);
+  }
+
+  function stepSlide(delta) {
+    if (currentSlides.length <= 1) return;
+    activeSlideIndex = (activeSlideIndex + delta + currentSlides.length) % currentSlides.length;
+    renderActiveSlide(true);
+  }
 
   function openLightbox(card) {
     const img = card.querySelector('img');
     if (!img) return;
 
     lastTrigger = card;
-    lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt || '';
+    const projectTitle = card.getAttribute('data-caption') || '';
     if (lightboxTitle) {
-      lightboxTitle.textContent = card.getAttribute('data-caption') || '';
+      lightboxTitle.textContent = projectTitle;
+    }
+
+    let slides = [];
+    const rawGallery = card.getAttribute('data-gallery');
+    if (rawGallery) {
+      try {
+        const parsed = JSON.parse(rawGallery);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          slides = parsed;
+        }
+      } catch {
+        slides = [];
+      }
+    }
+    if (slides.length === 0) {
+      slides = [{ src: img.src, label: 'Home' }];
+    }
+
+    currentSlides = slides;
+    activeSlideIndex = 0;
+
+    // Preload remaining slides smoothly in background
+    slides.slice(1).forEach((slide) => {
+      const preload = new Image();
+      preload.src = slide.src;
+    });
+
+    const showNav = slides.length > 1;
+    if (lightboxPrev) lightboxPrev.hidden = !showNav;
+    if (lightboxNext) lightboxNext.hidden = !showNav;
+
+    renderActiveSlide(false);
+
+    if (lightboxDesc) {
+      const desc = card.getAttribute('data-desc') || '';
+      lightboxDesc.textContent = desc;
+      lightboxDesc.hidden = !desc;
+    }
+    if (lightboxLink) {
+      const url = card.getAttribute('data-url') || '';
+      if (url) {
+        lightboxLink.href = url;
+        lightboxLink.hidden = false;
+      } else {
+        lightboxLink.removeAttribute('href');
+        lightboxLink.hidden = true;
+      }
     }
 
     lightbox.hidden = false;
@@ -319,10 +425,17 @@ export function initHero() {
 
   function closeLightbox() {
     if (lightbox.hidden) return;
+    if (fadeTimer !== null) {
+      window.clearTimeout(fadeTimer);
+      fadeTimer = null;
+    }
+    slideToken += 1;
     lightbox.classList.remove('is-open');
     window.setTimeout(() => {
       lightbox.hidden = true;
+      lightboxImg.classList.remove('is-fading');
       lightboxImg.src = '';
+      currentSlides = [];
     }, 200);
     if (lastTrigger && typeof lastTrigger.focus === 'function') {
       lastTrigger.focus();
@@ -333,6 +446,12 @@ export function initHero() {
     card.addEventListener('click', () => openLightbox(card));
   });
 
+  if (lightboxPrev) {
+    lightboxPrev.addEventListener('click', () => stepSlide(-1));
+  }
+  if (lightboxNext) {
+    lightboxNext.addEventListener('click', () => stepSlide(1));
+  }
   if (lightboxClose) {
     lightboxClose.addEventListener('click', closeLightbox);
   }
@@ -344,8 +463,13 @@ export function initHero() {
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && !lightbox.hidden) {
+    if (lightbox.hidden) return;
+    if (event.key === 'Escape') {
       closeLightbox();
+    } else if (event.key === 'ArrowLeft') {
+      stepSlide(-1);
+    } else if (event.key === 'ArrowRight') {
+      stepSlide(1);
     }
   });
 }
