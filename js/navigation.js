@@ -85,7 +85,12 @@ export function initNavigation() {
 
   function syncHeaderScrollState() {
     if (!siteHeader) return;
+    const activeSpaceEl = spaceElements[activeSpace];
+    const scrollTop = activeSpaceEl ? activeSpaceEl.scrollTop : 0;
+    const hasBg = scrollTop > 24;
     const isScrolled = activeSpace === SPACES.HOME && homeSpace.scrollTop > 48;
+
+    siteHeader.classList.toggle('has-bg', hasBg);
     siteHeader.classList.toggle('is-scrolled', isScrolled);
     if (headerMenu) {
       headerMenu.inert = !isScrolled;
@@ -114,6 +119,20 @@ export function initNavigation() {
         button.setAttribute('aria-current', 'page');
       } else {
         button.removeAttribute('aria-current');
+      }
+    });
+
+    [SPACES.WRITING, SPACES.ILLUSTRATION].forEach((spaceKey) => {
+      const spaceEl = spaceElements[spaceKey];
+      if (!spaceEl) return;
+      if (targetSpace === spaceKey) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            spaceEl.classList.add('is-entered');
+          });
+        });
+      } else {
+        spaceEl.classList.remove('is-entered');
       }
     });
 
@@ -189,7 +208,11 @@ export function initNavigation() {
     }
   }
 
-  homeSpace.addEventListener('scroll', syncHeaderScrollState, { passive: true });
+  Object.values(spaceElements).forEach((spaceEl) => {
+    if (spaceEl) {
+      spaceEl.addEventListener('scroll', syncHeaderScrollState, { passive: true });
+    }
+  });
 
   if (mobileToggle) {
     mobileToggle.addEventListener('click', () => {

@@ -168,24 +168,53 @@
             data-space="writing"
             aria-label="Writing space"
           >
-            <div class="space__inner">
-              <div class="space__topbar">
-                <button
-                  type="button"
-                  class="space__return-btn"
-                  data-nav-space="home"
-                >
-                  Return to HOME &rarr;
-                </button>
-              </div>
+            <div class="writing-stage">
+              <canvas
+                id="writing-halftone"
+                class="hero-halftone writing-halftone"
+                aria-hidden="true"
+              ></canvas>
 
-              <div class="space__header-block">
-                <h1 class="space__title">WRITING</h1>
+              <div class="hero-headline-wrap">
+                <div class="hero-headline-band">
+                  <h1 class="hero-headline writing-headline" aria-label="writing">
+                    <span class="hero-line hero-line--1">
+                      <span class="hero-word-mask">
+                        <span class="hero-word hero-word--serif" style="--word-i: 0">writing</span>
+                      </span>
+                    </span>
+                  </h1>
+
+                  <button
+                    type="button"
+                    class="hero-side-link hero-side-link--right writing-back-link"
+                    data-nav-space="home"
+                    aria-controls="space-home"
+                  >
+                    <span>HOME</span>
+                    <svg
+                      class="hero-side-link__arrow"
+                      width="15"
+                      height="15"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
               </div>
 
               <div
                 id="writing-content"
-                class="space__placeholder-container"
+                class="writing-content"
                 aria-label="Writing content container"
               ></div>
             </div>
@@ -938,24 +967,53 @@
             data-space="illustration"
             aria-label="Illustration space"
           >
-            <div class="space__inner">
-              <div class="space__topbar">
-                <button
-                  type="button"
-                  class="space__return-btn"
-                  data-nav-space="home"
-                >
-                  &larr; Return to HOME
-                </button>
-              </div>
+            <div class="illustration-stage">
+              <canvas
+                id="illustration-halftone"
+                class="hero-halftone illustration-halftone"
+                aria-hidden="true"
+              ></canvas>
 
-              <div class="space__header-block">
-                <h1 class="space__title">ILLUSTRATION</h1>
+              <div class="hero-headline-wrap">
+                <div class="hero-headline-band">
+                  <button
+                    type="button"
+                    class="hero-side-link hero-side-link--left illustration-back-link"
+                    data-nav-space="home"
+                    aria-controls="space-home"
+                  >
+                    <svg
+                      class="hero-side-link__arrow"
+                      width="15"
+                      height="15"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M13 8H3M3 8L7.5 3.5M3 8L7.5 12.5"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <span>HOME</span>
+                  </button>
+
+                  <h1 class="hero-headline illustration-headline" aria-label="illustration">
+                    <span class="hero-line hero-line--1">
+                      <span class="hero-word-mask">
+                        <span class="hero-word hero-word--serif" style="--word-i: 0">illustration</span>
+                      </span>
+                    </span>
+                  </h1>
+                </div>
               </div>
 
               <div
                 id="illustration-content"
-                class="space__placeholder-container"
+                class="illustration-content"
                 aria-label="Illustration content container"
               ></div>
             </div>

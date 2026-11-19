@@ -6,10 +6,12 @@
  */
 
 const ALPHA_BUCKETS = 24;
-const ALPHA_STYLES = Array.from({ length: ALPHA_BUCKETS }, (_, i) => {
-  const alpha = 0.07 + (i / (ALPHA_BUCKETS - 1)) * 0.84;
-  return `rgba(17, 17, 17, ${alpha.toFixed(3)})`;
-});
+function createAlphaStyles(rgb) {
+  return Array.from({ length: ALPHA_BUCKETS }, (_, i) => {
+    const alpha = 0.07 + (i / (ALPHA_BUCKETS - 1)) * 0.84;
+    return `rgba(${rgb}, ${alpha.toFixed(3)})`;
+  });
+}
 
 function hash2(ix, iy) {
   let n = Math.imul(ix, 374761393) + Math.imul(iy, 668265263);
@@ -56,6 +58,7 @@ export function initSectionHalftone({
   section,
   canvas,
   variant = 'contact',
+  rgb = '17, 17, 17',
   protectedSelectors = [],
 }) {
   if (!section || !canvas) {
@@ -67,8 +70,9 @@ export function initSectionHalftone({
     return;
   }
 
+  const alphaStyles = createAlphaStyles(rgb);
   const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const homeSpace = document.getElementById('space-home');
+  const scrollContainer = section.closest('.space') || document.getElementById('space-home');
 
   let canvasWidth = 0;
   let canvasHeight = 0;
@@ -134,8 +138,9 @@ export function initSectionHalftone({
     const cols = Math.ceil(width / step);
     const rows = Math.ceil(height / step);
 
-    const pad = isMobile ? 22 : variant === 'hero-top' ? 32 : 28;
-    const feather = variant === 'hero-top' ? 54 : 46;
+    const isTopCornerVariant = variant === 'hero-top' || variant === 'illustration-top-left';
+    const pad = isMobile ? 22 : isTopCornerVariant ? 32 : 28;
+    const feather = isTopCornerVariant ? 54 : 46;
 
     const collectedX = [];
     const collectedY = [];
@@ -156,7 +161,7 @@ export function initSectionHalftone({
         if (!inTopBand && !inBottomRegion) {
           continue;
         }
-      } else if (variant === 'hero-top' && ny > 0.84) {
+      } else if (isTopCornerVariant && ny > 0.84) {
         continue;
       }
 
@@ -215,6 +220,14 @@ export function initSectionHalftone({
           // Stronger organic halftone trace strictly in the top-right corner of the Hero block
           const cornerProx = Math.max(0, 1 - Math.hypot((1 - nx) * 2.08, ny * 1.48));
           const cloud = fbm(nx * 5.4 + 4.3, ny * 4.8 + 2.1);
+          const cloudMask = smoothstep(0.12, 0.65, cloud);
+          baseDensity =
+            Math.pow(cornerProx, 1.05) * (0.28 + cloudMask * 0.88) * (isMobile ? 0.62 : 0.94);
+          radialFade = Math.max(0.28, Math.min(1, cornerProx * 1.25));
+        } else if (variant === 'illustration-top-left' && nx < 0.56) {
+          // Mirrored organic halftone trace strictly in the top-left corner of Illustration
+          const cornerProx = Math.max(0, 1 - Math.hypot(nx * 2.08, ny * 1.48));
+          const cloud = fbm((1 - nx) * 5.4 + 4.3, ny * 4.8 + 2.1);
           const cloudMask = smoothstep(0.12, 0.65, cloud);
           baseDensity =
             Math.pow(cornerProx, 1.05) * (0.28 + cloudMask * 0.88) * (isMobile ? 0.62 : 0.94);
@@ -299,7 +312,7 @@ export function initSectionHalftone({
       const indices = buckets[b];
       if (indices.length === 0) continue;
 
-      ctx.fillStyle = ALPHA_STYLES[b];
+      ctx.fillStyle = alphaStyles[b];
       for (let k = 0; k < indices.length; k += 1) {
         const i = indices[k];
         const s = dotSize[i];
@@ -470,8 +483,8 @@ export function initSectionHalftone({
   document.addEventListener('mouseleave', handlePointerLeave);
   window.addEventListener('blur', handlePointerLeave);
 
-  if (homeSpace) {
-    homeSpace.addEventListener(
+  if (scrollContainer) {
+    scrollContainer.addEventListener(
       'scroll',
       () => {
         if (pointerActive) {
