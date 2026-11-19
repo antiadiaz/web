@@ -1,15 +1,38 @@
+import fs from 'fs';
+import path from 'path';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
 import {defineConfig} from 'vite';
+
+function copyRootAssetsPlugin() {
+  return {
+    name: 'copy-root-assets',
+    closeBundle() {
+      const rootDir = import.meta.dirname;
+      const distDir = path.resolve(rootDir, 'dist');
+      const srcAssets = path.resolve(rootDir, 'assets');
+      const destAssets = path.resolve(distDir, 'assets');
+
+      if (fs.existsSync(srcAssets)) {
+        fs.cpSync(srcAssets, destAssets, {recursive: true});
+      }
+
+      const nojekyllSrc = path.resolve(rootDir, '.nojekyll');
+      const nojekyllDest = path.resolve(distDir, '.nojekyll');
+      if (fs.existsSync(nojekyllSrc)) {
+        fs.copyFileSync(nojekyllSrc, nojekyllDest);
+      }
+    },
+  };
+}
 
 export default defineConfig(() => {
   return {
     base: './',
-    plugins: [react(), tailwindcss()],
+    plugins: [react(), tailwindcss(), copyRootAssetsPlugin()],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '.'),
+        '@': path.resolve(import.meta.dirname, '.'),
       },
     },
     server: {
