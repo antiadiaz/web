@@ -413,6 +413,13 @@ button *,
   will-change: transform;
 }
 
+.spaces-track.is-instant,
+.spaces-track.is-instant .space,
+.site-shell:has(.spaces-track.is-instant),
+.site-shell:has(.spaces-track.is-instant)::before {
+  transition: none !important;
+}
+
 .spaces-track[data-active-space="writing"] {
   transform: translate3d(0%, 0, 0);
 }
@@ -568,8 +575,7 @@ button *,
   z-index: 3;
 }
 
-.writing-content,
-.illustration-content {
+.writing-content {
   position: relative;
   z-index: 2;
   max-width: 1380px;
@@ -580,7 +586,14 @@ button *,
 }
 
 .illustration-content {
-  padding: clamp(68px, 10.5vh, 124px) 28px clamp(72px, 11vh, 116px);
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: clamp(68px, 10.5vh, 124px) 0 clamp(72px, 11vh, 116px);
+  min-height: 45vh;
+  pointer-events: none;
 }
 
 .writing-content > *,
@@ -695,6 +708,9 @@ button *,
 
 .illustration-about {
   width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 28px;
   scroll-margin-top: calc(var(--header-height) + 24px);
 }
 
@@ -2195,13 +2211,16 @@ button *,
     padding: 0 0 32px;
   }
 
-  .writing-content,
-  .illustration-content {
+  .writing-content {
     padding: clamp(24px, 4vh, 40px) 20px 56px;
   }
 
   .illustration-content {
-    padding: clamp(56px, 9vh, 96px) 20px clamp(64px, 9vh, 96px);
+    padding: clamp(56px, 9vh, 96px) 0 clamp(64px, 9vh, 96px);
+  }
+
+  .illustration-about {
+    padding: 0 20px;
   }
 
   .illustration-masonry-section {
@@ -2432,18 +2451,29 @@ button *,
     min-height: auto;
   }
 
-  .writing-stage,
-  .illustration-stage {
+  .writing-stage {
     padding: 0 12px 24px;
   }
 
-  .writing-content,
-  .illustration-content {
+  .illustration-stage {
+    padding: 0 0 24px;
+  }
+
+  .illustration-stage .hero-headline-wrap {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .writing-content {
     padding: 20px 0 48px;
   }
 
   .illustration-content {
     padding: 44px 0 64px;
+  }
+
+  .illustration-about {
+    padding: 0 12px;
   }
 
   .illustration-masonry-section {

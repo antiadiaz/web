@@ -163,6 +163,28 @@
           id="spaces-track"
           data-active-space="home"
         >
+          <script>
+            (function () {
+              var p = window.location.pathname.replace(/\/+$/, '').toLowerCase();
+              var h = window.location.hash.replace('#', '').toLowerCase();
+              var s =
+                p.endsWith('/writing') || p.endsWith('/writing.html') || h === 'writing' || h === 'space-writing'
+                  ? 'writing'
+                  : p.endsWith('/illustration') ||
+                      p.endsWith('/illustration.html') ||
+                      h === 'illustration' ||
+                      h === 'space-illustration'
+                    ? 'illustration'
+                    : 'home';
+              if (s !== 'home') {
+                var t = document.getElementById('spaces-track');
+                if (t) {
+                  t.classList.add('is-instant');
+                  t.setAttribute('data-active-space', s);
+                }
+              }
+            })();
+          </script>
           <!-- LEFT SPACE: WRITING -->
           <section
             id="space-writing"
@@ -314,9 +336,12 @@
                         style="--card-i: 0"
                         data-tags="dev"
                         data-caption="Rubearth"
-                        data-desc="Editorial e-commerce and lookbook platform developed for independent sustainable fashion label Rubearth."
+                        data-date="2023"
+                        data-role="Front-End &amp; WordPress eCommerce Development"
+                        data-desc="Editorial e-commerce and lookbook platform developed for independent sustainable fashion label Rubearth, combining runway storytelling with a clean online shopping flow."
                         data-url="https://rubearth.com/"
-                        data-gallery='[{"src":"./assets/images/home_rubearth_real_1795039883560.jpg","label":"Home"},{"src":"./assets/aistudio/rubearth_interior_1_8612dee0.png","label":"Shop"},{"src":"./assets/aistudio/rubearth_interior_2_74f3fcab.png","label":"Collections"},{"src":"./assets/aistudio/rubearth_interior_3_8aca895c.png","label":"About & Grava"}]'
+                        data-tech='[{"name":"WordPress &amp; WooCommerce","detail":"Custom store architecture, product catalog management, and streamlined checkout flow"},{"name":"HTML5 &amp; CSS3","detail":"Editorial grid layouts, responsive lookbook templates, and visual typography polish"},{"name":"JavaScript","detail":"Interactive collection navigation, product interactions, and fluid UI transitions"},{"name":"Technical SEO","detail":"Semantic HTML structure, crawlable lookbook pages, and performance tuning"}]'
+                        data-gallery='[{"src":"./assets/images/home_rubearth_real_1795039883560.jpg","label":"Home"},{"src":"./assets/aistudio/rubearth_interior_1_8612dee0.png","label":"Shop"},{"src":"./assets/aistudio/rubearth_interior_2_74f3fcab.png","label":"Collections"},{"src":"./assets/aistudio/rubearth_interior_3_8aca895c.png","label":"About &amp; Grava"}]'
                       >
                         <img
                           src="./assets/images/home_rubearth_real_1795039883560.jpg"
@@ -332,8 +357,11 @@
                         style="--card-i: 4"
                         data-tags="dev"
                         data-caption="El Ventero"
-                        data-desc="Brand and recipe showcase website developed on WordPress with Elementor Pro."
+                        data-date="2023"
+                        data-role="WordPress &amp; Front-End Development"
+                        data-desc="Brand and recipe showcase website developed on WordPress with Elementor Pro, highlighting product lines and step-by-step culinary editorial content."
                         data-url="https://elventero.es/"
+                        data-tech='[{"name":"WordPress","detail":"Custom corporate and recipe portal architecture tailored for brand storytelling"},{"name":"Elementor Pro","detail":"Dynamic recipe templates, custom single-post layouts, and reusable section blocks"},{"name":"HTML5 &amp; CSS3","detail":"Bespoke responsive styling and typographic refinement beyond default builder styles"},{"name":"JavaScript","detail":"Interactive recipe filtering, search views, and accessible mobile navigation"}]'
                         data-gallery='[{"src":"./assets/images/home_el_ventero_real_1795038769095.jpg","label":"Home"},{"src":"./assets/aistudio/el-ventero_interiores_1_954c9991.png","label":"Recetas"},{"src":"./assets/aistudio/el-ventero_interiores_2_41539758.png","label":"Ficha de receta"}]'
                       >
                         <img
@@ -353,8 +381,11 @@
                         style="--card-i: 1"
                         data-tags="dev design"
                         data-caption="Madrid Comic Summit"
-                        data-desc="End-to-end visual design and WordPress front-end development for the professional comic industry event in Madrid."
+                        data-date="2024"
+                        data-role="UI/UX Design &amp; WordPress Front-End Development"
+                        data-desc="End-to-end visual design and WordPress front-end development for the professional comic industry event in Madrid, structuring guests, schedules, and venue history."
                         data-url="https://madridcomicsummit.com/"
+                        data-tech='[{"name":"Figma","detail":"End-to-end visual direction, wireframing, responsive UI system, and interactive prototypes"},{"name":"WordPress","detail":"Modular CMS setup for event schedule, guest lineup, activities, and press updates"},{"name":"HTML5 &amp; CSS3","detail":"Custom layout grids, editorial hierarchy, and mobile-first responsive stylesheets"},{"name":"JavaScript","detail":"Interactive program navigation, schedule filtering, and smooth section transitions"}]'
                         data-gallery='[{"src":"./assets/images/home_madrid_comic_summit_real_1795036866553.jpg","label":"Home"},{"src":"./assets/aistudio/madrid-comic-summit_interior_1_31f4f4d4.png","label":"Actividades"},{"src":"./assets/aistudio/madrid-comic-summit_interior_2_e6e3c8f1.png","label":"Historia"},{"src":"./assets/aistudio/madrid-comic-summit_interior_3_b09afa4f.png","label":"Invitados"}]'
                       >
                         <img
@@ -371,8 +402,11 @@
                         style="--card-i: 5"
                         data-tags="dev"
                         data-caption="Fundación Multiópticas"
-                        data-desc="Corporate social foundation portal built and maintained on WordPress within the Multiópticas multi-site ecosystem."
+                        data-date="2022 – Present"
+                        data-role="WordPress Development &amp; Multi-Site Maintenance"
+                        data-desc="Corporate social foundation portal built and continuously maintained on WordPress within the Multiópticas multi-site ecosystem, supporting international solidarity campaigns."
                         data-url="https://www.fundacionmultiopticas.com/"
+                        data-tech='[{"name":"WordPress","detail":"Institutional portal architecture and ongoing management within the Multiópticas ecosystem"},{"name":"HTML5 &amp; CSS3","detail":"Responsive campaign landing blocks, editorial storytelling pages, and accessibility fixes"},{"name":"JavaScript","detail":"Interactive project sections, navigation controls, and front-end production enhancements"},{"name":"Salesforce &amp; Campaign Ops","detail":"Alignment with internal marketing workflows and rapid production issue resolution"}]'
                         data-gallery='[{"src":"./assets/images/home_fundacion_multiopticas_real_1795038916620.jpg","label":"Home"},{"src":"./assets/aistudio/fundacion-multiopticas_interior_1_bbfbca04.png","label":"Colabora"},{"src":"./assets/aistudio/fundacion-multiopticas_interior_2_25c87fd7.png","label":"Senegal"},{"src":"./assets/aistudio/fundacion-multiopticas_interior_3_41759af5.png","label":"Patronato"}]'
                       >
                         <img
@@ -392,8 +426,11 @@
                         style="--card-i: 2"
                         data-tags="dev"
                         data-caption="MÓ Eyewear México"
-                        data-desc="Regional eyewear brand platform built and maintained on WordPress within the Multiópticas group."
+                        data-date="2022 – Present"
+                        data-role="WordPress Development &amp; Technical Support"
+                        data-desc="Regional eyewear brand platform built and maintained on WordPress within the Multiópticas group, adapted for commercial optical campaigns in Mexico."
                         data-url="https://www.moeyewear.mx/"
+                        data-tech='[{"name":"WordPress","detail":"Regional brand portal development and ongoing multi-site maintenance"},{"name":"HTML5 &amp; CSS3","detail":"Responsive eyewear catalog presentation and campaign visual adaptations"},{"name":"JavaScript","detail":"Interactive catalog browsing, filter interactions, and cross-browser UI refinements"},{"name":"Production Operations","detail":"Autonomous resolution of production bugs and campaign rollout support"}]'
                         data-gallery='[{"src":"./assets/images/home_mo_eyewear_mexico_real_1795039511714.jpg","label":"Home"},{"src":"./assets/aistudio/moeyewear_interior_e5f2895e.png","label":"Lentes ópticos"}]'
                       >
                         <img
@@ -410,8 +447,11 @@
                         style="--card-i: 6"
                         data-tags="dev"
                         data-caption="Hayon Studio"
-                        data-desc="Front-end and WordPress development showcasing Jaime Hayon&apos;s international design, spaces, and installations portfolio."
+                        data-date="2023"
+                        data-role="Front-End &amp; WordPress Development"
+                        data-desc="Front-end and WordPress development showcasing Jaime Hayon&apos;s international industrial design, architectural spaces, exhibitions, and curated archives."
                         data-url="https://hayonstudio.com/"
+                        data-tech='[{"name":"WordPress &amp; PHP","detail":"Custom portfolio CMS architecture for archives, spaces, studio, and collections"},{"name":"HTML5 &amp; CSS3","detail":"Minimalist editorial grid precision and responsive high-resolution media layouts"},{"name":"JavaScript","detail":"Fluid archive navigation, dynamic project transitions, and gallery views"},{"name":"Performance &amp; Responsive UI","detail":"Optimized asset delivery across desktop, tablet, and mobile viewports"}]'
                         data-gallery='[{"src":"./assets/images/home_hayon_studio_real_1795039204757.jpg","label":"Home"},{"src":"./assets/aistudio/hayon-studio_interior_1_c4394700.png","label":"Archive"},{"src":"./assets/aistudio/hayon-studio_interior_2_2c81b090.png","label":"Botanic Collection"},{"src":"./assets/aistudio/hayon-studio_interior_3_40ffeba7.png","label":"Jaime Hayon"},{"src":"./assets/aistudio/hayon-studio_interior_4_6e7ca816.png","label":"Studio"},{"src":"./assets/aistudio/hayon-studio_interior_5_59b08792.png","label":"Projects"}]'
                       >
                         <img
@@ -431,8 +471,11 @@
                         style="--card-i: 3"
                         data-tags="dev"
                         data-caption="Studio Casa Sana"
-                        data-desc="Boutique barre, cycling, and strength studio website built with custom front-end development and WordPress."
+                        data-date="2024"
+                        data-role="Custom Front-End &amp; WordPress Development"
+                        data-desc="Boutique barre, cycling, and strength studio website built with custom front-end development and WordPress, reflecting a calm, tactile wellness identity."
                         data-url="https://studiocasasana.com/"
+                        data-tech='[{"name":"WordPress &amp; PHP","detail":"Custom theme templates for studio philosophy, disciplines, and corporate sessions"},{"name":"HTML5 &amp; CSS3","detail":"Refined layout rhythm, custom typography pairing, and mobile-first styling"},{"name":"JavaScript","detail":"Interactive page transitions, class showcases, and responsive navigation"},{"name":"Technical SEO","detail":"Structured headings, clean metadata, and fast front-end asset loading"}]'
                         data-gallery='[{"src":"./assets/images/home_studio_casa_sana_real_1795084580038.jpg","label":"Home"},{"src":"./assets/aistudio/casa-sana_interior_1_c023b52b.png","label":"Filosofía"},{"src":"./assets/aistudio/casa-sana_interior_2_af488944.png","label":"Corporates"}]'
                       >
                         <img
@@ -449,8 +492,11 @@
                         style="--card-i: 7"
                         data-tags="dev"
                         data-caption="MUV Store"
-                        data-desc="WordPress &amp; WooCommerce e-commerce platform built with Bricks, ACF Pro, WPML, batch inventory logic, and custom features."
+                        data-date="2024"
+                        data-role="WordPress &amp; WooCommerce Full Development"
+                        data-desc="Full-featured WordPress &amp; WooCommerce e-commerce platform built with Bricks Builder, ACF Pro, and WPML, including custom batch/lot inventory management logic."
                         data-url="https://muv-store.com/"
+                        data-tech='[{"name":"WordPress &amp; WooCommerce","detail":"Complete e-commerce architecture, product kits, and tailored cart/checkout logic"},{"name":"Bricks Builder","detail":"High-performance visual template architecture and reusable storefront components"},{"name":"ACF Pro","detail":"Structured product kit data, technical specifications, and editorial back-office"},{"name":"WPML","detail":"Multilingual catalog, localized product pages, and multi-market checkout"},{"name":"Custom PHP &amp; JavaScript","detail":"Bespoke batch/lot and stock management logic plus tailored store features"}]'
                         data-gallery='[{"src":"./assets/images/home_muv_store_real_1795038913844.jpg","label":"Home"},{"src":"./assets/aistudio/muv_interior_1_52e3d8a1.png","label":"Kits"},{"src":"./assets/aistudio/muv_interior_2_27153119.png","label":"Full MUV Premium"},{"src":"./assets/aistudio/muv_interior_3_bd5fb3e9.png","label":"Tu cesta"}]'
                       >
                         <img
@@ -467,8 +513,11 @@
                         style="--card-i: 8"
                         data-tags="dev"
                         data-caption="Área Central"
-                        data-desc="Custom WordPress platform built with Bricks Builder, ACF Pro, and WPML multilingual architecture."
+                        data-date="2024"
+                        data-role="WordPress Platform Development"
+                        data-desc="Custom WordPress platform built for the Área Central shopping center with Bricks Builder, ACF Pro, and WPML multilingual architecture."
                         data-url="https://www.areacentral.es/"
+                        data-tech='[{"name":"WordPress","detail":"Multi-brand shopping center portal with maintainable directory structure"},{"name":"Bricks Builder","detail":"Modular responsive templates, category archives, and custom directory grids"},{"name":"ACF Pro","detail":"Custom fields for store profiles, locations, timetables, and promotions"},{"name":"WPML","detail":"Full multilingual content synchronization across site languages"}]'
                         data-gallery='[{"src":"./assets/images/home_area_central_real_1795037658450.jpg","label":"Home"},{"src":"./assets/aistudio/area-central_interior_1_80be3ac7.png","label":"Nuestras marcas"},{"src":"./assets/aistudio/area-central_interior_2_4a54c637.png","label":"El Ganso Outlet"}]'
                       >
                         <img
@@ -1603,7 +1652,7 @@
           type="button"
           id="hero-lightbox-close"
           class="hero-lightbox__close"
-          aria-label="Cerrar pop-up"
+          aria-label="Close modal"
         >
           <svg
             width="22"
@@ -1620,13 +1669,76 @@
             />
           </svg>
         </button>
-        <figure class="hero-lightbox__figure">
+
+        <!-- Project Dossier View (Title at top + stacked left screenshots + sticky right specs) -->
+        <article id="hero-lightbox-sheet" class="hero-lightbox__sheet" hidden>
+          <header class="hero-lightbox__sheet-header">
+            <h2 id="hero-lightbox-sheet-title" class="hero-lightbox__sheet-title"></h2>
+          </header>
+
+          <div class="hero-lightbox__sheet-grid">
+            <div id="hero-lightbox-media-stack" class="hero-lightbox__media-stack"></div>
+
+            <aside class="hero-lightbox__details" aria-label="Project specifications">
+              <p id="hero-lightbox-sheet-desc" class="hero-lightbox__sheet-desc"></p>
+
+              <dl class="hero-lightbox__specs">
+                <div id="hero-lightbox-date-row" class="hero-lightbox__spec-row">
+                  <dt class="hero-lightbox__spec-label">Published</dt>
+                  <dd id="hero-lightbox-sheet-date" class="hero-lightbox__spec-value"></dd>
+                </div>
+
+                <div id="hero-lightbox-role-row" class="hero-lightbox__spec-row">
+                  <dt class="hero-lightbox__spec-label">Role</dt>
+                  <dd id="hero-lightbox-sheet-role" class="hero-lightbox__spec-value"></dd>
+                </div>
+
+                <div id="hero-lightbox-tech-row" class="hero-lightbox__spec-row hero-lightbox__spec-row--tech">
+                  <dt class="hero-lightbox__spec-label">Technologies</dt>
+                  <dd class="hero-lightbox__spec-value">
+                    <ul id="hero-lightbox-sheet-tech" class="hero-lightbox__tech-list"></ul>
+                  </dd>
+                </div>
+              </dl>
+
+              <a
+                id="hero-lightbox-sheet-link"
+                class="hero-lightbox__cta"
+                href=""
+                target="_blank"
+                rel="noopener noreferrer"
+                hidden
+              >
+                <span>Visit live website</span>
+                <svg
+                  class="hero-lightbox__link-arrow"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            </aside>
+          </div>
+        </article>
+
+        <!-- Single Artwork Lightbox View (Illustration collection browsing) -->
+        <figure id="hero-lightbox-figure" class="hero-lightbox__figure">
           <div class="hero-lightbox__stage">
             <button
               type="button"
               id="hero-lightbox-prev"
               class="hero-lightbox__nav hero-lightbox__nav--prev"
-              aria-label="Previous screenshot"
+              aria-label="Previous artwork"
             >
               <svg width="22" height="22" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <path
@@ -1643,7 +1755,7 @@
               type="button"
               id="hero-lightbox-next"
               class="hero-lightbox__nav hero-lightbox__nav--next"
-              aria-label="Next screenshot"
+              aria-label="Next artwork"
             >
               <svg width="22" height="22" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <path

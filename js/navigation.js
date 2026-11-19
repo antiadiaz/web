@@ -15,6 +15,18 @@ export const SPACES = Object.freeze({
 
 const VALID_SPACES = new Set(Object.values(SPACES));
 const HOME_SECTIONS = ['hero', 'about', 'contact'];
+const SPACE_TITLES = Object.freeze({
+  [SPACES.WRITING]: 'Antía Díaz — Writing',
+  [SPACES.HOME]: 'Antía Díaz — Developer & Product Designer',
+  [SPACES.ILLUSTRATION]: 'Antía Díaz — Editorial Illustration & Character Design',
+});
+
+function detectBasePath(pathname = window.location.pathname) {
+  const cleaned = pathname
+    .replace(/\/(writing|illustration)(?:\.html)?\/?$/i, '/')
+    .replace(/\/index\.html$/i, '/');
+  return cleaned.endsWith('/') ? cleaned : `${cleaned}/`;
+}
 
 export function initNavigation() {
   const track = document.getElementById('spaces-track');
@@ -40,10 +52,22 @@ export function initNavigation() {
     Boolean
   );
 
+  const basePath = detectBasePath();
   let activeSpace = SPACES.HOME;
   let activeSection = 'hero';
   let isMobileMenuOpen = false;
   let mobileMenuHideTimer = null;
+
+  function buildSpaceUrl(targetSpace, hash = '') {
+    const cleanHash = hash ? (hash.startsWith('#') ? hash : `#${hash}`) : '';
+    if (targetSpace === SPACES.WRITING) {
+      return `${basePath}writing${cleanHash}`;
+    }
+    if (targetSpace === SPACES.ILLUSTRATION) {
+      return `${basePath}illustration${cleanHash}`;
+    }
+    return `${basePath}${cleanHash}`;
+  }
 
   function setMobileMenuOpen(open) {
     if (!mobileToggle || !mobileDrawer || !mobileBackdrop) return;
@@ -164,6 +188,10 @@ export function initNavigation() {
       syncAnchorState('');
     }
 
+    if (SPACE_TITLES[targetSpace]) {
+      document.title = SPACE_TITLES[targetSpace];
+    }
+
     syncHeaderScrollState();
   }
 
@@ -193,7 +221,7 @@ export function initNavigation() {
   /**
    * Moves horizontally to the requested space ('writing', 'home', or 'illustration').
    */
-  function goToSpace(targetSpace, { updateHash = true } = {}) {
+  function goToSpace(targetSpace, { updateUrl = true, replace = false } = {}) {
     if (!VALID_SPACES.has(targetSpace)) {
       return;
     }
@@ -201,15 +229,19 @@ export function initNavigation() {
     activeSpace = targetSpace;
     syncSpaceState(targetSpace);
 
-    if (updateHash) {
+    if (updateUrl) {
       const nextHash =
-        targetSpace === SPACES.HOME
-          ? activeSection === 'hero'
-            ? '#home'
-            : `#${activeSection}`
-          : `#${targetSpace}`;
-      if (window.location.hash !== nextHash) {
-        history.replaceState(null, '', nextHash);
+        targetSpace === SPACES.HOME && activeSection !== 'hero'
+          ? `#${activeSection}`
+          : '';
+      const nextUrl = buildSpaceUrl(targetSpace, nextHash);
+      const currentUrl = `${window.location.pathname}${window.location.hash}`;
+      if (currentUrl !== nextUrl) {
+        if (replace) {
+          history.replaceState(null, '', nextUrl);
+        } else {
+          history.pushState(null, '', nextUrl);
+        }
       }
     }
   }
@@ -218,14 +250,15 @@ export function initNavigation() {
    * Scrolls HOME vertically to a specific section ID.
    * If the user is currently in WRITING or ILLUSTRATION, returns to HOME first.
    */
-  function goToHomeSection(sectionId, { smooth = true, updateHash = true } = {}) {
+  function goToHomeSection(sectionId, { smooth = true, updateUrl = true } = {}) {
     const targetElement = document.getElementById(sectionId);
     if (!targetElement) {
       return;
     }
 
-    if (activeSpace !== SPACES.HOME) {
-      goToSpace(SPACES.HOME, { updateHash: false });
+    const wasInOtherSpace = activeSpace !== SPACES.HOME;
+    if (wasInOtherSpace) {
+      goToSpace(SPACES.HOME, { updateUrl: false });
     }
 
     syncAnchorState(sectionId);
@@ -235,10 +268,16 @@ export function initNavigation() {
       block: 'start',
     });
 
-    if (updateHash) {
-      const nextHash = `#${sectionId}`;
-      if (window.location.hash !== nextHash) {
-        history.replaceState(null, '', nextHash);
+    if (updateUrl) {
+      const nextHash = sectionId === 'hero' ? '' : `#${sectionId}`;
+      const nextUrl = buildSpaceUrl(SPACES.HOME, nextHash);
+      const currentUrl = `${window.location.pathname}${window.location.hash}`;
+      if (currentUrl !== nextUrl) {
+        if (wasInOtherSpace) {
+          history.pushState(null, '', nextUrl);
+        } else {
+          history.replaceState(null, '', nextUrl);
+        }
       }
     }
   }
@@ -308,6 +347,10 @@ export function initNavigation() {
       ) {
         homeSpace.scrollTo({ top: 0, behavior: 'smooth' });
         syncAnchorState('hero');
+        const heroUrl = buildSpaceUrl(SPACES.HOME);
+        if (`${window.location.pathname}${window.location.hash}` !== heroUrl) {
+          history.replaceState(null, '', heroUrl);
+        }
         return;
       }
       if (
@@ -403,34 +446,65 @@ export function initNavigation() {
   }
 
   /**
-   * Resolves an initial or changed URL hash to either a space or a HOME section.
+   * Resolves an initial, popstate, or hash URL to the corresponding space or section.
    */
-  function handleHashNavigation(smooth = false) {
+  function handleUrlNavigation(smooth = false, { fromPopState = false } = {}) {
+    const cleanPath = window.location.pathname.replace(/\/+$/, '').toLowerCase();
     const rawHash = window.location.hash.replace('#', '').toLowerCase();
 
+    if (cleanPath.endsWith('/writing') || cleanPath.endsWith('/writing.html')) {
+      goToSpace(SPACES.WRITING, { updateUrl: false });
+      const canonical = buildSpaceUrl(SPACES.WRITING);
+      if (!fromPopState && `${window.location.pathname}${window.location.hash}` !== canonical) {
+        history.replaceState(null, '', canonical);
+      }
+      return;
+    }
+
+    if (cleanPath.endsWith('/illustration') || cleanPath.endsWith('/illustration.html')) {
+      goToSpace(SPACES.ILLUSTRATION, { updateUrl: false });
+      if (rawHash === 'about' || rawHash === 'illustration-about') {
+        goToIllustrationSection('about', { smooth });
+      } else if (rawHash === 'contact' || rawHash === 'illustration-contact') {
+        goToIllustrationSection('contact', { smooth });
+      } else {
+        const canonical = buildSpaceUrl(SPACES.ILLUSTRATION);
+        if (!fromPopState && `${window.location.pathname}${window.location.hash}` !== canonical) {
+          history.replaceState(null, '', canonical);
+        }
+      }
+      return;
+    }
+
     if (rawHash === SPACES.WRITING || rawHash === 'space-writing') {
-      goToSpace(SPACES.WRITING, { updateHash: false });
+      goToSpace(SPACES.WRITING, { updateUrl: !fromPopState, replace: true });
       return;
     }
 
     if (rawHash === SPACES.ILLUSTRATION || rawHash === 'space-illustration') {
-      goToSpace(SPACES.ILLUSTRATION, { updateHash: false });
+      goToSpace(SPACES.ILLUSTRATION, { updateUrl: !fromPopState, replace: true });
       return;
     }
 
     if (HOME_SECTIONS.includes(rawHash)) {
-      goToHomeSection(rawHash, { smooth, updateHash: false });
+      goToHomeSection(rawHash, { smooth, updateUrl: false });
       return;
     }
 
-    goToSpace(SPACES.HOME, { updateHash: false });
+    goToSpace(SPACES.HOME, { updateUrl: false });
     syncAnchorState('hero');
   }
 
-  window.addEventListener('hashchange', () => handleHashNavigation(true));
+  window.addEventListener('popstate', () => handleUrlNavigation(true, { fromPopState: true }));
+  window.addEventListener('hashchange', () => handleUrlNavigation(true));
 
-  // Initialize on HOME without overriding a direct deep-link hash if present
-  handleHashNavigation(false);
+  // Initialize from current pathname/hash without overriding valid deep links
+  handleUrlNavigation(false);
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      track.classList.remove('is-instant');
+    });
+  });
 
   return {
     goToSpace,
