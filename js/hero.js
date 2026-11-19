@@ -434,7 +434,7 @@ export function initHero() {
     window.setTimeout(() => {
       lightbox.hidden = true;
       lightboxImg.classList.remove('is-fading');
-      lightboxImg.src = '';
+      lightboxImg.removeAttribute('src');
       currentSlides = [];
     }, 200);
     if (lastTrigger && typeof lastTrigger.focus === 'function') {
