@@ -3,6 +3,8 @@
  */
 
 import { initSectionHalftone } from './halftone.js';
+import { initSpaceEdgeLinks } from './edgeLinks.js';
+import { attachGalleryCards, hideCardTooltip, isLightboxOpen } from './lightbox.js';
 
 export function initHero() {
   const heroSection = document.getElementById('hero');
@@ -16,8 +18,6 @@ export function initHero() {
     variant: 'hero-top',
     protectedSelectors: [
       '.hero-headline',
-      '.hero-side-link--left',
-      '.hero-side-link--right',
       '#hero-masonry-viewport',
     ],
   });
@@ -288,344 +288,40 @@ export function initHero() {
     });
   }
 
-  // 4. Lightbox multi-slide viewer for project showcase (Home + internal pages)
-  const lightbox = document.getElementById('hero-lightbox');
-  const lightboxImg = document.getElementById('hero-lightbox-img');
-  const lightboxPrev = document.getElementById('hero-lightbox-prev');
-  const lightboxNext = document.getElementById('hero-lightbox-next');
-  const lightboxTitle = document.getElementById('hero-lightbox-title');
-  const lightboxDesc = document.getElementById('hero-lightbox-desc');
-  const lightboxLink = document.getElementById('hero-lightbox-link');
-  const lightboxClose = document.getElementById('hero-lightbox-close');
-
-  if (!lightbox || !lightboxImg || cards.length === 0) {
-    return;
-  }
-
-  let lastTrigger = null;
-  let currentSlides = [];
-  let activeSlideIndex = 0;
-  let fadeTimer = null;
-  let slideToken = 0;
-
-  function renderActiveSlide(animateFade) {
-    if (currentSlides.length === 0) return;
-    const slide = currentSlides[activeSlideIndex];
-    const title = lightboxTitle ? lightboxTitle.textContent : '';
-    const nextAlt = `${title} — ${slide.label}`;
-    slideToken += 1;
-    const token = slideToken;
-
-    if (fadeTimer !== null) {
-      window.clearTimeout(fadeTimer);
-      fadeTimer = null;
-    }
-
-    const applySlideSrc = () => {
-      if (token !== slideToken) return;
-      const reveal = () => {
-        if (token !== slideToken) return;
-        requestAnimationFrame(() => {
-          lightboxImg.classList.remove('is-fading');
-        });
-      };
-
-      lightboxImg.onload = reveal;
-      lightboxImg.onerror = reveal;
-      lightboxImg.alt = nextAlt;
-      lightboxImg.src = slide.src;
-
-      if (lightboxImg.complete && lightboxImg.naturalWidth > 0) {
-        reveal();
-      }
-    };
-
-    if (!animateFade || reducedMotionQuery.matches) {
-      lightboxImg.classList.remove('is-fading');
-      lightboxImg.alt = nextAlt;
-      lightboxImg.src = slide.src;
-      return;
-    }
-
-    lightboxImg.classList.add('is-fading');
-    fadeTimer = window.setTimeout(() => {
-      fadeTimer = null;
-      applySlideSrc();
-    }, 180);
-  }
-
-  function stepSlide(delta) {
-    if (currentSlides.length <= 1) return;
-    activeSlideIndex = (activeSlideIndex + delta + currentSlides.length) % currentSlides.length;
-    renderActiveSlide(true);
-  }
-
-  function openLightbox(card) {
-    const img = card.querySelector('img');
-    if (!img) return;
-
-    heroSection.dispatchEvent(new CustomEvent('hero:lightboxopen'));
-    lastTrigger = card;
-    const projectTitle = card.getAttribute('data-caption') || '';
-    if (lightboxTitle) {
-      lightboxTitle.textContent = projectTitle;
-    }
-
-    let slides = [];
-    const rawGallery = card.getAttribute('data-gallery');
-    if (rawGallery) {
-      try {
-        const parsed = JSON.parse(rawGallery);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          slides = parsed;
-        }
-      } catch {
-        slides = [];
-      }
-    }
-    if (slides.length === 0) {
-      slides = [{ src: img.src, label: 'Home' }];
-    }
-
-    currentSlides = slides;
-    activeSlideIndex = 0;
-
-    // Preload remaining slides smoothly in background
-    slides.slice(1).forEach((slide) => {
-      const preload = new Image();
-      preload.src = slide.src;
-    });
-
-    const showNav = slides.length > 1;
-    if (lightboxPrev) lightboxPrev.hidden = !showNav;
-    if (lightboxNext) lightboxNext.hidden = !showNav;
-
-    renderActiveSlide(false);
-
-    if (lightboxDesc) {
-      const desc = card.getAttribute('data-desc') || '';
-      lightboxDesc.textContent = desc;
-      lightboxDesc.hidden = !desc;
-    }
-    if (lightboxLink) {
-      const url = card.getAttribute('data-url') || '';
-      if (url) {
-        lightboxLink.href = url;
-        lightboxLink.hidden = false;
-      } else {
-        lightboxLink.removeAttribute('href');
-        lightboxLink.hidden = true;
-      }
-    }
-
-    lightbox.hidden = false;
-    requestAnimationFrame(() => {
-      lightbox.classList.add('is-open');
-    });
-    if (lightboxClose) {
-      lightboxClose.focus();
-    }
-  }
-
-  function closeLightbox() {
-    if (lightbox.hidden) return;
-    if (fadeTimer !== null) {
-      window.clearTimeout(fadeTimer);
-      fadeTimer = null;
-    }
-    slideToken += 1;
-    lightbox.classList.remove('is-open');
-    window.setTimeout(() => {
-      lightbox.hidden = true;
-      lightboxImg.classList.remove('is-fading');
-      lightboxImg.removeAttribute('src');
-      currentSlides = [];
-    }, 200);
-    if (lastTrigger && typeof lastTrigger.focus === 'function') {
-      lastTrigger.focus();
-    }
-  }
-
-  cards.forEach((card) => {
-    card.addEventListener('click', () => openLightbox(card));
+  // 4. Shared lightbox & cursor tooltip for project showcase
+  attachGalleryCards(cards, {
+    scopeEl: heroSection,
+    scrollContainer: homeSpace,
+    mode: 'slides',
+    onOpen: () => {
+      heroSection.dispatchEvent(new CustomEvent('hero:lightboxopen'));
+    },
   });
 
-  if (lightboxPrev) {
-    lightboxPrev.addEventListener('click', () => stepSlide(-1));
-  }
-  if (lightboxNext) {
-    lightboxNext.addEventListener('click', () => stepSlide(1));
-  }
-  if (lightboxClose) {
-    lightboxClose.addEventListener('click', closeLightbox);
-  }
+  heroSection.addEventListener('hero:lightboxopen', hideCardTooltip);
+  heroSection.addEventListener('hero:filterchange', hideCardTooltip);
 
-  lightbox.addEventListener('click', (event) => {
-    if (event.target === lightbox) {
-      closeLightbox();
-    }
+  // 5. Cursor-following Writing & Illustration edge links (hidden over the gallery)
+  initSpaceEdgeLinks({
+    spaceName: 'home',
+    spaceElement: homeSpace,
+    leftLink: heroSection.querySelector('.hero-side-link--left'),
+    rightLink: heroSection.querySelector('.hero-side-link--right'),
+    headlineEl: heroSection.querySelector('.hero-headline'),
+    excludeSelector:
+      '.hero-card, #hero-masonry-viewport, .home-anchors, .home-section--about, .home-section--contact, .site-header, .hero-lightbox, .legal-modal',
+    getVerticalBounds: (side, headerBottom) => {
+      const masonryRect = viewport ? viewport.getBoundingClientRect() : null;
+      const colSelector = side === 'left' ? '.hero-masonry__col--1' : '.hero-masonry__col--4';
+      const col = heroSection.querySelector(colSelector);
+      const colTop = col ? col.getBoundingClientRect().top : Infinity;
+      const cutoffY = masonryRect
+        ? Math.min(colTop, masonryRect.top + (side === 'left' ? 24 : 8))
+        : window.innerHeight - 24;
+      return { minY: headerBottom + 8, maxY: cutoffY };
+    },
+    extraBlockers: [isLightboxOpen],
+    extraHideTarget: heroSection,
+    extraHideEvent: 'hero:lightboxopen',
   });
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && !modalHidden()) {
-      closeLightbox();
-    } else if (event.key === 'ArrowLeft' && !modalHidden()) {
-      stepSlide(-1);
-    } else if (event.key === 'ArrowRight' && !modalHidden()) {
-      stepSlide(1);
-    }
-  });
-
-  function modalHidden() {
-    return lightbox.hidden;
-  }
-
-  // 5. Cursor-following project name tooltip on gallery card hover
-  const cardTooltip = document.getElementById('hero-card-tooltip');
-  const tooltipHoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
-
-  if (cardTooltip) {
-    let hoveredCard = null;
-    let tipRafId = null;
-    let tipTargetX = 0;
-    let tipTargetY = 0;
-    let tipCurrentX = 0;
-    let tipCurrentY = 0;
-    let tipWidth = 0;
-    let tipHeight = 0;
-    let lastPointerX = -9999;
-    let lastPointerY = -9999;
-
-    const getClampedPosition = (clientX, clientY) => {
-      const margin = 12;
-      let x = clientX + 18;
-      let y = clientY + 20;
-
-      if (x + tipWidth > window.innerWidth - margin) {
-        x = Math.max(margin, clientX - tipWidth - 10);
-      }
-      if (y + tipHeight > window.innerHeight - margin) {
-        y = Math.max(margin, clientY - tipHeight - 10);
-      }
-      return { x, y };
-    };
-
-    const renderTooltip = () => {
-      tipRafId = null;
-      if (!hoveredCard) return;
-
-      const dx = tipTargetX - tipCurrentX;
-      const dy = tipTargetY - tipCurrentY;
-
-      if (reducedMotionQuery.matches || (Math.abs(dx) < 0.25 && Math.abs(dy) < 0.25)) {
-        tipCurrentX = tipTargetX;
-        tipCurrentY = tipTargetY;
-        cardTooltip.style.transform = `translate3d(${tipCurrentX.toFixed(1)}px, ${tipCurrentY.toFixed(1)}px, 0)`;
-        return;
-      }
-
-      tipCurrentX += dx * 0.34;
-      tipCurrentY += dy * 0.34;
-      cardTooltip.style.transform = `translate3d(${tipCurrentX.toFixed(1)}px, ${tipCurrentY.toFixed(1)}px, 0)`;
-      tipRafId = requestAnimationFrame(renderTooltip);
-    };
-
-    const hideCardTooltip = () => {
-      hoveredCard = null;
-      if (tipRafId !== null) {
-        cancelAnimationFrame(tipRafId);
-        tipRafId = null;
-      }
-      cardTooltip.classList.remove('is-visible');
-    };
-
-    const showCardTooltip = (card, clientX, clientY) => {
-      if (
-        !tooltipHoverQuery.matches ||
-        !lightbox.hidden ||
-        card.classList.contains('is-hidden') ||
-        card.classList.contains('is-leaving')
-      ) {
-        hideCardTooltip();
-        return;
-      }
-
-      const caption = (card.getAttribute('data-caption') || '').trim();
-      if (!caption) {
-        hideCardTooltip();
-        return;
-      }
-
-      if (hoveredCard !== card) {
-        cardTooltip.textContent = caption;
-        tipWidth = cardTooltip.offsetWidth;
-        tipHeight = cardTooltip.offsetHeight;
-        hoveredCard = card;
-
-        const pos = getClampedPosition(clientX, clientY);
-        tipCurrentX = pos.x;
-        tipCurrentY = pos.y;
-        tipTargetX = pos.x;
-        tipTargetY = pos.y;
-        cardTooltip.style.transform = `translate3d(${tipCurrentX.toFixed(1)}px, ${tipCurrentY.toFixed(1)}px, 0)`;
-        cardTooltip.classList.add('is-visible');
-        return;
-      }
-
-      const pos = getClampedPosition(clientX, clientY);
-      tipTargetX = pos.x;
-      tipTargetY = pos.y;
-      if (tipRafId === null) {
-        tipRafId = requestAnimationFrame(renderTooltip);
-      }
-    };
-
-    cards.forEach((card) => {
-      card.addEventListener('pointerenter', (event) => {
-        if (event.pointerType && event.pointerType !== 'mouse' && event.pointerType !== 'pen') {
-          return;
-        }
-        lastPointerX = event.clientX;
-        lastPointerY = event.clientY;
-        showCardTooltip(card, event.clientX, event.clientY);
-      });
-
-      card.addEventListener('pointermove', (event) => {
-        if (event.pointerType && event.pointerType !== 'mouse' && event.pointerType !== 'pen') {
-          return;
-        }
-        lastPointerX = event.clientX;
-        lastPointerY = event.clientY;
-        showCardTooltip(card, event.clientX, event.clientY);
-      });
-
-      card.addEventListener('pointerleave', () => {
-        if (hoveredCard === card) {
-          hideCardTooltip();
-        }
-      });
-    });
-
-    if (homeSpace) {
-      homeSpace.addEventListener(
-        'scroll',
-        () => {
-          if (!hoveredCard && lastPointerX < 0) return;
-          const underCursor = document.elementFromPoint(lastPointerX, lastPointerY);
-          const cardUnder = underCursor ? underCursor.closest('.hero-card') : null;
-          if (cardUnder && cards.includes(cardUnder)) {
-            showCardTooltip(cardUnder, lastPointerX, lastPointerY);
-          } else {
-            hideCardTooltip();
-          }
-        },
-        { passive: true }
-      );
-    }
-
-    heroSection.addEventListener('hero:lightboxopen', hideCardTooltip);
-    heroSection.addEventListener('hero:filterchange', hideCardTooltip);
-    document.addEventListener('mouseleave', hideCardTooltip);
-    window.addEventListener('blur', hideCardTooltip);
-  }
 }

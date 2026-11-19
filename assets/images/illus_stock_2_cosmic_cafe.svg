@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs>
+    <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#191b34"/>
+      <stop offset="65%" stop-color="#33355c"/>
+      <stop offset="100%" stop-color="#4e466b"/>
+    </linearGradient>
+    <radialGradient id="cafeGlow" cx="28%" cy="48%" r="48%">
+      <stop offset="0%" stop-color="#ffc978" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ffc978" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#dusk)"/>
+  <!-- Bistro storefront -->
+  <rect x="44" y="80" width="320" height="390" fill="#23243b" stroke="#141424" stroke-width="4"/>
+  <rect x="74" y="135" width="210" height="215" fill="#f2b866"/>
+  <rect x="74" y="135" width="210" height="215" fill="#ffdf9e" opacity="0.35"/>
+  <path d="M32,126 L382,126 L396,176 L18,176 Z" fill="#a8443d" stroke="#141424" stroke-width="4"/>
+  <g fill="#f5ecd8">
+    <polygon points="82,126 122,126 116,176 72,176"/>
+    <polygon points="168,126 208,126 208,176 164,176"/>
+    <polygon points="256,126 296,126 302,176 260,176"/>
+  </g>
+  <rect width="800" height="600" fill="url(#cafeGlow)"/>
+  <!-- Sidewalk & Stars -->
+  <rect y="468" width="800" height="132" fill="#202133"/>
+  <line x1="0" y1="468" x2="800" y2="468" stroke="#121322" stroke-width="4"/>
+  <circle cx="570" cy="96" r="2.5" fill="#f5ecd8" opacity="0.8"/>
+  <circle cx="660" cy="142" r="2" fill="#f5ecd8" opacity="0.7"/>
+  <circle cx="715" cy="78" r="3" fill="#f5ecd8" opacity="0.85"/>
+  <!-- Distant moon -->
+  <circle cx="675" cy="112" r="32" fill="#f8eed3"/>
+  <circle cx="690" cy="104" r="28" fill="#1e203d"/>
+  <!-- Cute visitor from outer space sitting at bistro table -->
+  <ellipse cx="485" cy="240" rx="56" ry="44" fill="#9bc98d" stroke="#172419" stroke-width="4"/>
+  <path d="M454,202 Q445,172 436,172" stroke="#172419" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="434" cy="170" r="8" fill="#c7e8b5" stroke="#172419" stroke-width="3.5"/>
+  <path d="M516,202 Q525,172 534,172" stroke="#172419" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="536" cy="170" r="8" fill="#c7e8b5" stroke="#172419" stroke-width="3.5"/>
+  <!-- Big curious eyes -->
+  <circle cx="466" cy="236" r="14" fill="#172419"/>
+  <circle cx="504" cy="236" r="14" fill="#172419"/>
+  <circle cx="470" cy="231" r="4" fill="#ffffff"/>
+  <circle cx="508" cy="231" r="4" fill="#ffffff"/>
+  <path d="M477,260 Q485,268 494,260" stroke="#172419" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Cardigan & stripes -->
+  <path d="M438,284 C418,302 414,395 418,450 L552,450 C556,395 552,302 532,284 Z" fill="#d97b54" stroke="#172419" stroke-width="4"/>
+  <g stroke="#f4ecd8" stroke-width="5">
+    <line x1="432" y1="322" x2="538" y2="322"/>
+    <line x1="426" y1="354" x2="544" y2="354"/>
+    <line x1="424" y1="386" x2="546" y2="386"/>
+  </g>
+  <!-- Bistro Table & Teacup -->
+  <rect x="440" y="388" width="170" height="16" rx="6" fill="#ebe4d5" stroke="#141424" stroke-width="4"/>
+  <line x1="525" y1="404" x2="525" y2="516" stroke="#141424" stroke-width="7"/>
+  <path d="M482,516 L568,516" stroke="#141424" stroke-width="7" stroke-linecap="round"/>
+  <!-- Newspaper -->
+  <polygon points="434,364 510,334 548,386 452,390" fill="#f7f2e7" stroke="#141424" stroke-width="3.5"/>
+  <line x1="464" y1="364" x2="508" y2="348" stroke="#8c867b" stroke-width="3"/>
+  <line x1="472" y1="375" x2="518" y2="358" stroke="#8c867b" stroke-width="3"/>
+  <!-- Steaming cup -->
+  <path d="M558,364 L584,364 L580,388 L562,388 Z" fill="#d97b54" stroke="#141424" stroke-width="3"/>
+  <path d="M567,352 Q562,338 571,328" stroke="#f5ecd8" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+  <path d="M578,354 Q584,340 574,330" stroke="#f5ecd8" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+</svg>

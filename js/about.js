@@ -5,12 +5,14 @@
  */
 
 export function initAbout() {
-  const rolesContainer = document.querySelector('.about-roles');
-  if (!rolesContainer) {
+  const rolesContainers = Array.from(document.querySelectorAll('.about-roles'));
+  if (rolesContainers.length === 0) {
     return;
   }
 
-  const roles = Array.from(rolesContainer.querySelectorAll('.about-role'));
+  const roles = rolesContainers.flatMap((container) =>
+    Array.from(container.querySelectorAll('.about-role'))
+  );
   if (roles.length === 0) {
     return;
   }

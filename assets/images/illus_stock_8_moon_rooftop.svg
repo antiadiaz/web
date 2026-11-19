@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" fill="none">
+  <defs>
+    <linearGradient id="moonSky" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#0f1529"/>
+      <stop offset="60%" stop-color="#1e2948"/>
+      <stop offset="100%" stop-color="#2e3b5c"/>
+    </linearGradient>
+    <radialGradient id="crescentGlow" cx="68%" cy="28%" r="36%">
+      <stop offset="0%" stop-color="#fff0c4" stop-opacity="0.34"/>
+      <stop offset="100%" stop-color="#fff0c4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="700" height="700" fill="url(#moonSky)"/>
+  <rect width="700" height="700" fill="url(#crescentGlow)"/>
+  <!-- Giant crescent moon -->
+  <circle cx="482" cy="196" r="88" fill="#faecc8"/>
+  <circle cx="516" cy="176" r="78" fill="#17203d"/>
+  <!-- Quiet stars -->
+  <g fill="#faecc8" opacity="0.8">
+    <circle cx="144" cy="116" r="3"/>
+    <circle cx="248" cy="178" r="2.5"/>
+    <circle cx="322" cy="96" r="3"/>
+    <circle cx="604" cy="294" r="2.5"/>
+    <circle cx="112" cy="296" r="2"/>
+  </g>
+  <!-- Distant apartment windows silhouette -->
+  <g fill="#12182b">
+    <rect x="0" y="420" width="175" height="280"/>
+    <rect x="520" y="390" width="180" height="310"/>
+  </g>
+  <g fill="#f0c478" opacity="0.72">
+    <rect x="38" y="462" width="24" height="32" rx="3"/>
+    <rect x="92" y="462" width="24" height="32" rx="3"/>
+    <rect x="564" y="438" width="24" height="32" rx="3"/>
+    <rect x="618" y="492" width="24" height="32" rx="3"/>
+  </g>
+  <!-- Rooftop ledge -->
+  <rect x="145" y="492" width="410" height="208" fill="#2c354c" stroke="#101524" stroke-width="4"/>
+  <rect x="130" y="476" width="440" height="28" fill="#46526d" stroke="#101524" stroke-width="4"/>
+  <!-- Curly-haired illustrator sitting sketching -->
+  <circle cx="294" cy="364" r="38" fill="#442b23" stroke="#151010" stroke-width="3.5"/>
+  <circle cx="302" cy="374" r="28" fill="#f3d6c8" stroke="#151010" stroke-width="3"/>
+  <circle cx="310" cy="374" r="10" stroke="#151010" stroke-width="2.5"/>
+  <path d="M266,406 C284,394 316,394 334,406 L342,476 L262,476 Z" fill="#c77858" stroke="#151010" stroke-width="3.5"/>
+  <!-- Tiny spacesuit companion sitting beside -->
+  <circle cx="426" cy="404" r="28" fill="#f2f0e9" stroke="#151010" stroke-width="3.5"/>
+  <ellipse cx="422" cy="406" rx="18" ry="14" fill="#2a4563" stroke="#151010" stroke-width="2.5"/>
+  <path d="M402,432 L450,432 L456,476 L396,476 Z" fill="#f2f0e9" stroke="#151010" stroke-width="3.5"/>
+  <rect x="412" y="446" width="24" height="14" rx="3" fill="#d97b54"/>
+</svg>

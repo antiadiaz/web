@@ -12,33 +12,30 @@ const LEGAL_HASH_MAP = Object.freeze({
   '#cookie-policy': 'cookies',
 });
 
-export function initContact() {
-  initSectionHalftone({
-    section: document.getElementById('contact'),
-    canvas: document.getElementById('contact-halftone'),
-    variant: 'contact',
-    protectedSelectors: [
-      '.contact-heading',
-      '.contact-copy',
-      '.contact-links',
-      '.contact-form',
-    ],
-  });
-
-  const form = document.getElementById('contact-form');
+function bindContactForm({
+  formId,
+  nameId,
+  emailId,
+  subjectId,
+  messageId,
+  privacyId,
+  honeyId,
+  statusId,
+}) {
+  const form = document.getElementById(formId);
   if (!form) {
     return;
   }
 
-  const nameInput = document.getElementById('contact-name');
-  const emailInput = document.getElementById('contact-email');
-  const subjectInput = document.getElementById('contact-subject');
-  const messageInput = document.getElementById('contact-message');
-  const privacyInput = document.getElementById('contact-privacy');
-  const honeyInput = document.getElementById('contact-honey');
+  const nameInput = document.getElementById(nameId);
+  const emailInput = document.getElementById(emailId);
+  const subjectInput = document.getElementById(subjectId);
+  const messageInput = document.getElementById(messageId);
+  const privacyInput = document.getElementById(privacyId);
+  const honeyInput = document.getElementById(honeyId);
   const submitButton = form.querySelector('.contact-submit');
   const submitLabel = submitButton ? submitButton.querySelector('span') : null;
-  const statusEl = document.getElementById('contact-status');
+  const statusEl = document.getElementById(statusId);
 
   const defaultButtonText = submitLabel ? submitLabel.textContent : 'Send message';
   let isSubmitting = false;
@@ -178,6 +175,57 @@ export function initContact() {
     } finally {
       setLoading(false);
     }
+  });
+}
+
+export function initContact() {
+  initSectionHalftone({
+    section: document.getElementById('contact'),
+    canvas: document.getElementById('contact-halftone'),
+    variant: 'contact',
+    protectedSelectors: [
+      '.contact-heading',
+      '.contact-copy',
+      '.contact-links',
+      '.contact-form',
+    ],
+  });
+
+  bindContactForm({
+    formId: 'contact-form',
+    nameId: 'contact-name',
+    emailId: 'contact-email',
+    subjectId: 'contact-subject',
+    messageId: 'contact-message',
+    privacyId: 'contact-privacy',
+    honeyId: 'contact-honey',
+    statusId: 'contact-status',
+  });
+
+  initSectionHalftone({
+    section: document.getElementById('illustration-contact'),
+    canvas: document.getElementById('illustration-contact-halftone'),
+    variant: 'contact',
+    rgb: '255, 255, 255',
+    densityScale: 0.34,
+    alphaScale: 0.48,
+    protectedSelectors: [
+      '.contact-heading',
+      '.contact-copy',
+      '.contact-links',
+      '.contact-form',
+    ],
+  });
+
+  bindContactForm({
+    formId: 'illustration-contact-form',
+    nameId: 'illus-contact-name',
+    emailId: 'illus-contact-email',
+    subjectId: 'illus-contact-subject',
+    messageId: 'illus-contact-message',
+    privacyId: 'illus-contact-privacy',
+    honeyId: 'illus-contact-honey',
+    statusId: 'illus-contact-status',
   });
 }
 

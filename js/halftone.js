@@ -6,9 +6,9 @@
  */
 
 const ALPHA_BUCKETS = 24;
-function createAlphaStyles(rgb) {
+function createAlphaStyles(rgb, alphaScale = 1) {
   return Array.from({ length: ALPHA_BUCKETS }, (_, i) => {
-    const alpha = 0.07 + (i / (ALPHA_BUCKETS - 1)) * 0.84;
+    const alpha = (0.07 + (i / (ALPHA_BUCKETS - 1)) * 0.84) * alphaScale;
     return `rgba(${rgb}, ${alpha.toFixed(3)})`;
   });
 }
@@ -59,6 +59,8 @@ export function initSectionHalftone({
   canvas,
   variant = 'contact',
   rgb = '17, 17, 17',
+  densityScale = 1,
+  alphaScale = 1,
   protectedSelectors = [],
 }) {
   if (!section || !canvas) {
@@ -70,7 +72,7 @@ export function initSectionHalftone({
     return;
   }
 
-  const alphaStyles = createAlphaStyles(rgb);
+  const alphaStyles = createAlphaStyles(rgb, alphaScale);
   const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   const scrollContainer = section.closest('.space') || document.getElementById('space-home');
 
@@ -251,7 +253,7 @@ export function initSectionHalftone({
           }
         }
 
-        const density = Math.min(0.94, baseDensity * clearance);
+        const density = Math.min(0.94, baseDensity * densityScale * clearance);
         if (density <= 0.015) {
           continue;
         }

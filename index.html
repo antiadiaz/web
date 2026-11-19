@@ -87,6 +87,7 @@
                 type="button"
                 class="site-nav__item"
                 data-nav-space="illustration"
+                data-nav-context-slot="illustration-home"
                 aria-controls="space-illustration"
               >
                 Illustration
@@ -145,6 +146,7 @@
                 type="button"
                 class="mobile-drawer__link"
                 data-nav-space="illustration"
+                data-nav-context-slot="illustration-home"
                 aria-controls="space-illustration"
               >
                 Illustration
@@ -191,7 +193,7 @@
                     data-nav-space="home"
                     aria-controls="space-home"
                   >
-                    <span>HOME</span>
+                    <span>MORE SKILLS</span>
                     <svg
                       class="hero-side-link__arrow"
                       width="15"
@@ -259,18 +261,18 @@
                         <span>WRITING</span>
                       </button>
 
-                      <h1 id="heading-hero" class="hero-headline" aria-label="web dev &amp; design">
+                      <h1 id="heading-hero" class="hero-headline" aria-label="developer &amp; product designer">
                         <span class="hero-line hero-line--1">
                           <span class="hero-word-mask">
-                            <span class="hero-word hero-word--sans" style="--word-i: 0">web dev</span>
+                            <span class="hero-word hero-word--sans" style="--word-i: 0">developer</span>
+                          </span>
+                          <span class="hero-word-mask">
+                            <span class="hero-word hero-word--serif" style="--word-i: 1">&amp;</span>
                           </span>
                         </span>
                         <span class="hero-line hero-line--2">
                           <span class="hero-word-mask">
-                            <span class="hero-word hero-word--serif" style="--word-i: 1">&amp;</span>
-                          </span>
-                          <span class="hero-word-mask">
-                            <span class="hero-word hero-word--serif" style="--word-i: 2">design</span>
+                            <span class="hero-word hero-word--serif" style="--word-i: 2">product designer</span>
                           </span>
                         </span>
                       </h1>
@@ -343,7 +345,7 @@
                       </button>
                     </div>
 
-                    <!-- Column 2 (Overlaps text higher) -->
+                    <!-- Column 2 -->
                     <div class="hero-masonry__col hero-masonry__col--2">
                       <button
                         type="button"
@@ -365,42 +367,24 @@
 
                       <button
                         type="button"
-                        class="hero-card hero-card--landscape"
+                        class="hero-card hero-card--square"
                         style="--card-i: 5"
                         data-tags="dev"
-                        data-caption="Studio Casa Sana"
-                        data-desc="Boutique barre, cycling, and strength studio website built with custom front-end development and WordPress."
-                        data-url="https://studiocasasana.com/"
-                        data-gallery='[{"src":"./assets/images/home_studio_casa_sana_real_1795084580038.jpg","label":"Home"},{"src":"./assets/aistudio/casa-sana_interior_1_c023b52b.png","label":"Filosofía"},{"src":"./assets/aistudio/casa-sana_interior_2_af488944.png","label":"Corporates"}]'
+                        data-caption="Fundación Multiópticas"
+                        data-desc="Corporate social foundation portal built and maintained on WordPress within the Multiópticas multi-site ecosystem."
+                        data-url="https://www.fundacionmultiopticas.com/"
+                        data-gallery='[{"src":"./assets/images/home_fundacion_multiopticas_real_1795038916620.jpg","label":"Home"},{"src":"./assets/aistudio/fundacion-multiopticas_interior_1_bbfbca04.png","label":"Colabora"},{"src":"./assets/aistudio/fundacion-multiopticas_interior_2_25c87fd7.png","label":"Senegal"},{"src":"./assets/aistudio/fundacion-multiopticas_interior_3_41759af5.png","label":"Patronato"}]'
                       >
                         <img
-                          src="./assets/images/home_studio_casa_sana_real_1795084580038.jpg"
-                          alt="Studio Casa Sana real homepage displayed across MacBook Pro, iPad, and iPhone on travertine marble"
-                          loading="eager"
-                          referrerpolicy="no-referrer"
-                        />
-                      </button>
-
-                      <button
-                        type="button"
-                        class="hero-card hero-card--landscape"
-                        style="--card-i: 8"
-                        data-tags="dev"
-                        data-caption="MUV Store"
-                        data-desc="WordPress &amp; WooCommerce e-commerce platform built with Bricks, ACF Pro, WPML, batch inventory logic, and custom features."
-                        data-url="https://muv-store.com/"
-                        data-gallery='[{"src":"./assets/images/home_muv_store_real_1795038913844.jpg","label":"Home"},{"src":"./assets/aistudio/muv_interior_1_52e3d8a1.png","label":"Kits"},{"src":"./assets/aistudio/muv_interior_2_27153119.png","label":"Full MUV Premium"},{"src":"./assets/aistudio/muv_interior_3_bd5fb3e9.png","label":"Tu cesta"}]'
-                      >
-                        <img
-                          src="./assets/images/home_muv_store_real_1795038913844.jpg"
-                          alt="MUV Store real homepage displayed across MacBook Pro and iPhone on a pale oak and travertine table"
+                          src="./assets/images/home_fundacion_multiopticas_real_1795038916620.jpg"
+                          alt="Fundación Multiópticas real homepage displayed across MacBook Pro and iPhone on a sandstone desk"
                           loading="eager"
                           referrerpolicy="no-referrer"
                         />
                       </button>
                     </div>
 
-                    <!-- Column 3 (Leaves breathing room for headline) -->
+                    <!-- Column 3 -->
                     <div class="hero-masonry__col hero-masonry__col--3">
                       <button
                         type="button"
@@ -439,21 +423,21 @@
                       </button>
                     </div>
 
-                    <!-- Column 4 (Overlaps text right side) -->
+                    <!-- Column 4 -->
                     <div class="hero-masonry__col hero-masonry__col--4">
                       <button
                         type="button"
-                        class="hero-card hero-card--square"
+                        class="hero-card hero-card--landscape"
                         style="--card-i: 3"
                         data-tags="dev"
-                        data-caption="Área Central"
-                        data-desc="Custom WordPress platform built with Bricks Builder, ACF Pro, and WPML multilingual architecture."
-                        data-url="https://www.areacentral.es/"
-                        data-gallery='[{"src":"./assets/images/home_area_central_real_1795037658450.jpg","label":"Home"},{"src":"./assets/aistudio/area-central_interior_1_80be3ac7.png","label":"Nuestras marcas"},{"src":"./assets/aistudio/area-central_interior_2_4a54c637.png","label":"El Ganso Outlet"}]'
+                        data-caption="Studio Casa Sana"
+                        data-desc="Boutique barre, cycling, and strength studio website built with custom front-end development and WordPress."
+                        data-url="https://studiocasasana.com/"
+                        data-gallery='[{"src":"./assets/images/home_studio_casa_sana_real_1795084580038.jpg","label":"Home"},{"src":"./assets/aistudio/casa-sana_interior_1_c023b52b.png","label":"Filosofía"},{"src":"./assets/aistudio/casa-sana_interior_2_af488944.png","label":"Corporates"}]'
                       >
                         <img
-                          src="./assets/images/home_area_central_real_1795037658450.jpg"
-                          alt="Área Central real homepage displayed across MacBook Pro, iPad, and iPhone on honed concrete and travertine"
+                          src="./assets/images/home_studio_casa_sana_real_1795084580038.jpg"
+                          alt="Studio Casa Sana real homepage displayed across MacBook Pro, iPad, and iPhone on travertine marble"
                           loading="eager"
                           referrerpolicy="no-referrer"
                         />
@@ -464,14 +448,14 @@
                         class="hero-card hero-card--landscape"
                         style="--card-i: 7"
                         data-tags="dev"
-                        data-caption="Siux Pádel"
-                        data-desc="High-performance padel e-commerce front-end development and custom storefront implementation."
-                        data-url="https://www.siuxpadel.com/"
-                        data-gallery='[{"src":"./assets/images/home_siux_padel_1795036401731.jpg","label":"Home"},{"src":"./assets/images/int_siux_palas_1795036457501.jpg","label":"Palas"},{"src":"./assets/images/int_siux_textil_1795036456080.jpg","label":"Textil"}]'
+                        data-caption="MUV Store"
+                        data-desc="WordPress &amp; WooCommerce e-commerce platform built with Bricks, ACF Pro, WPML, batch inventory logic, and custom features."
+                        data-url="https://muv-store.com/"
+                        data-gallery='[{"src":"./assets/images/home_muv_store_real_1795038913844.jpg","label":"Home"},{"src":"./assets/aistudio/muv_interior_1_52e3d8a1.png","label":"Kits"},{"src":"./assets/aistudio/muv_interior_2_27153119.png","label":"Full MUV Premium"},{"src":"./assets/aistudio/muv_interior_3_bd5fb3e9.png","label":"Tu cesta"}]'
                       >
                         <img
-                          src="./assets/images/home_siux_padel_1795036401731.jpg"
-                          alt="Siux Pádel homepage displayed across MacBook Pro, iPad, and iPhone on slate concrete"
+                          src="./assets/images/home_muv_store_real_1795038913844.jpg"
+                          alt="MUV Store real homepage displayed across MacBook Pro and iPhone on a pale oak and travertine table"
                           loading="eager"
                           referrerpolicy="no-referrer"
                         />
@@ -480,16 +464,16 @@
                       <button
                         type="button"
                         class="hero-card hero-card--square"
-                        style="--card-i: 9"
+                        style="--card-i: 8"
                         data-tags="dev"
-                        data-caption="Fundación Multiópticas"
-                        data-desc="Corporate social foundation portal built and maintained on WordPress within the Multiópticas multi-site ecosystem."
-                        data-url="https://www.fundacionmultiopticas.com/"
-                        data-gallery='[{"src":"./assets/images/home_fundacion_multiopticas_real_1795038916620.jpg","label":"Home"},{"src":"./assets/aistudio/fundacion-multiopticas_interior_1_bbfbca04.png","label":"Colabora"},{"src":"./assets/aistudio/fundacion-multiopticas_interior_2_25c87fd7.png","label":"Senegal"},{"src":"./assets/aistudio/fundacion-multiopticas_interior_3_41759af5.png","label":"Patronato"}]'
+                        data-caption="Área Central"
+                        data-desc="Custom WordPress platform built with Bricks Builder, ACF Pro, and WPML multilingual architecture."
+                        data-url="https://www.areacentral.es/"
+                        data-gallery='[{"src":"./assets/images/home_area_central_real_1795037658450.jpg","label":"Home"},{"src":"./assets/aistudio/area-central_interior_1_80be3ac7.png","label":"Nuestras marcas"},{"src":"./assets/aistudio/area-central_interior_2_4a54c637.png","label":"El Ganso Outlet"}]'
                       >
                         <img
-                          src="./assets/images/home_fundacion_multiopticas_real_1795038916620.jpg"
-                          alt="Fundación Multiópticas real homepage displayed across MacBook Pro and iPhone on a sandstone desk"
+                          src="./assets/images/home_area_central_real_1795037658450.jpg"
+                          alt="Área Central real homepage displayed across MacBook Pro, iPad, and iPhone on honed concrete and travertine"
                           loading="eager"
                           referrerpolicy="no-referrer"
                         />
@@ -998,13 +982,24 @@
                         stroke-linejoin="round"
                       />
                     </svg>
-                    <span>HOME</span>
+                    <span>MORE SKILLS</span>
                   </button>
 
-                  <h1 class="hero-headline illustration-headline" aria-label="illustration">
+                  <h1
+                    class="hero-headline illustration-headline"
+                    aria-label="editorial illustration &amp; character design"
+                  >
                     <span class="hero-line hero-line--1">
                       <span class="hero-word-mask">
-                        <span class="hero-word hero-word--serif" style="--word-i: 0">illustration</span>
+                        <span class="hero-word hero-word--serif" style="--word-i: 0">editorial illustration</span>
+                      </span>
+                      <span class="hero-word-mask">
+                        <span class="hero-word hero-word--serif" style="--word-i: 1">&amp;</span>
+                      </span>
+                    </span>
+                    <span class="hero-line hero-line--2">
+                      <span class="hero-word-mask">
+                        <span class="hero-word hero-word--sans" style="--word-i: 2">character design</span>
                       </span>
                     </span>
                   </h1>
@@ -1014,9 +1009,580 @@
               <div
                 id="illustration-content"
                 class="illustration-content"
-                aria-label="Illustration content container"
-              ></div>
+                aria-label="Illustration gallery and biography"
+              >
+                <section
+                  id="illustration-masonry-section"
+                  class="illustration-masonry-section"
+                  aria-label="Selected illustration works"
+                >
+                  <div id="illustration-masonry" class="illustration-masonry">
+                    <div
+                      class="illustration-masonry__col illustration-masonry__col--1"
+                      data-scroll-shift="-26"
+                    >
+                      <button
+                        type="button"
+                        class="illustration-card illustration-card--tall"
+                        style="--card-i: 0"
+                        data-caption="Twilight Editorial Study"
+                        data-desc="Editorial character illustration exploring nocturnal slate-blue light and nuanced figure proportions (stock placeholder)."
+                      >
+                        <img
+                          src="./assets/images/illus_stock_1_nocturne.svg"
+                          alt="Editorial illustration of a curly-haired character with glasses standing outside a dusk building"
+                          width="600"
+                          height="800"
+                          loading="lazy"
+                          decoding="async"
+                          referrerpolicy="no-referrer"
+                        />
+                      </button>
+
+                      <button
+                        type="button"
+                        class="illustration-card illustration-card--landscape"
+                        style="--card-i: 4"
+                        data-caption="Cosmic Café Vignette"
+                        data-desc="Humorous editorial cover concept blending warm twilight storytelling and playful character acting (stock placeholder)."
+                      >
+                        <img
+                          src="./assets/images/illus_stock_2_cosmic_cafe.svg"
+                          alt="Whimsical illustration of an alien visitor reading a newspaper at an evening sidewalk cafe"
+                          width="800"
+                          height="600"
+                          loading="lazy"
+                          decoding="async"
+                          referrerpolicy="no-referrer"
+                        />
+                      </button>
+                    </div>
+
+                    <div
+                      class="illustration-masonry__col illustration-masonry__col--2"
+                      data-scroll-shift="22"
+                    >
+                      <button
+                        type="button"
+                        class="illustration-card illustration-card--square"
+                        style="--card-i: 1"
+                        data-caption="Daily Espresso Hazard"
+                        data-desc="Black-and-white graphic humor comic strip panel built around expressive ink linework and slapstick timing (stock placeholder)."
+                      >
+                        <img
+                          src="./assets/images/illus_stock_3_ink_strip.svg"
+                          alt="Black and white comic strip illustration showing a character lunging for a falling coffee cup pushed by a cat"
+                          width="700"
+                          height="700"
+                          loading="lazy"
+                          decoding="async"
+                          referrerpolicy="no-referrer"
+                        />
+                      </button>
+
+                      <button
+                        type="button"
+                        class="illustration-card illustration-card--tall"
+                        style="--card-i: 5"
+                        data-caption="Rainy Night Desk"
+                        data-desc="Atmospheric editorial spot illustration lit by a warm brass lamp over open sketchbooks (stock placeholder)."
+                      >
+                        <img
+                          src="./assets/images/illus_stock_4_studio_rain.svg"
+                          alt="Atmospheric illustration of a cozy artist desk under a warm lamp beside a rainy window"
+                          width="600"
+                          height="800"
+                          loading="lazy"
+                          decoding="async"
+                          referrerpolicy="no-referrer"
+                        />
+                      </button>
+                    </div>
+
+                    <div
+                      class="illustration-masonry__col illustration-masonry__col--3"
+                      data-scroll-shift="-20"
+                    >
+                      <button
+                        type="button"
+                        class="illustration-card illustration-card--landscape"
+                        style="--card-i: 2"
+                        data-caption="03:00 AM Deadline"
+                        data-desc="Monochrome humor panel capturing late-night studio life in crisp brush ink (stock placeholder)."
+                      >
+                        <img
+                          src="./assets/images/illus_stock_5_deadline_gag.svg"
+                          alt="Monochrome graphic humor illustration of a sleepy artist at a desk stacked with sketchbooks at three in the morning"
+                          width="800"
+                          height="600"
+                          loading="lazy"
+                          decoding="async"
+                          referrerpolicy="no-referrer"
+                        />
+                      </button>
+
+                      <button
+                        type="button"
+                        class="illustration-card illustration-card--tall"
+                        style="--card-i: 6"
+                        data-caption="Botanical Nocturne"
+                        data-desc="Stylized portrait surrounded by midnight foliage, violet shadows, and drifting fireflies (stock placeholder)."
+                      >
+                        <img
+                          src="./assets/images/illus_stock_6_botanical_night.svg"
+                          alt="Editorial character portrait framed by dark botanical leaves and glowing fireflies"
+                          width="600"
+                          height="800"
+                          loading="lazy"
+                          decoding="async"
+                          referrerpolicy="no-referrer"
+                        />
+                      </button>
+                    </div>
+
+                    <div
+                      class="illustration-masonry__col illustration-masonry__col--4"
+                      data-scroll-shift="28"
+                    >
+                      <button
+                        type="button"
+                        class="illustration-card illustration-card--tall"
+                        style="--card-i: 3"
+                        data-caption="Last Train Home"
+                        data-desc="Moody narrative character study inside a late-night metro car with teal and amber lighting (stock placeholder)."
+                      >
+                        <img
+                          src="./assets/images/illus_stock_7_metro_study.svg"
+                          alt="Stylized editorial scene inside a late-night subway car with two quiet commuters"
+                          width="600"
+                          height="800"
+                          loading="lazy"
+                          decoding="async"
+                          referrerpolicy="no-referrer"
+                        />
+                      </button>
+
+                      <button
+                        type="button"
+                        class="illustration-card illustration-card--square"
+                        style="--card-i: 7"
+                        data-caption="Crescent Rooftop Sketch"
+                        data-desc="Lyrical character vignette under a giant crescent moon overlooking quiet city windows (stock placeholder)."
+                      >
+                        <img
+                          src="./assets/images/illus_stock_8_moon_rooftop.svg"
+                          alt="Storybook illustration of an illustrator and a tiny astronaut sitting on a rooftop beneath a crescent moon"
+                          width="700"
+                          height="700"
+                          loading="lazy"
+                          decoding="async"
+                          referrerpolicy="no-referrer"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </section>
+
+                <section
+                  id="illustration-about"
+                  class="illustration-about"
+                  aria-labelledby="heading-illustration-about"
+                >
+                  <div class="about-layout">
+                    <div class="about-intro">
+                      <h2 id="heading-illustration-about" class="about-heading">
+                        About <em class="about-heading__italic">my art</em>
+                      </h2>
+                      <div class="contact-links">
+                        <a
+                          href="https://www.instagram.com/antiadiaz/"
+                          class="contact-direct"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <span>Instagram (@antiadiaz)</span>
+                          <svg
+                            class="contact-direct__arrow"
+                            width="13"
+                            height="13"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5"
+                              stroke="currentColor"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="about-content">
+                      <p class="about-copy">
+                        My work moves across two distinct yet complementary visual voices. On one
+                        hand, I create black-and-white graphic humor strips built around bold ink
+                        linework, expressive slapstick timing, exaggerated gestures, and
+                        hand-lettered dialogue; on the other, I craft atmospheric editorial
+                        illustrations and character designs defined by stylized proportions, moody
+                        nocturnal palettes, and painterly light and shadow.
+                      </p>
+                      <p class="about-copy">
+                        I share my comic strips and illustrations with an Instagram community of
+                        over 50,000 followers, and I am the author and illustrator of the humor and
+                        illustration book <em>&ldquo;El extraterrestre humano&rdquo;</em>,
+                        published by Penguin Random House. Alongside editorial publishing, I create
+                        and self-publish paranormal-themed fanzines and have hands-on experience
+                        presenting my artwork at illustration fairs. For commercial commissions, I
+                        have worked as an illustrator for brands such as El Corte Ingl&eacute;s,
+                        Platanomel&oacute;n, and La Casa de las Carcasas&mdash;designing a
+                        collection of five illustrated phone cases for the latter&mdash;among other
+                        companies.
+                      </p>
+                      <p class="about-copy">
+                        My creative path is grounded in formal visual arts, graphic design, and
+                        motion: I earned a Technical Degree in Illustration (2006&ndash;2008) and a
+                        Degree in Graphic Design (2008&ndash;2011) at EASD Antonio Fa&iacute;lde
+                        in Ourense, later specializing through a Character Design course at
+                        G&uuml;iken School (2018) with Pakoto Mart&iacute;nez, Julio Serrano, and Mr.
+                        Mol, a Master&apos;s in Illustration &amp; Animation at ESDESIGN Barcelona
+                        (2023), and a Traditional 2D Animation course with Santi Riscos (2024).
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="about-roles" aria-label="Illustration specialties and training">
+                    <div class="about-role">
+                      <h3 class="about-role__heading">
+                        <button
+                          type="button"
+                          class="about-role__trigger"
+                          aria-expanded="false"
+                          aria-controls="illustration-role-panel-1"
+                        >
+                          <span class="about-role__title">Humor, Books &amp; Fanzines</span>
+                          <svg
+                            class="about-role__chevron"
+                            width="15"
+                            height="15"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M8 3V13M8 13L3.5 8.5M8 13L12.5 8.5"
+                              stroke="currentColor"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </button>
+                      </h3>
+                      <div id="illustration-role-panel-1" class="about-role__panel">
+                        <div class="about-role__panel-inner">
+                          <p class="about-role__desc">
+                            High-contrast ink strips, comedic pacing, and recurring characters for
+                            50K+ followers (@antiadiaz), the illustrated book
+                            <em>El extraterrestre humano</em> (Penguin Random House), and
+                            self-published paranormal fanzines presented at illustration fairs.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="about-role">
+                      <h3 class="about-role__heading">
+                        <button
+                          type="button"
+                          class="about-role__trigger"
+                          aria-expanded="false"
+                          aria-controls="illustration-role-panel-2"
+                        >
+                          <span class="about-role__title">Editorial &amp; Character Design</span>
+                          <svg
+                            class="about-role__chevron"
+                            width="15"
+                            height="15"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M8 3V13M8 13L3.5 8.5M8 13L12.5 8.5"
+                              stroke="currentColor"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </button>
+                      </h3>
+                      <div id="illustration-role-panel-2" class="about-role__panel">
+                        <div class="about-role__panel-inner">
+                          <p class="about-role__desc">
+                            Atmospheric narrative scenes, character development, painterly
+                            shading, and expressive staging, refined with G&uuml;iken School&apos;s
+                            Character Design training (Pakoto Mart&iacute;nez, Julio Serrano &amp;
+                            Mr. Mol, 2018).
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="about-role">
+                      <h3 class="about-role__heading">
+                        <button
+                          type="button"
+                          class="about-role__trigger"
+                          aria-expanded="false"
+                          aria-controls="illustration-role-panel-3"
+                        >
+                          <span class="about-role__title">Brand &amp; Product Collaborations</span>
+                          <svg
+                            class="about-role__chevron"
+                            width="15"
+                            height="15"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M8 3V13M8 13L3.5 8.5M8 13L12.5 8.5"
+                              stroke="currentColor"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </button>
+                      </h3>
+                      <div id="illustration-role-panel-3" class="about-role__panel">
+                        <div class="about-role__panel-inner">
+                          <p class="about-role__desc">
+                            Custom commercial illustration for El Corte Ingl&eacute;s,
+                            Platanomel&oacute;n, and other brands, plus a five-piece illustrated
+                            phone case collection designed for La Casa de las Carcasas.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="about-role">
+                      <h3 class="about-role__heading">
+                        <button
+                          type="button"
+                          class="about-role__trigger"
+                          aria-expanded="false"
+                          aria-controls="illustration-role-panel-4"
+                        >
+                          <span class="about-role__title">Education &amp; 2D Animation</span>
+                          <svg
+                            class="about-role__chevron"
+                            width="15"
+                            height="15"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M8 3V13M8 13L3.5 8.5M8 13L12.5 8.5"
+                              stroke="currentColor"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </button>
+                      </h3>
+                      <div id="illustration-role-panel-4" class="about-role__panel">
+                        <div class="about-role__panel-inner">
+                          <p class="about-role__desc">
+                            Technical Degree in Illustration (2006&ndash;2008) &amp; Degree in
+                            Graphic Design (2008&ndash;2011) at EASD Antonio Fa&iacute;lde;
+                            Master&apos;s in Illustration &amp; Animation at ESDESIGN Barcelona
+                            (2023); Traditional 2D Animation with Santi Riscos (2024).
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
             </div>
+
+            <section
+              id="illustration-contact"
+              class="home-section home-section--contact illustration-contact"
+              aria-labelledby="heading-illustration-contact"
+            >
+              <canvas
+                id="illustration-contact-halftone"
+                class="contact-halftone"
+                aria-hidden="true"
+              ></canvas>
+              <div class="contact-layout">
+                <div class="contact-intro">
+                  <h2 id="heading-illustration-contact" class="contact-heading">
+                    Let&rsquo;s work <em class="contact-heading__italic">together</em>
+                  </h2>
+                  <p class="contact-copy">
+                    Available for editorial illustration, character design, publishing commissions,
+                    and creative brand collaborations.
+                  </p>
+                  <div class="contact-links">
+                    <a href="mailto:hola@antiadiaz.com" class="contact-direct">
+                      hola@antiadiaz.com
+                    </a>
+                  </div>
+                </div>
+
+                <form id="illustration-contact-form" class="contact-form" novalidate>
+                  <input
+                    id="illus-contact-honey"
+                    name="_honey"
+                    type="text"
+                    class="contact-honey"
+                    tabindex="-1"
+                    autocomplete="off"
+                    aria-hidden="true"
+                  />
+
+                  <div class="contact-form__row">
+                    <div class="contact-field">
+                      <label for="illus-contact-name" class="contact-label">Name *</label>
+                      <input
+                        id="illus-contact-name"
+                        name="name"
+                        type="text"
+                        class="contact-input"
+                        placeholder="Your name"
+                        autocomplete="name"
+                        required
+                      />
+                    </div>
+
+                    <div class="contact-field">
+                      <label for="illus-contact-email" class="contact-label">Email *</label>
+                      <input
+                        id="illus-contact-email"
+                        name="email"
+                        type="email"
+                        class="contact-input"
+                        placeholder="you@domain.com"
+                        autocomplete="email"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div class="contact-field">
+                    <label for="illus-contact-subject" class="contact-label">Subject</label>
+                    <input
+                      id="illus-contact-subject"
+                      name="subject"
+                      type="text"
+                      class="contact-input"
+                      placeholder="Editorial illustration, character design, commission..."
+                    />
+                  </div>
+
+                  <div class="contact-field">
+                    <label for="illus-contact-message" class="contact-label">Message *</label>
+                    <textarea
+                      id="illus-contact-message"
+                      name="message"
+                      rows="4"
+                      class="contact-input contact-textarea"
+                      placeholder="Tell me about your project"
+                      required
+                    ></textarea>
+                  </div>
+
+                  <div class="contact-consent">
+                    <label for="illus-contact-privacy" class="contact-checkbox-label">
+                      <input
+                        id="illus-contact-privacy"
+                        name="privacy"
+                        type="checkbox"
+                        class="contact-checkbox"
+                        required
+                      />
+                      <span>
+                        I have read and accept the
+                        <button
+                          type="button"
+                          class="contact-inline-link"
+                          data-legal-doc="privacy"
+                        >
+                          Privacy Policy
+                        </button>
+                        and consent to the processing of my data to respond to my inquiry.
+                      </span>
+                    </label>
+
+                    <p class="contact-gdpr">
+                      <strong>Basic Data Protection Info (GDPR / Spanish LOPDGDD):</strong>
+                      Controller: Ant&iacute;a D&iacute;az (hola@antiadiaz.com, Spain). Purpose:
+                      Handle and reply to your inquiry. Legal basis: Your consent (Art. 6.1.a GDPR).
+                      Recipients: Technical delivery via FormSubmit to hola@antiadiaz.com; no
+                      third-party commercial sharing. Rights: Access, rectification, erasure,
+                      objection, restriction, and portability at hola@antiadiaz.com, or before the
+                      Spanish Data Protection Agency (AEPD).
+                    </p>
+                  </div>
+
+                  <div class="contact-form__actions">
+                    <button type="submit" class="contact-submit">
+                      <span>Send message</span>
+                      <svg
+                        class="contact-submit__arrow"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </button>
+                    <p
+                      id="illus-contact-status"
+                      class="contact-status"
+                      role="status"
+                      aria-live="polite"
+                      hidden
+                    ></p>
+                  </div>
+                </form>
+              </div>
+            </section>
+
+            <footer class="site-footer site-footer--illustration" role="contentinfo">
+              <div class="site-footer__inner">
+                <p class="site-footer__copy">&copy; 2026 Ant&iacute;a D&iacute;az &middot; Spain</p>
+                <nav class="site-footer__nav" aria-label="Legal navigation">
+                  <a href="#legal-notice" class="site-footer__link" data-legal-doc="legal">
+                    Legal Notice
+                  </a>
+                  <a href="#privacy-policy" class="site-footer__link" data-legal-doc="privacy">
+                    Privacy Policy
+                  </a>
+                  <a href="#cookie-policy" class="site-footer__link" data-legal-doc="cookies">
+                    Cookie Policy
+                  </a>
+                </nav>
+              </div>
+            </footer>
           </section>
         </div>
       </main>

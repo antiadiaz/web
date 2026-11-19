@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" fill="none">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#0e1c30"/>
+      <stop offset="58%" stop-color="#22364d"/>
+      <stop offset="100%" stop-color="#374859"/>
+    </linearGradient>
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="0.8">
+      <stop offset="0%" stop-color="#7c8791"/>
+      <stop offset="100%" stop-color="#4e5964"/>
+    </linearGradient>
+    <linearGradient id="sweater" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9e6d3b"/>
+      <stop offset="100%" stop-color="#704a25"/>
+    </linearGradient>
+    <radialGradient id="lampGlow" cx="50%" cy="42%" r="46%">
+      <stop offset="0%" stop-color="#ffdfa8" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ffdfa8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#sky)"/>
+  <circle cx="485" cy="128" r="38" fill="#e9edf2" opacity="0.14"/>
+  <circle cx="485" cy="128" r="24" fill="#f2efe4" opacity="0.85"/>
+  <!-- Architectural dusk library -->
+  <polygon points="40,185 335,72 560,195 560,520 40,520" fill="url(#wall)" opacity="0.88"/>
+  <polygon points="335,72 560,195 560,520 335,520" fill="#2b333e" opacity="0.92"/>
+  <g stroke="#293542" stroke-width="3" fill="#4f6c78" opacity="0.72">
+    <polygon points="75,235 300,152 300,320 75,372"/>
+    <line x1="120" y1="218" x2="120" y2="361"/>
+    <line x1="165" y1="201" x2="165" y2="351"/>
+    <line x1="210" y1="185" x2="210" y2="341"/>
+    <line x1="255" y1="168" x2="255" y2="330"/>
+  </g>
+  <!-- Silhouetted evening trees -->
+  <path d="M0,490 C70,455 150,475 240,495 C380,505 490,460 600,480 L600,800 L0,800 Z" fill="#182129"/>
+  <path d="M0,550 L600,525 L600,800 L0,800 Z" fill="#2c333b"/>
+  <rect width="600" height="800" fill="url(#lampGlow)"/>
+  <!-- Character curly hair back -->
+  <path d="M235,280 C195,270 175,320 198,358 C178,382 188,430 220,440 C248,452 355,452 385,436 C418,425 426,378 402,350 C422,312 396,262 352,272 C332,245 268,242 235,280 Z" fill="#3a231c" stroke="#1b110e" stroke-width="4"/>
+  <!-- Warm sweater torso -->
+  <path d="M238,448 C208,458 190,520 185,595 L418,595 C412,518 394,458 362,448 Z" fill="url(#sweater)" stroke="#231710" stroke-width="4"/>
+  <!-- Sweater knit pattern lines -->
+  <g stroke="#5c3b1c" stroke-width="2" opacity="0.65">
+    <path d="M206,502 L396,502"/>
+    <path d="M196,544 L406,544"/>
+    <path d="M242,462 Q300,480 358,462" fill="none"/>
+  </g>
+  <!-- Neck & Face -->
+  <rect x="281" y="405" width="38" height="48" rx="14" fill="#efd0c2" stroke="#231710" stroke-width="3.5"/>
+  <path d="M248,332 C248,290 352,290 352,332 C352,386 328,422 300,422 C272,422 248,386 248,332 Z" fill="#f4d8cb" stroke="#231710" stroke-width="3.5"/>
+  <!-- Rosy blush & nose -->
+  <ellipse cx="268" cy="368" rx="12" ry="6" fill="#d97d72" opacity="0.35"/>
+  <ellipse cx="332" cy="368" rx="12" ry="6" fill="#d97d72" opacity="0.35"/>
+  <path d="M298,356 Q304,368 296,374" stroke="#9d6456" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M289,392 Q300,396 311,392" stroke="#7c473e" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Glasses & eyes -->
+  <g stroke="#2a2220" stroke-width="3" fill="#ffffff" fill-opacity="0.16">
+    <circle cx="277" cy="352" r="18"/>
+    <circle cx="323" cy="352" r="18"/>
+    <line x1="295" y1="352" x2="305" y2="352"/>
+  </g>
+  <circle cx="278" cy="353" r="4" fill="#231a18"/>
+  <circle cx="322" cy="353" r="4" fill="#231a18"/>
+  <path d="M261,329 Q276,322 290,329" stroke="#2a1b16" stroke-width="3" stroke-linecap="round"/>
+  <path d="M310,329 Q324,322 339,329" stroke="#2a1b16" stroke-width="3" stroke-linecap="round"/>
+  <!-- Curls foreground -->
+  <path d="M244,322 C240,285 278,266 304,288 C328,265 364,284 356,324 C346,304 322,300 302,312 C282,298 256,305 244,322 Z" fill="#462b22" stroke="#1b110e" stroke-width="3.5"/>
+  <!-- Books in arms -->
+  <rect x="262" y="492" width="84" height="106" rx="8" transform="rotate(-7 304 545)" fill="#587b9e" stroke="#1b2633" stroke-width="3.5"/>
+  <rect x="282" y="502" width="76" height="98" rx="7" transform="rotate(6 320 551)" fill="#78a6c8" stroke="#1b2633" stroke-width="3.5"/>
+  <path d="M225,512 C238,546 270,564 302,560" stroke="#231710" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <!-- Trousers -->
+  <path d="M210,595 L390,595 L376,800 L312,800 L300,670 L288,800 L224,800 Z" fill="#d2b693" stroke="#231710" stroke-width="3.5"/>
+</svg>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" fill="none">
+  <rect width="700" height="700" fill="#faf9f5"/>
+  <!-- Crisp comic strip frame -->
+  <rect x="26" y="26" width="648" height="648" fill="#ffffff" stroke="#111111" stroke-width="7"/>
+  <!-- Hand-lettered dialogue style bars -->
+  <g stroke="#111111" stroke-width="4.5" stroke-linecap="round">
+    <path d="M84,96 L104,76 L124,96 M91,90 L117,90"/>
+    <path d="M140,76 L140,96 L158,96"/>
+    <path d="M174,76 L174,96 M192,76 L192,96 M174,86 L192,86"/>
+    <path d="M214,76 L214,96 M214,76 L230,76 Q238,76 238,84 Q238,92 230,92 L214,92"/>
+  </g>
+  <path d="M74,128 Q240,122 410,128" stroke="#111111" stroke-width="3" stroke-dasharray="1 10" stroke-linecap="round"/>
+  <!-- Table surface -->
+  <path d="M56,472 L644,472" stroke="#111111" stroke-width="6" stroke-linecap="round"/>
+  <!-- Deadpan smug cat on table -->
+  <path d="M475,472 L472,340 L492,300 L512,330 L548,330 L568,300 L588,340 L586,472 Z" fill="#111111"/>
+  <!-- Cat eyes -->
+  <ellipse cx="516" cy="364" rx="13" ry="11" fill="#ffffff" stroke="#111111" stroke-width="2.5"/>
+  <ellipse cx="554" cy="364" rx="13" ry="11" fill="#ffffff" stroke="#111111" stroke-width="2.5"/>
+  <line x1="502" y1="358" x2="530" y2="358" stroke="#111111" stroke-width="4.5"/>
+  <line x1="540" y1="358" x2="568" y2="358" stroke="#111111" stroke-width="4.5"/>
+  <circle cx="516" cy="367" r="3.5" fill="#111111"/>
+  <circle cx="554" cy="367" r="3.5" fill="#111111"/>
+  <!-- Cat outstretched paw -->
+  <path d="M475,392 L416,388 C406,388 406,408 416,408 L475,412" fill="#111111"/>
+  <!-- Falling coffee mug & splash -->
+  <g transform="rotate(34 365 408)">
+    <rect x="340" y="382" width="44" height="52" rx="4" fill="#ffffff" stroke="#111111" stroke-width="5"/>
+    <path d="M384,394 C400,394 400,420 384,420" stroke="#111111" stroke-width="5" fill="none"/>
+  </g>
+  <path d="M326,418 Q304,442 318,465" stroke="#111111" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="305" cy="436" r="5" fill="#111111"/>
+  <circle cx="322" cy="456" r="4" fill="#111111"/>
+  <!-- Kinetic comic motion lines -->
+  <path d="M405,368 L368,364 M408,354 L378,344 M295,382 L272,354" stroke="#111111" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Lunging curly-haired character with round glasses -->
+  <path d="M126,336 C86,336 74,395 102,424 C92,452 128,476 154,462 L238,452 C264,428 262,366 232,340 C208,308 156,304 126,336 Z" fill="#111111"/>
+  <!-- Head & Dramatic Eyes -->
+  <circle cx="192" cy="392" r="54" fill="#ffffff" stroke="#111111" stroke-width="5.5"/>
+  <circle cx="176" cy="382" r="19" fill="#ffffff" stroke="#111111" stroke-width="4.5"/>
+  <circle cx="218" cy="382" r="19" fill="#ffffff" stroke="#111111" stroke-width="4.5"/>
+  <circle cx="182" cy="383" r="4.5" fill="#111111"/>
+  <circle cx="224" cy="383" r="4.5" fill="#111111"/>
+  <ellipse cx="197" cy="422" rx="14" ry="11" fill="#111111"/>
+  <!-- Wild curls on top -->
+  <path d="M142,354 Q122,324 148,308 Q166,280 198,298 Q232,282 245,320" stroke="#111111" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Striped shirt torso -->
+  <path d="M138,448 L224,458 L206,608 L104,608 Z" fill="#ffffff" stroke="#111111" stroke-width="5.5"/>
+  <g stroke="#111111" stroke-width="9">
+    <line x1="136" y1="478" x2="219" y2="486"/>
+    <line x1="128" y1="512" x2="215" y2="520"/>
+    <line x1="118" y1="546" x2="211" y2="554"/>
+    <line x1="110" y1="580" x2="207" y2="588"/>
+  </g>
+  <!-- Dramatic arm reaching out -->
+  <path d="M220,468 L288,430 L310,452" stroke="#111111" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M220,468 L288,430 L310,452" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

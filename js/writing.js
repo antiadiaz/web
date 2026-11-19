@@ -4,6 +4,7 @@
  */
 
 import { initSectionHalftone } from './halftone.js';
+import { initSpaceEdgeLinks } from './edgeLinks.js';
 
 export function initWriting() {
   const writingSpace = document.getElementById('space-writing');
@@ -19,7 +20,14 @@ export function initWriting() {
     rgb: '17, 17, 17',
     protectedSelectors: [
       '.writing-headline',
-      '.writing-back-link',
     ],
+  });
+
+  initSpaceEdgeLinks({
+    spaceName: 'writing',
+    spaceElement: writingSpace,
+    rightLink: writingSpace.querySelector('.writing-back-link'),
+    headlineEl: writingSpace.querySelector('.writing-headline'),
+    excludeSelector: '.writing-content > *, .site-header, .legal-modal',
   });
 }

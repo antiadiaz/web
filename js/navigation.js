@@ -88,7 +88,9 @@ export function initNavigation() {
     const activeSpaceEl = spaceElements[activeSpace];
     const scrollTop = activeSpaceEl ? activeSpaceEl.scrollTop : 0;
     const hasBg = scrollTop > 24;
-    const isScrolled = activeSpace === SPACES.HOME && homeSpace.scrollTop > 48;
+    const isScrollMenuSpace =
+      activeSpace === SPACES.HOME || activeSpace === SPACES.ILLUSTRATION;
+    const isScrolled = isScrollMenuSpace && scrollTop > 48;
 
     siteHeader.classList.toggle('has-bg', hasBg);
     siteHeader.classList.toggle('is-scrolled', isScrolled);
@@ -97,6 +99,10 @@ export function initNavigation() {
       headerMenu.setAttribute('aria-hidden', String(!isScrolled));
     }
   }
+
+  const contextNavSlots = Array.from(
+    document.querySelectorAll('[data-nav-context-slot="illustration-home"]')
+  );
 
   /**
    * Updates header active button states and marks inactive off-screen spaces as inert.
@@ -111,9 +117,23 @@ export function initNavigation() {
       element.setAttribute('aria-hidden', String(!isCurrent));
     });
 
+    contextNavSlots.forEach((button) => {
+      if (targetSpace === SPACES.ILLUSTRATION) {
+        button.textContent = 'Dev & Design';
+        button.setAttribute('data-nav-space', SPACES.HOME);
+        button.setAttribute('aria-controls', 'space-home');
+      } else {
+        button.textContent = 'Illustration';
+        button.setAttribute('data-nav-space', SPACES.ILLUSTRATION);
+        button.setAttribute('aria-controls', 'space-illustration');
+      }
+    });
+
     spaceButtons.forEach((button) => {
       const buttonSpace = button.getAttribute('data-nav-space');
-      const isCurrent = buttonSpace === targetSpace;
+      const isCurrent =
+        buttonSpace === targetSpace &&
+        !(targetSpace === SPACES.ILLUSTRATION && button.hasAttribute('data-nav-context-slot'));
       button.classList.toggle('is-active', isCurrent);
       if (isCurrent) {
         button.setAttribute('aria-current', 'page');
@@ -136,14 +156,29 @@ export function initNavigation() {
       }
     });
 
+    if (targetSpace === SPACES.HOME) {
+      syncAnchorState(activeSection);
+    } else if (targetSpace === SPACES.ILLUSTRATION) {
+      syncAnchorState(activeIllustrationSection);
+    } else {
+      syncAnchorState('');
+    }
+
     syncHeaderScrollState();
   }
 
+  let activeIllustrationSection = '';
+
   /**
-   * Highlights the active HOME anchor link.
+   * Highlights the active vertical anchor link (About me / Contact).
    */
   function syncAnchorState(sectionId) {
-    activeSection = sectionId;
+    if (activeSpace === SPACES.HOME && sectionId) {
+      activeSection = sectionId;
+    } else if (activeSpace === SPACES.ILLUSTRATION) {
+      activeIllustrationSection = sectionId;
+    }
+
     anchorLinks.forEach((link) => {
       const isCurrent = link.getAttribute('data-anchor-target') === sectionId;
       link.classList.toggle('is-active', isCurrent);
@@ -239,6 +274,26 @@ export function initNavigation() {
     }
   });
 
+  function goToIllustrationSection(sectionKey, { smooth = true } = {}) {
+    const illustrationSpace = spaceElements[SPACES.ILLUSTRATION];
+    const sectionMap = {
+      about: 'illustration-about',
+      contact: 'illustration-contact',
+    };
+    const targetId = sectionMap[sectionKey];
+    const targetElement = targetId ? document.getElementById(targetId) : null;
+    if (!illustrationSpace || !targetElement) {
+      goToHomeSection(sectionKey, { smooth });
+      return;
+    }
+
+    syncAnchorState(sectionKey);
+    targetElement.scrollIntoView({
+      behavior: smooth ? 'smooth' : 'auto',
+      block: 'start',
+    });
+  }
+
   /**
    * Handles clicks on header navigation items and in-space return buttons.
    */
@@ -255,28 +310,44 @@ export function initNavigation() {
         syncAnchorState('hero');
         return;
       }
+      if (
+        targetSpace === SPACES.ILLUSTRATION &&
+        activeSpace === SPACES.ILLUSTRATION
+      ) {
+        const illustrationSpace = spaceElements[SPACES.ILLUSTRATION];
+        if (illustrationSpace) {
+          illustrationSpace.scrollTo({ top: 0, behavior: 'smooth' });
+          syncAnchorState('');
+        }
+        return;
+      }
       goToSpace(targetSpace);
     });
   });
 
   /**
-   * Handles clicks on HOME vertical anchor links.
+   * Handles clicks on vertical anchor links (About me / Contact).
    */
   anchorLinks.forEach((link) => {
     link.addEventListener('click', (event) => {
       event.preventDefault();
       setMobileMenuOpen(false);
       const targetSection = link.getAttribute('data-anchor-target');
+      if (activeSpace === SPACES.ILLUSTRATION) {
+        goToIllustrationSection(targetSection);
+        return;
+      }
       goToHomeSection(targetSection);
     });
   });
 
   /**
-   * Tracks vertical scroll inside HOME to keep the active anchor indicator synchronized.
+   * Tracks vertical scroll inside HOME & ILLUSTRATION to synchronize anchor highlights.
    */
   if ('IntersectionObserver' in window && sectionElements.length > 0) {
     const observer = new IntersectionObserver(
       (entries) => {
+        if (activeSpace !== SPACES.HOME) return;
         const visibleEntry = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
@@ -293,6 +364,42 @@ export function initNavigation() {
     );
 
     sectionElements.forEach((section) => observer.observe(section));
+  }
+
+  const illustrationSpace = spaceElements[SPACES.ILLUSTRATION];
+  if ('IntersectionObserver' in window && illustrationSpace) {
+    const illusTargets = [
+      document.getElementById('illustration-masonry-section'),
+      document.getElementById('illustration-about'),
+      document.getElementById('illustration-contact'),
+    ].filter(Boolean);
+
+    if (illusTargets.length > 0) {
+      const illusObserver = new IntersectionObserver(
+        (entries) => {
+          if (activeSpace !== SPACES.ILLUSTRATION) return;
+          const visibleEntry = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+          if (!visibleEntry) return;
+          if (visibleEntry.target.id === 'illustration-about') {
+            syncAnchorState('about');
+          } else if (visibleEntry.target.id === 'illustration-contact') {
+            syncAnchorState('contact');
+          } else {
+            syncAnchorState('');
+          }
+        },
+        {
+          root: illustrationSpace,
+          rootMargin: '-20% 0px -50% 0px',
+          threshold: [0.1, 0.35, 0.65],
+        }
+      );
+
+      illusTargets.forEach((el) => illusObserver.observe(el));
+    }
   }
 
   /**

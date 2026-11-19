@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" fill="none">
+  <defs>
+    <linearGradient id="metroBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#193340"/>
+      <stop offset="100%" stop-color="#0f1d28"/>
+    </linearGradient>
+    <linearGradient id="winNight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a121c"/>
+      <stop offset="100%" stop-color="#152436"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#metroBg)"/>
+  <!-- Metro fluorescent ceiling strip -->
+  <rect x="110" y="34" width="380" height="22" rx="11" fill="#e6f7f5" opacity="0.9"/>
+  <!-- Arched metro windows -->
+  <rect x="54" y="130" width="222" height="310" rx="28" fill="url(#winNight)" stroke="#2c515f" stroke-width="6"/>
+  <rect x="324" y="130" width="222" height="310" rx="28" fill="url(#winNight)" stroke="#2c515f" stroke-width="6"/>
+  <!-- Passing tunnel lights streaks -->
+  <line x1="78" y1="224" x2="242" y2="224" stroke="#f0c478" stroke-width="3" opacity="0.45"/>
+  <line x1="348" y1="264" x2="514" y2="264" stroke="#7dd4d0" stroke-width="3" opacity="0.45"/>
+  <!-- Overhead hand straps -->
+  <line x1="0" y1="104" x2="600" y2="104" stroke="#99b3bd" stroke-width="7"/>
+  <path d="M160,104 L160,152 M435,104 L435,152" stroke="#99b3bd" stroke-width="4"/>
+  <circle cx="160" cy="172" r="20" stroke="#99b3bd" stroke-width="5"/>
+  <circle cx="435" cy="172" r="20" stroke="#99b3bd" stroke-width="5"/>
+  <!-- Bench seat -->
+  <rect x="0" y="546" width="600" height="254" fill="#234252"/>
+  <rect x="0" y="528" width="600" height="24" fill="#d48948"/>
+  <!-- Commuter 1: reading figure -->
+  <circle cx="168" cy="364" r="38" fill="#ebc7b8" stroke="#111a21" stroke-width="3.5"/>
+  <path d="M132,354 C132,318 202,316 204,354 C188,342 152,342 132,354 Z" fill="#281d26"/>
+  <path d="M114,418 C134,400 202,400 222,418 L236,568 L100,568 Z" fill="#466985" stroke="#111a21" stroke-width="3.5"/>
+  <polygon points="128,468 206,468 196,528 138,528" fill="#f2ead9" stroke="#111a21" stroke-width="3"/>
+  <!-- Commuter 2: daydreaming with headphones -->
+  <circle cx="418" cy="348" r="40" fill="#d9ad96" stroke="#111a21" stroke-width="3.5"/>
+  <path d="M380,336 C378,292 458,292 456,336" stroke="#1e2436" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <rect x="372" y="334" width="16" height="28" rx="6" fill="#d48948" stroke="#111a21" stroke-width="3"/>
+  <rect x="448" y="334" width="16" height="28" rx="6" fill="#d48948" stroke="#111a21" stroke-width="3"/>
+  <path d="M356,406 C380,388 456,388 480,406 L496,568 L340,568 Z" fill="#b86b52" stroke="#111a21" stroke-width="3.5"/>
+</svg>

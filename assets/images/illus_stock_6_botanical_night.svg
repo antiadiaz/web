@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" fill="none">
+  <defs>
+    <linearGradient id="plumSky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#221933"/>
+      <stop offset="55%" stop-color="#2c2440"/>
+      <stop offset="100%" stop-color="#172436"/>
+    </linearGradient>
+    <radialGradient id="firefly" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffe794" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#ffe794" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#plumSky)"/>
+  <!-- Midnight botanical leaves -->
+  <g fill="#19303b" stroke="#0d1a21" stroke-width="3">
+    <path d="M-20,660 C80,530 140,420 120,260 C72,380 20,490 -20,660 Z"/>
+    <path d="M620,640 C510,510 470,370 500,220 C542,350 580,480 620,640 Z"/>
+    <path d="M30,190 C120,260 190,260 240,180 C165,160 95,165 30,190 Z"/>
+    <path d="M570,175 C490,235 420,235 370,155 C445,140 510,148 570,175 Z"/>
+  </g>
+  <!-- Flowing wavy dark hair -->
+  <path d="M210,275 C140,300 125,445 152,585 L448,585 C475,445 460,300 390,275 C352,225 248,225 210,275 Z" fill="#1e1829" stroke="#100c17" stroke-width="4"/>
+  <!-- Shoulders & scarf -->
+  <path d="M168,548 C210,502 390,502 432,548 L462,800 L138,800 Z" fill="#824d5c" stroke="#221319" stroke-width="4"/>
+  <path d="M216,522 Q300,564 384,522 Q370,578 300,586 Q230,578 216,522 Z" fill="#c78367" stroke="#221319" stroke-width="3.5"/>
+  <!-- Face -->
+  <rect x="278" y="454" width="44" height="62" rx="18" fill="#e8c3b8" stroke="#221319" stroke-width="3.5"/>
+  <path d="M236,356 C236,296 364,296 364,356 C364,424 334,474 300,474 C266,474 236,424 236,356 Z" fill="#f1cfc3" stroke="#221319" stroke-width="3.5"/>
+  <!-- Warm rim highlight along cheek -->
+  <path d="M350,350 C354,398 334,442 308,464" stroke="#ffe1b0" stroke-width="3.5" opacity="0.45" stroke-linecap="round"/>
+  <!-- Contemplative eyes & brows -->
+  <path d="M256,368 Q272,360 286,368" stroke="#221319" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M314,368 Q328,360 344,368" stroke="#221319" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <ellipse cx="272" cy="382" rx="7" ry="4.5" fill="#2b2029"/>
+  <ellipse cx="328" cy="382" rx="7" ry="4.5" fill="#2b2029"/>
+  <path d="M298,386 Q304,404 295,410" stroke="#9e645b" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M286,432 Q300,439 314,432" stroke="#854444" stroke-width="3" stroke-linecap="round"/>
+  <!-- Glowing fireflies -->
+  <circle cx="132" cy="284" r="28" fill="url(#firefly)"/>
+  <circle cx="132" cy="284" r="4" fill="#fff6cc"/>
+  <circle cx="478" cy="338" r="32" fill="url(#firefly)"/>
+  <circle cx="478" cy="338" r="4.5" fill="#fff6cc"/>
+  <circle cx="412" cy="196" r="22" fill="url(#firefly)"/>
+  <circle cx="412" cy="196" r="3" fill="#fff6cc"/>
+  <circle cx="164" cy="494" r="24" fill="url(#firefly)"/>
+  <circle cx="164" cy="494" r="3.5" fill="#fff6cc"/>
+</svg>
