@@ -141,6 +141,9 @@ export function initHero() {
       activeFilter = nextFilter;
       heroSection.classList.add('is-filter-ready');
       syncFilterButtons(nextFilter);
+      if (typeof window !== 'undefined') {
+        heroSection.dispatchEvent(new CustomEvent('hero:filterchange'));
+      }
 
       if (filterTimer !== null) {
         window.clearTimeout(filterTimer);
@@ -361,6 +364,7 @@ export function initHero() {
     const img = card.querySelector('img');
     if (!img) return;
 
+    heroSection.dispatchEvent(new CustomEvent('hero:lightboxopen'));
     lastTrigger = card;
     const projectTitle = card.getAttribute('data-caption') || '';
     if (lightboxTitle) {
@@ -463,13 +467,165 @@ export function initHero() {
   });
 
   document.addEventListener('keydown', (event) => {
-    if (lightbox.hidden) return;
-    if (event.key === 'Escape') {
+    if (event.key === 'Escape' && !modalHidden()) {
       closeLightbox();
-    } else if (event.key === 'ArrowLeft') {
+    } else if (event.key === 'ArrowLeft' && !modalHidden()) {
       stepSlide(-1);
-    } else if (event.key === 'ArrowRight') {
+    } else if (event.key === 'ArrowRight' && !modalHidden()) {
       stepSlide(1);
     }
   });
+
+  function modalHidden() {
+    return lightbox.hidden;
+  }
+
+  // 5. Cursor-following project name tooltip on gallery card hover
+  const cardTooltip = document.getElementById('hero-card-tooltip');
+  const tooltipHoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+  if (cardTooltip) {
+    let hoveredCard = null;
+    let tipRafId = null;
+    let tipTargetX = 0;
+    let tipTargetY = 0;
+    let tipCurrentX = 0;
+    let tipCurrentY = 0;
+    let tipWidth = 0;
+    let tipHeight = 0;
+    let lastPointerX = -9999;
+    let lastPointerY = -9999;
+
+    const getClampedPosition = (clientX, clientY) => {
+      const margin = 12;
+      let x = clientX + 18;
+      let y = clientY + 20;
+
+      if (x + tipWidth > window.innerWidth - margin) {
+        x = Math.max(margin, clientX - tipWidth - 10);
+      }
+      if (y + tipHeight > window.innerHeight - margin) {
+        y = Math.max(margin, clientY - tipHeight - 10);
+      }
+      return { x, y };
+    };
+
+    const renderTooltip = () => {
+      tipRafId = null;
+      if (!hoveredCard) return;
+
+      const dx = tipTargetX - tipCurrentX;
+      const dy = tipTargetY - tipCurrentY;
+
+      if (reducedMotionQuery.matches || (Math.abs(dx) < 0.25 && Math.abs(dy) < 0.25)) {
+        tipCurrentX = tipTargetX;
+        tipCurrentY = tipTargetY;
+        cardTooltip.style.transform = `translate3d(${tipCurrentX.toFixed(1)}px, ${tipCurrentY.toFixed(1)}px, 0)`;
+        return;
+      }
+
+      tipCurrentX += dx * 0.34;
+      tipCurrentY += dy * 0.34;
+      cardTooltip.style.transform = `translate3d(${tipCurrentX.toFixed(1)}px, ${tipCurrentY.toFixed(1)}px, 0)`;
+      tipRafId = requestAnimationFrame(renderTooltip);
+    };
+
+    const hideCardTooltip = () => {
+      hoveredCard = null;
+      if (tipRafId !== null) {
+        cancelAnimationFrame(tipRafId);
+        tipRafId = null;
+      }
+      cardTooltip.classList.remove('is-visible');
+    };
+
+    const showCardTooltip = (card, clientX, clientY) => {
+      if (
+        !tooltipHoverQuery.matches ||
+        !lightbox.hidden ||
+        card.classList.contains('is-hidden') ||
+        card.classList.contains('is-leaving')
+      ) {
+        hideCardTooltip();
+        return;
+      }
+
+      const caption = (card.getAttribute('data-caption') || '').trim();
+      if (!caption) {
+        hideCardTooltip();
+        return;
+      }
+
+      if (hoveredCard !== card) {
+        cardTooltip.textContent = caption;
+        tipWidth = cardTooltip.offsetWidth;
+        tipHeight = cardTooltip.offsetHeight;
+        hoveredCard = card;
+
+        const pos = getClampedPosition(clientX, clientY);
+        tipCurrentX = pos.x;
+        tipCurrentY = pos.y;
+        tipTargetX = pos.x;
+        tipTargetY = pos.y;
+        cardTooltip.style.transform = `translate3d(${tipCurrentX.toFixed(1)}px, ${tipCurrentY.toFixed(1)}px, 0)`;
+        cardTooltip.classList.add('is-visible');
+        return;
+      }
+
+      const pos = getClampedPosition(clientX, clientY);
+      tipTargetX = pos.x;
+      tipTargetY = pos.y;
+      if (tipRafId === null) {
+        tipRafId = requestAnimationFrame(renderTooltip);
+      }
+    };
+
+    cards.forEach((card) => {
+      card.addEventListener('pointerenter', (event) => {
+        if (event.pointerType && event.pointerType !== 'mouse' && event.pointerType !== 'pen') {
+          return;
+        }
+        lastPointerX = event.clientX;
+        lastPointerY = event.clientY;
+        showCardTooltip(card, event.clientX, event.clientY);
+      });
+
+      card.addEventListener('pointermove', (event) => {
+        if (event.pointerType && event.pointerType !== 'mouse' && event.pointerType !== 'pen') {
+          return;
+        }
+        lastPointerX = event.clientX;
+        lastPointerY = event.clientY;
+        showCardTooltip(card, event.clientX, event.clientY);
+      });
+
+      card.addEventListener('pointerleave', () => {
+        if (hoveredCard === card) {
+          hideCardTooltip();
+        }
+      });
+    });
+
+    if (homeSpace) {
+      homeSpace.addEventListener(
+        'scroll',
+        () => {
+          if (!hoveredCard && lastPointerX < 0) return;
+          const underCursor = document.elementFromPoint(lastPointerX, lastPointerY);
+          const cardUnder = underCursor ? underCursor.closest('.hero-card') : null;
+          if (cardUnder && cards.includes(cardUnder)) {
+            showCardTooltip(cardUnder, lastPointerX, lastPointerY);
+          } else {
+            hideCardTooltip();
+          }
+        },
+        { passive: true }
+      );
+    }
+
+    heroSection.addEventListener('hero:lightboxopen', hideCardTooltip);
+    heroSection.addEventListener('hero:filterchange', hideCardTooltip);
+    document.addEventListener('mouseleave', hideCardTooltip);
+    window.addEventListener('blur', hideCardTooltip);
+  }
 }
