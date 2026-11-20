@@ -10,6 +10,7 @@ const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
 
 let initialized = false;
 let lightbox = null;
+let lightboxFigure = null;
 let lightboxImg = null;
 let lightboxPrev = null;
 let lightboxNext = null;
@@ -17,6 +18,20 @@ let lightboxTitle = null;
 let lightboxDesc = null;
 let lightboxLink = null;
 let lightboxClose = null;
+
+let lightboxSheet = null;
+let sheetHeader = null;
+let sheetTitle = null;
+let sheetMediaStack = null;
+let sheetDesc = null;
+let sheetDateRow = null;
+let sheetDate = null;
+let sheetRoleRow = null;
+let sheetRole = null;
+let sheetTechRow = null;
+let sheetTechList = null;
+let sheetLink = null;
+
 let cardTooltip = null;
 
 let lastTrigger = null;
@@ -45,6 +60,7 @@ const registeredGroups = [];
 function ensureDOMRefs() {
   if (lightbox) return;
   lightbox = document.getElementById('hero-lightbox');
+  lightboxFigure = document.getElementById('hero-lightbox-figure');
   lightboxImg = document.getElementById('hero-lightbox-img');
   lightboxPrev = document.getElementById('hero-lightbox-prev');
   lightboxNext = document.getElementById('hero-lightbox-next');
@@ -52,6 +68,20 @@ function ensureDOMRefs() {
   lightboxDesc = document.getElementById('hero-lightbox-desc');
   lightboxLink = document.getElementById('hero-lightbox-link');
   lightboxClose = document.getElementById('hero-lightbox-close');
+
+  lightboxSheet = document.getElementById('hero-lightbox-sheet');
+  sheetHeader = lightboxSheet ? lightboxSheet.querySelector('.hero-lightbox__sheet-header') : null;
+  sheetTitle = document.getElementById('hero-lightbox-sheet-title');
+  sheetMediaStack = document.getElementById('hero-lightbox-media-stack');
+  sheetDesc = document.getElementById('hero-lightbox-sheet-desc');
+  sheetDateRow = document.getElementById('hero-lightbox-date-row');
+  sheetDate = document.getElementById('hero-lightbox-sheet-date');
+  sheetRoleRow = document.getElementById('hero-lightbox-role-row');
+  sheetRole = document.getElementById('hero-lightbox-sheet-role');
+  sheetTechRow = document.getElementById('hero-lightbox-tech-row');
+  sheetTechList = document.getElementById('hero-lightbox-sheet-tech');
+  sheetLink = document.getElementById('hero-lightbox-sheet-link');
+
   cardTooltip = document.getElementById('hero-card-tooltip');
 }
 
@@ -169,6 +199,25 @@ function getCardSlides(card) {
   return [{ src: img.currentSrc || img.src, label: card.getAttribute('data-caption') || 'Artwork' }];
 }
 
+function getCardTech(card) {
+  const rawTech = card.getAttribute('data-tech');
+  if (!rawTech) return [];
+  try {
+    const parsed = JSON.parse(rawTech);
+    if (Array.isArray(parsed)) {
+      return parsed.filter((item) => item && (item.name || typeof item === 'string'));
+    }
+  } catch {
+    // Fallback to comma-separated tech list if plain text is ever provided
+    return rawTech
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .map((name) => ({ name, detail: '' }));
+  }
+  return [];
+}
+
 function applyLightboxMeta(card) {
   const title = card.getAttribute('data-caption') || '';
   if (lightboxTitle) {
@@ -188,6 +237,132 @@ function applyLightboxMeta(card) {
       lightboxLink.removeAttribute('href');
       lightboxLink.hidden = true;
     }
+  }
+}
+
+function renderEditorialTitle(targetEl, rawTitle) {
+  if (!targetEl) return;
+  targetEl.textContent = '';
+  const words = rawTitle.trim().split(/\s+/).filter(Boolean);
+  if (words.length === 0) return;
+
+  if (words.length === 1) {
+    const serifSpan = document.createElement('span');
+    serifSpan.className = 'hero-lightbox__sheet-title-serif';
+    serifSpan.textContent = words[0].toLowerCase();
+    targetEl.appendChild(serifSpan);
+    return;
+  }
+
+  const splitIndex = words.length >= 3 && words[0].toLowerCase() === 'studio' ? 1 : words.length - 1;
+  const sansText = words.slice(0, splitIndex).join(' ').toLowerCase();
+  const serifText = words.slice(splitIndex).join(' ').toLowerCase();
+
+  const sansSpan = document.createElement('span');
+  sansSpan.className = 'hero-lightbox__sheet-title-sans';
+  sansSpan.textContent = sansText;
+  targetEl.appendChild(sansSpan);
+
+  const serifSpan = document.createElement('span');
+  serifSpan.className = 'hero-lightbox__sheet-title-serif';
+  serifSpan.textContent = serifText;
+  targetEl.appendChild(serifSpan);
+}
+
+function syncSheetHeaderScrollState() {
+  if (!lightbox || !sheetHeader) return;
+  const hasBg = currentMode === 'slides' && lightbox.scrollTop > 16;
+  sheetHeader.classList.toggle('has-bg', hasBg);
+}
+
+function populateProjectSheet(card, slides) {
+  if (!lightboxSheet) return;
+
+  const title = card.getAttribute('data-caption') || '';
+  const desc = card.getAttribute('data-desc') || '';
+  const date = card.getAttribute('data-date') || '';
+  const role = card.getAttribute('data-role') || '';
+  const url = card.getAttribute('data-url') || '';
+  const techItems = getCardTech(card);
+
+  renderEditorialTitle(sheetTitle, title);
+
+  if (sheetDesc) {
+    sheetDesc.textContent = desc;
+    sheetDesc.hidden = !desc;
+  }
+
+  if (sheetDateRow && sheetDate) {
+    sheetDate.textContent = date;
+    sheetDateRow.hidden = !date;
+  }
+
+  if (sheetRoleRow && sheetRole) {
+    sheetRole.textContent = role;
+    sheetRoleRow.hidden = !role;
+  }
+
+  if (sheetTechRow && sheetTechList) {
+    sheetTechList.textContent = '';
+    techItems.forEach((item) => {
+      const li = document.createElement('li');
+      li.className = 'hero-lightbox__tech-item';
+
+      const nameEl = document.createElement('span');
+      nameEl.className = 'hero-lightbox__tech-name';
+      nameEl.textContent = typeof item === 'string' ? item : item.name || '';
+      li.appendChild(nameEl);
+
+      if (typeof item === 'object' && item.detail) {
+        const detailEl = document.createElement('span');
+        detailEl.className = 'hero-lightbox__tech-detail';
+        detailEl.textContent = item.detail;
+        li.appendChild(detailEl);
+      }
+
+      sheetTechList.appendChild(li);
+    });
+    sheetTechRow.hidden = techItems.length === 0;
+  }
+
+  if (sheetLink) {
+    if (url) {
+      sheetLink.href = url;
+      sheetLink.hidden = false;
+    } else {
+      sheetLink.removeAttribute('href');
+      sheetLink.hidden = true;
+    }
+  }
+
+  if (sheetMediaStack) {
+    sheetMediaStack.textContent = '';
+    slides.forEach((slide, index) => {
+      const figure = document.createElement('figure');
+      figure.className = 'hero-lightbox__shot';
+
+      const img = document.createElement('img');
+      img.className = 'hero-lightbox__shot-img';
+      img.src = slide.src;
+      img.alt =
+        slide.label && slide.label !== title
+          ? `${title} — ${slide.label}`
+          : `${title} (${index + 1})`;
+      img.loading = index === 0 ? 'eager' : 'lazy';
+      img.decoding = 'async';
+      img.referrerPolicy = 'no-referrer';
+      figure.appendChild(img);
+
+      if (slide.label) {
+        const caption = document.createElement('figcaption');
+        caption.className = 'hero-lightbox__shot-caption';
+        const indexText = String(index + 1).padStart(2, '0');
+        caption.textContent = `${indexText} / ${slide.label}`;
+        figure.appendChild(caption);
+      }
+
+      sheetMediaStack.appendChild(figure);
+    });
   }
 }
 
@@ -239,26 +414,20 @@ function renderActiveSlide(animateFade) {
 }
 
 function stepLightbox(delta) {
-  if (currentMode === 'collection') {
-    if (currentCollectionCards.length <= 1) return;
-    activeCardIndex =
-      (activeCardIndex + delta + currentCollectionCards.length) % currentCollectionCards.length;
-    const nextCard = currentCollectionCards[activeCardIndex];
-    currentSlides = getCardSlides(nextCard);
-    activeSlideIndex = 0;
-    applyLightboxMeta(nextCard);
-    renderActiveSlide(true);
-    return;
-  }
-
-  if (currentSlides.length <= 1) return;
-  activeSlideIndex = (activeSlideIndex + delta + currentSlides.length) % currentSlides.length;
+  if (currentMode !== 'collection') return;
+  if (currentCollectionCards.length <= 1) return;
+  activeCardIndex =
+    (activeCardIndex + delta + currentCollectionCards.length) % currentCollectionCards.length;
+  const nextCard = currentCollectionCards[activeCardIndex];
+  currentSlides = getCardSlides(nextCard);
+  activeSlideIndex = 0;
+  applyLightboxMeta(nextCard);
   renderActiveSlide(true);
 }
 
 function openLightboxForCard(card, { cards = [], mode = 'slides', onOpen = null } = {}) {
   ensureDOMRefs();
-  if (!lightbox || !lightboxImg) return;
+  if (!lightbox) return;
 
   const slides = getCardSlides(card);
   if (slides.length === 0) return;
@@ -275,7 +444,21 @@ function openLightboxForCard(card, { cards = [], mode = 'slides', onOpen = null 
   currentSlides = slides;
   activeSlideIndex = 0;
 
-  if (mode === 'collection') {
+  const isProjectSheet = mode === 'slides' && Boolean(lightboxSheet);
+  lightbox.classList.toggle('is-project-sheet', isProjectSheet);
+  lightbox.classList.toggle('is-collection-view', !isProjectSheet);
+
+  if (isProjectSheet) {
+    lightbox.setAttribute('aria-labelledby', 'hero-lightbox-sheet-title');
+    if (lightboxFigure) lightboxFigure.hidden = true;
+    lightboxSheet.hidden = false;
+    populateProjectSheet(card, slides);
+  } else {
+    if (!lightboxImg) return;
+    lightbox.setAttribute('aria-labelledby', 'hero-lightbox-title');
+    if (lightboxSheet) lightboxSheet.hidden = true;
+    if (lightboxFigure) lightboxFigure.hidden = false;
+
     cards.forEach((item) => {
       if (item === card) return;
       const itemImg = item.querySelector('img');
@@ -284,26 +467,25 @@ function openLightboxForCard(card, { cards = [], mode = 'slides', onOpen = null 
         preload.src = itemImg.currentSrc || itemImg.src;
       }
     });
-  } else {
-    slides.slice(1).forEach((slide) => {
-      const preload = new Image();
-      preload.src = slide.src;
-    });
+
+    const showNav = cards.length > 1;
+    if (lightboxPrev) lightboxPrev.hidden = !showNav;
+    if (lightboxNext) lightboxNext.hidden = !showNav;
+
+    applyLightboxMeta(card);
+    renderActiveSlide(false);
   }
 
-  const showNav = mode === 'collection' ? cards.length > 1 : slides.length > 1;
-  if (lightboxPrev) lightboxPrev.hidden = !showNav;
-  if (lightboxNext) lightboxNext.hidden = !showNav;
-
-  applyLightboxMeta(card);
-  renderActiveSlide(false);
-
   lightbox.hidden = false;
+  lightbox.scrollTop = 0;
+  syncSheetHeaderScrollState();
   requestAnimationFrame(() => {
+    lightbox.scrollTop = 0;
+    syncSheetHeaderScrollState();
     lightbox.classList.add('is-open');
   });
   if (lightboxClose) {
-    lightboxClose.focus();
+    lightboxClose.focus({ preventScroll: true });
   }
 }
 
@@ -318,9 +500,19 @@ export function closeLightbox() {
   lightbox.classList.remove('is-open');
   window.setTimeout(() => {
     lightbox.hidden = true;
+    lightbox.classList.remove('is-project-sheet', 'is-collection-view');
     if (lightboxImg) {
       lightboxImg.classList.remove('is-fading');
       lightboxImg.removeAttribute('src');
+    }
+    if (sheetHeader) {
+      sheetHeader.classList.remove('has-bg');
+    }
+    if (sheetMediaStack) {
+      sheetMediaStack.textContent = '';
+    }
+    if (sheetTechList) {
+      sheetTechList.textContent = '';
     }
     currentSlides = [];
     currentCollectionCards = [];
@@ -337,6 +529,8 @@ function initGlobalListeners() {
   ensureDOMRefs();
   if (!lightbox) return;
 
+  lightbox.addEventListener('scroll', syncSheetHeaderScrollState, { passive: true });
+
   if (lightboxPrev) {
     lightboxPrev.addEventListener('click', () => stepLightbox(-1));
   }
@@ -348,7 +542,7 @@ function initGlobalListeners() {
   }
 
   lightbox.addEventListener('click', (event) => {
-    if (event.target === lightbox) {
+    if (event.target === lightbox || event.target === lightboxSheet) {
       closeLightbox();
     }
   });
@@ -357,9 +551,9 @@ function initGlobalListeners() {
     if (lightbox.hidden) return;
     if (event.key === 'Escape') {
       closeLightbox();
-    } else if (event.key === 'ArrowLeft') {
+    } else if (currentMode === 'collection' && event.key === 'ArrowLeft') {
       stepLightbox(-1);
-    } else if (event.key === 'ArrowRight') {
+    } else if (currentMode === 'collection' && event.key === 'ArrowRight') {
       stepLightbox(1);
     }
   });
