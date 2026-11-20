@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" fill="none">
+  <rect width="700" height="700" fill="#785c42"/>
+  <rect x="38" y="38" width="624" height="624" stroke="#e9dcc7" stroke-opacity="0.22" stroke-width="1"/>
+  <!-- Top hairlines & label matching brown poem card in screenshot 1 -->
+  <line x1="94" y1="92" x2="252" y2="92" stroke="#e9dcc7" stroke-opacity="0.45" stroke-width="1"/>
+  <text x="350" y="97" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" letter-spacing="2.2" fill="#e9dcc7" fill-opacity="0.85">Anthology Selection</text>
+  <line x1="448" y1="92" x2="606" y2="92" stroke="#e9dcc7" stroke-opacity="0.45" stroke-width="1"/>
+
+  <!-- Crimson nocturnal moon & rose glyph -->
+  <circle cx="350" cy="172" r="26" fill="#4d1d22" fill-opacity="0.72"/>
+  <path d="M358 152 A21 21 0 1 0 364 188 A16 16 0 1 1 358 152 Z" fill="#efe4d2" fill-opacity="0.88"/>
+
+  <!-- Centered literary serif title -->
+  <text x="350" y="256" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-size="44" fill="#efe4d2">Crónicas</text>
+  <text x="350" y="306" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-style="italic" font-size="40" fill="#efe4d2">microvampíricas</text>
+
+  <!-- Centered verse/flash-fiction lines -->
+  <g text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-size="19" fill="#efe4d2" fill-opacity="0.88">
+    <text x="350" y="378">Shadows wait beneath old cobblestones,</text>
+    <text x="350" y="408">a hundred words sharp as silver</text>
+    <text x="350" y="438">folded into velvet dark.</text>
+    <text x="350" y="486">III Literary Contest · Selected Story</text>
+    <text x="350" y="516">Diversidad Literaria</text>
+  </g>
+
+  <text x="350" y="592" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" letter-spacing="2.6" fill="#efe4d2" fill-opacity="0.7">III · ANTHOLOGY</text>
+  <line x1="94" y1="620" x2="606" y2="620" stroke="#e9dcc7" stroke-opacity="0.45" stroke-width="1"/>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <defs>
+    <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#dfddd8"/>
+      <stop offset="56%" stop-color="#cecbc4"/>
+      <stop offset="100%" stop-color="#ded9cf"/>
+    </linearGradient>
+    <linearGradient id="shore2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b9b4aa"/>
+      <stop offset="42%" stop-color="#cbc5ba"/>
+      <stop offset="100%" stop-color="#d8d1c5"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky2)"/>
+  <rect y="368" width="800" height="232" fill="url(#shore2)"/>
+  <!-- Misty horizon & pale sun -->
+  <circle cx="540" cy="252" r="44" fill="#f7f4ee" opacity="0.45"/>
+  <line x1="0" y1="368" x2="800" y2="368" stroke="#9e998e" stroke-opacity="0.45" stroke-width="1"/>
+  <!-- Wet sand reflection -->
+  <path d="M358 430 L388 430 L377 518 L368 518 Z" fill="#4f4a43" opacity="0.16"/>
+  <!-- Lone walking silhouette -->
+  <circle cx="372" cy="364" r="7.5" fill="#2c2926"/>
+  <path d="M362 374 C362 370 382 370 382 374 L386 410 L358 410 Z" fill="#2c2926"/>
+  <path d="M366 410 L362 432 M378 410 L383 432" stroke="#2c2926" stroke-width="3.6" stroke-linecap="round"/>
+
+  <!-- Editorial top strip matching moodboard -->
+  <text x="400" y="74" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="500" letter-spacing="4.2" fill="#2d2a26">SHORT FICTION · SUBSTACK</text>
+  <line x1="250" y1="92" x2="550" y2="92" stroke="#2d2a26" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="400" y="122" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-style="italic" font-size="24" fill="#3a3631">stories written between dusk &amp; tide</text>
+</svg>

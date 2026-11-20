@@ -86,6 +86,7 @@
                 type="button"
                 class="site-nav__item"
                 data-nav-space="writing"
+                data-nav-context-slot="writing-home"
                 aria-controls="space-writing"
               >
                 Writing
@@ -145,6 +146,7 @@
                 type="button"
                 class="mobile-drawer__link"
                 data-nav-space="writing"
+                data-nav-context-slot="writing-home"
                 aria-controls="space-writing"
               >
                 Writing
@@ -248,9 +250,521 @@
               <div
                 id="writing-content"
                 class="writing-content"
-                aria-label="Writing content container"
-              ></div>
+                aria-label="Writing gallery and biography"
+              >
+                <section
+                  id="writing-collage-section"
+                  class="writing-collage-section"
+                  aria-label="Selected books, short stories, and fanzines"
+                >
+                  <div id="writing-collage" class="writing-collage">
+                    <button
+                      type="button"
+                      class="writing-card writing-card--1"
+                      style="--card-i: 0; --rest-z: 2"
+                      data-caption="El extraterrestre humano"
+                      data-desc="Published by Penguin Random House—a graphic humor book pairing expressive black-and-white ink strips with written reflections on human quirks (stock cover placeholder)."
+                    >
+                      <img
+                        src="./assets/images/writing_stock_1_extraterrestre.svg"
+                        alt="Book cover placeholder for El extraterrestre humano, published by Penguin Random House"
+                        width="700"
+                        height="700"
+                        loading="lazy"
+                        decoding="async"
+                        referrerpolicy="no-referrer"
+                      />
+                    </button>
+
+                    <button
+                      type="button"
+                      class="writing-card writing-card--2"
+                      style="--card-i: 1; --rest-z: 1"
+                      data-caption="Short Stories on Substack"
+                      data-desc="Ongoing collection of short literary fiction and personal essays published periodically on Substack (stock cover placeholder)."
+                    >
+                      <img
+                        src="./assets/images/writing_stock_2_substack.svg"
+                        alt="Editorial print card placeholder for Short Stories published on Substack"
+                        width="800"
+                        height="600"
+                        loading="lazy"
+                        decoding="async"
+                        referrerpolicy="no-referrer"
+                      />
+                    </button>
+
+                    <button
+                      type="button"
+                      class="writing-card writing-card--3"
+                      style="--card-i: 2; --rest-z: 4"
+                      data-caption="Dos Semanas"
+                      data-desc="Romantic novel serialized on Wattpad with more than 20,000 reads and enthusiastic reader reception (stock cover placeholder)."
+                    >
+                      <span class="writing-collage__tape writing-collage__tape--top" aria-hidden="true"></span>
+                      <img
+                        src="./assets/images/writing_stock_3_dos_semanas.svg"
+                        alt="Novel cover placeholder for Dos Semanas on Wattpad"
+                        width="700"
+                        height="700"
+                        loading="lazy"
+                        decoding="async"
+                        referrerpolicy="no-referrer"
+                      />
+                    </button>
+
+                    <button
+                      type="button"
+                      class="writing-card writing-card--4"
+                      style="--card-i: 3; --rest-z: 5"
+                      data-caption="Illustrated Fanzines"
+                      data-desc="Self-published independent fanzines weaving narrative illustration together with short fiction, nocturnal vignettes, and hand-crafted print editions (stock cover placeholder)."
+                    >
+                      <span class="writing-collage__tape writing-collage__tape--head" aria-hidden="true"></span>
+                      <span class="writing-collage__tape writing-collage__tape--foot" aria-hidden="true"></span>
+                      <img
+                        src="./assets/images/writing_stock_4_fanzines.svg"
+                        alt="Zine print sheet placeholder for illustrated and written fanzines"
+                        width="560"
+                        height="840"
+                        loading="lazy"
+                        decoding="async"
+                        referrerpolicy="no-referrer"
+                      />
+                    </button>
+
+                    <button
+                      type="button"
+                      class="writing-card writing-card--5"
+                      style="--card-i: 4; --rest-z: 2"
+                      data-caption="Upcoming Novels · @antiadiaz_etc"
+                      data-desc="Work-in-progress manuscripts, worldbuilding notes, and chapter previews shared regularly on Instagram at @antiadiaz_etc (stock cover placeholder)."
+                      data-url="https://www.instagram.com/antiadiaz_etc/"
+                    >
+                      <img
+                        src="./assets/images/writing_stock_6_wip.svg"
+                        alt="Editorial print card placeholder for upcoming novels shared on @antiadiaz_etc"
+                        width="800"
+                        height="600"
+                        loading="lazy"
+                        decoding="async"
+                        referrerpolicy="no-referrer"
+                      />
+                    </button>
+
+                    <button
+                      type="button"
+                      class="writing-card writing-card--6"
+                      style="--card-i: 5; --rest-z: 3"
+                      data-caption="Crónicas microvampíricas"
+                      data-desc="Micro-story selected in the III Crónicas microvampíricas contest organized by Diversidad Literaria and featured in its printed anthology (stock cover placeholder)."
+                    >
+                      <img
+                        src="./assets/images/writing_stock_5_microvampiricas.svg"
+                        alt="Anthology card placeholder for Crónicas microvampíricas by Diversidad Literaria"
+                        width="700"
+                        height="700"
+                        loading="lazy"
+                        decoding="async"
+                        referrerpolicy="no-referrer"
+                      />
+                    </button>
+                  </div>
+                </section>
+
+                <section
+                  id="writing-about"
+                  class="writing-about"
+                  aria-labelledby="heading-writing-about"
+                >
+                  <div class="about-layout">
+                    <div class="about-intro">
+                      <h2 id="heading-writing-about" class="about-heading">
+                        about <em class="about-heading__italic">my work</em>
+                      </h2>
+                      <div class="contact-links">
+                        <a
+                          href="https://www.instagram.com/antiadiaz_etc/"
+                          class="contact-direct"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <span>Instagram (@antiadiaz_etc)</span>
+                          <svg
+                            class="contact-direct__arrow"
+                            width="13"
+                            height="13"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M4.5 11.5L11.5 4.5M11.5 4.5H5.5M11.5 4.5V10.5"
+                              stroke="currentColor"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="about-content">
+                      <p class="about-copy">
+                        My writing moves between fiction, short narrative, and visual-literary
+                        editions. I am the author of <em>El extraterrestre humano</em>, published
+                        with Penguin Random House—a graphic humor book accompanied by written
+                        reflections—and I also create independent fanzines that bring together
+                        illustration and writing.
+                      </p>
+                      <p class="about-copy">
+                        Online and in print, I published the romantic novel
+                        <em>Dos Semanas</em> on Wattpad, reaching over 20,000 reads with very warm
+                        reader reviews, alongside several short stories on Substack. My micro-fiction
+                        was also selected in the III &ldquo;Cr&oacute;nicas microvamp&iacute;ricas&rdquo;
+                        vampire flash-fiction contest by Diversidad Literaria, appearing in their
+                        anthology book. On Instagram (<em>@antiadiaz_etc</em>), I share news and
+                        previews of my upcoming novels.
+                      </p>
+                      <p class="about-copy">
+                        To keep sharpening my craft, I completed a Creative Writing course at
+                        Escuela de Escritores in Madrid in 2024 taught by writer In&eacute;s
+                        Mendoza, followed in early 2025 by the &ldquo;Escritura en crudo&rdquo;
+                        workshop at queer bookstore Librer&iacute;a Mary Read with Eva Gallud, and
+                        in mid-2025 by &ldquo;Escribir con los sentidos&rdquo; at Escuela de
+                        Escritores with Ianire Doistua.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="about-roles" aria-label="Writing publications and training">
+                    <div class="about-role">
+                      <h3 class="about-role__heading">
+                        <button
+                          type="button"
+                          class="about-role__trigger"
+                          aria-expanded="false"
+                          aria-controls="writing-role-panel-1"
+                        >
+                          <span class="about-role__title">Published Book &amp; Fanzines</span>
+                          <svg
+                            class="about-role__chevron"
+                            width="15"
+                            height="15"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M8 3V13M8 13L3.5 8.5M8 13L12.5 8.5"
+                              stroke="currentColor"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </button>
+                      </h3>
+                      <div id="writing-role-panel-1" class="about-role__panel">
+                        <div class="about-role__panel-inner">
+                          <p class="about-role__desc">
+                            Author of <em>El extraterrestre humano</em> (Penguin Random House), a
+                            graphic humor work paired with written reflections, plus several
+                            independent fanzines uniting illustration and writing.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="about-role">
+                      <h3 class="about-role__heading">
+                        <button
+                          type="button"
+                          class="about-role__trigger"
+                          aria-expanded="false"
+                          aria-controls="writing-role-panel-2"
+                        >
+                          <span class="about-role__title">Novels &amp; Short Fiction</span>
+                          <svg
+                            class="about-role__chevron"
+                            width="15"
+                            height="15"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M8 3V13M8 13L3.5 8.5M8 13L12.5 8.5"
+                              stroke="currentColor"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </button>
+                      </h3>
+                      <div id="writing-role-panel-2" class="about-role__panel">
+                        <div class="about-role__panel-inner">
+                          <p class="about-role__desc">
+                            Author of the romantic novel <em>Dos Semanas</em> on Wattpad (20,000+
+                            reads and strong reviews), short stories published on Substack, and
+                            upcoming novel previews on Instagram (@antiadiaz_etc).
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="about-role">
+                      <h3 class="about-role__heading">
+                        <button
+                          type="button"
+                          class="about-role__trigger"
+                          aria-expanded="false"
+                          aria-controls="writing-role-panel-3"
+                        >
+                          <span class="about-role__title">Anthologies &amp; Selection</span>
+                          <svg
+                            class="about-role__chevron"
+                            width="15"
+                            height="15"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M8 3V13M8 13L3.5 8.5M8 13L12.5 8.5"
+                              stroke="currentColor"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </button>
+                      </h3>
+                      <div id="writing-role-panel-3" class="about-role__panel">
+                        <div class="about-role__panel-inner">
+                          <p class="about-role__desc">
+                            Selected in the III &ldquo;Cr&oacute;nicas microvamp&iacute;ricas&rdquo;
+                            flash-fiction contest organized by Diversidad Literaria, with her story
+                            published in the official anthology book.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="about-role">
+                      <h3 class="about-role__heading">
+                        <button
+                          type="button"
+                          class="about-role__trigger"
+                          aria-expanded="false"
+                          aria-controls="writing-role-panel-4"
+                        >
+                          <span class="about-role__title">Writing Workshops</span>
+                          <svg
+                            class="about-role__chevron"
+                            width="15"
+                            height="15"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M8 3V13M8 13L3.5 8.5M8 13L12.5 8.5"
+                              stroke="currentColor"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </button>
+                      </h3>
+                      <div id="writing-role-panel-4" class="about-role__panel">
+                        <div class="about-role__panel-inner">
+                          <p class="about-role__desc">
+                            Creative Writing with In&eacute;s Mendoza (Escuela de Escritores,
+                            Madrid, 2024); &ldquo;Escritura en crudo&rdquo; with Eva Gallud
+                            (Librer&iacute;a Mary Read, early 2025); &ldquo;Escribir con los
+                            sentidos&rdquo; with Ianire Doistua (Escuela de Escritores, mid-2025).
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
             </div>
+
+            <section
+              id="writing-contact"
+              class="home-section home-section--contact writing-contact"
+              aria-labelledby="heading-writing-contact"
+            >
+              <canvas
+                id="writing-contact-halftone"
+                class="contact-halftone"
+                aria-hidden="true"
+              ></canvas>
+              <div class="contact-layout">
+                <div class="contact-intro">
+                  <h2 id="heading-writing-contact" class="contact-heading">
+                    let&rsquo;s work <em class="contact-heading__italic">together</em>
+                  </h2>
+                  <p class="contact-copy">
+                    Available for literary collaborations, editorial commissions, publishing
+                    inquiries, and creative writing projects.
+                  </p>
+                  <div class="contact-links">
+                    <a href="mailto:hola@antiadiaz.com" class="contact-direct">
+                      hola@antiadiaz.com
+                    </a>
+                  </div>
+                </div>
+
+                <form id="writing-contact-form" class="contact-form" novalidate>
+                  <input
+                    id="writing-contact-honey"
+                    name="_honey"
+                    type="text"
+                    class="contact-honey"
+                    tabindex="-1"
+                    autocomplete="off"
+                    aria-hidden="true"
+                  />
+
+                  <div class="contact-form__row">
+                    <div class="contact-field">
+                      <label for="writing-contact-name" class="contact-label">Name *</label>
+                      <input
+                        id="writing-contact-name"
+                        name="name"
+                        type="text"
+                        class="contact-input"
+                        placeholder="Your name"
+                        autocomplete="name"
+                        required
+                      />
+                    </div>
+
+                    <div class="contact-field">
+                      <label for="writing-contact-email" class="contact-label">Email *</label>
+                      <input
+                        id="writing-contact-email"
+                        name="email"
+                        type="email"
+                        class="contact-input"
+                        placeholder="you@domain.com"
+                        autocomplete="email"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div class="contact-field">
+                    <label for="writing-contact-subject" class="contact-label">Subject</label>
+                    <input
+                      id="writing-contact-subject"
+                      name="subject"
+                      type="text"
+                      class="contact-input"
+                      placeholder="Publishing inquiry, editorial piece, fanzine, commission..."
+                    />
+                  </div>
+
+                  <div class="contact-field">
+                    <label for="writing-contact-message" class="contact-label">Message *</label>
+                    <textarea
+                      id="writing-contact-message"
+                      name="message"
+                      rows="4"
+                      class="contact-input contact-textarea"
+                      placeholder="Tell me about your project"
+                      required
+                    ></textarea>
+                  </div>
+
+                  <div class="contact-consent">
+                    <label for="writing-contact-privacy" class="contact-checkbox-label">
+                      <input
+                        id="writing-contact-privacy"
+                        name="privacy"
+                        type="checkbox"
+                        class="contact-checkbox"
+                        required
+                      />
+                      <span>
+                        I have read and accept the
+                        <button
+                          type="button"
+                          class="contact-inline-link"
+                          data-legal-doc="privacy"
+                        >
+                          Privacy Policy
+                        </button>
+                        and consent to the processing of my data to respond to my inquiry.
+                      </span>
+                    </label>
+
+                    <p class="contact-gdpr">
+                      <strong>Basic Data Protection Info (GDPR / Spanish LOPDGDD):</strong>
+                      Controller: Ant&iacute;a D&iacute;az (hola@antiadiaz.com, Spain). Purpose:
+                      Handle and reply to your inquiry. Legal basis: Your consent (Art. 6.1.a GDPR).
+                      Recipients: Technical delivery via FormSubmit to hola@antiadiaz.com; no
+                      third-party commercial sharing. Rights: Access, rectification, erasure,
+                      objection, restriction, and portability at hola@antiadiaz.com, or before the
+                      Spanish Data Protection Agency (AEPD).
+                    </p>
+                  </div>
+
+                  <div class="contact-form__actions">
+                    <button type="submit" class="contact-submit">
+                      <span>Send message</span>
+                      <svg
+                        class="contact-submit__arrow"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </button>
+                    <p
+                      id="writing-contact-status"
+                      class="contact-status"
+                      role="status"
+                      aria-live="polite"
+                      hidden
+                    ></p>
+                  </div>
+                </form>
+              </div>
+            </section>
+
+            <footer class="site-footer site-footer--writing" role="contentinfo">
+              <div class="site-footer__inner">
+                <p class="site-footer__copy">&copy; 2026 Ant&iacute;a D&iacute;az &middot; Spain</p>
+                <nav class="site-footer__nav" aria-label="Legal navigation">
+                  <a href="#legal-notice" class="site-footer__link" data-legal-doc="legal">
+                    Legal Notice
+                  </a>
+                  <a href="#privacy-policy" class="site-footer__link" data-legal-doc="privacy">
+                    Privacy Policy
+                  </a>
+                  <a href="#cookie-policy" class="site-footer__link" data-legal-doc="cookies">
+                    Cookie Policy
+                  </a>
+                </nav>
+              </div>
+            </footer>
           </section>
 
           <!-- CENTRAL SPACE: HOME -->

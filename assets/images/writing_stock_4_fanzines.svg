@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 840" fill="none">
+  <rect width="560" height="840" fill="#dfd7c6"/>
+  <rect x="28" y="28" width="504" height="784" stroke="#2c2721" stroke-opacity="0.16" stroke-width="1"/>
+  <!-- Top editorial header matching screenshot 1 vertical poetry/zine card -->
+  <text x="52" y="128" font-family="Inter, sans-serif" font-size="38" font-weight="500" letter-spacing="2" fill="#23201b">FANZINE</text>
+  <text x="150" y="162" font-family="Playfair Display, Georgia, serif" font-style="italic" font-size="28" fill="#463f36">ink &amp; paper</text>
+
+  <!-- Left micro-column lines -->
+  <g fill="#463f36" fill-opacity="0.72" font-family="Inter, sans-serif" font-size="13">
+    <text x="52" y="246">Pages stapled by hand,</text>
+    <text x="52" y="268">where linework bleeds</text>
+    <text x="52" y="290">into short fiction,</text>
+    <text x="52" y="312">fragments of night,</text>
+    <text x="52" y="334">and quiet ghosts.</text>
+    <text x="52" y="392" font-style="italic" font-family="Playfair Display, Georgia, serif">— edition 01–04</text>
+  </g>
+
+  <!-- Right inset framed illustration panel -->
+  <rect x="268" y="196" width="244" height="444" fill="#3a3029"/>
+  <rect x="294" y="246" width="192" height="320" fill="#6b5442" opacity="0.5"/>
+  <circle cx="390" cy="342" r="42" fill="#e8dbc4" opacity="0.24"/>
+  <circle cx="390" cy="342" r="24" fill="#f3ead9" opacity="0.72"/>
+  <path d="M312 566 C322 480 356 440 390 440 C424 440 458 480 468 566 Z" fill="#1e1814"/>
+  <circle cx="390" cy="402" r="24" fill="#1e1814"/>
+
+  <line x1="52" y1="686" x2="508" y2="686" stroke="#23201b" stroke-opacity="0.32" stroke-width="1"/>
+  <text x="52" y="722" font-family="Inter, sans-serif" font-size="11" font-weight="600" letter-spacing="2" fill="#463f36">#04 · ILLUSTRATED ZINES</text>
+</svg>

@@ -227,6 +227,30 @@ export function initContact() {
     honeyId: 'illus-contact-honey',
     statusId: 'illus-contact-status',
   });
+
+  initSectionHalftone({
+    section: document.getElementById('writing-contact'),
+    canvas: document.getElementById('writing-contact-halftone'),
+    variant: 'contact',
+    rgb: '17, 17, 17',
+    protectedSelectors: [
+      '.contact-heading',
+      '.contact-copy',
+      '.contact-links',
+      '.contact-form',
+    ],
+  });
+
+  bindContactForm({
+    formId: 'writing-contact-form',
+    nameId: 'writing-contact-name',
+    emailId: 'writing-contact-email',
+    subjectId: 'writing-contact-subject',
+    messageId: 'writing-contact-message',
+    privacyId: 'writing-contact-privacy',
+    honeyId: 'writing-contact-honey',
+    statusId: 'writing-contact-status',
+  });
 }
 
 export function initLegalModal() {

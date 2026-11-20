@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#f3f0ea"/>
+  <!-- Editorial index header -->
+  <text x="64" y="88" font-family="Inter, sans-serif" font-size="14" font-weight="600" letter-spacing="2.5" fill="#2a2723">#095 · WORK IN PROGRESS</text>
+  <line x1="64" y1="108" x2="736" y2="108" stroke="#2a2723" stroke-opacity="0.3" stroke-width="1"/>
+
+  <!-- Small right atmospheric notebook inset -->
+  <rect x="524" y="138" width="212" height="176" fill="#d8d1c4"/>
+  <path d="M524 252 Q610 226 736 248 L736 314 L524 314 Z" fill="#9e9587"/>
+  <path d="M604 246 C616 196 640 182 652 162" stroke="#4f483e" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Bold minimalist quote typography inspired by screenshot 2 card -->
+  <g font-family="Inter, sans-serif" font-size="38" font-weight="500" letter-spacing="-0.8" fill="#171615">
+    <text x="64" y="232">“CHAPTERS STILL</text>
+    <text x="64" y="282">TAKING SHAPE</text>
+    <text x="64" y="332">BETWEEN INK,</text>
+    <text x="64" y="382">PAPER &amp; NIGHT.”</text>
+  </g>
+  <text x="64" y="446" font-family="Playfair Display, Georgia, serif" font-style="italic" font-size="28" fill="#474139">Upcoming Novels · @antiadiaz_etc</text>
+  <line x1="64" y1="518" x2="736" y2="518" stroke="#2a2723" stroke-opacity="0.18" stroke-width="1"/>
+  <text x="64" y="548" font-family="Inter, sans-serif" font-size="12" letter-spacing="2.2" fill="#6b645a">UPDATES, SCENES &amp; DRAFTS IN PROGRESS</text>
+</svg>

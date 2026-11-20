@@ -603,9 +603,10 @@ button *,
 .writing-content {
   position: relative;
   z-index: 2;
+  width: 100%;
   max-width: 1380px;
   margin: 0 auto;
-  padding: clamp(28px, 5vh, 52px) 28px 64px;
+  padding: clamp(56px, 8.5vh, 100px) 28px clamp(72px, 11vh, 116px);
   min-height: 45vh;
   pointer-events: none;
 }
@@ -624,6 +625,171 @@ button *,
 .writing-content > *,
 .illustration-content > * {
   pointer-events: auto;
+}
+
+/* Writing Layered Print Collage Gallery
+   ========================================================================== */
+
+.writing-collage-section {
+  width: 100%;
+  margin: 0 0 clamp(104px, 15vh, 168px);
+}
+
+.writing-collage {
+  position: relative;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  aspect-ratio: 1120 / 740;
+}
+
+.writing-card {
+  position: absolute;
+  display: block;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+  background-color: #e6dfd1;
+  z-index: var(--rest-z, 1);
+  box-shadow:
+    0 10px 26px rgba(17, 15, 12, 0.11),
+    0 2px 6px rgba(17, 15, 12, 0.07);
+  opacity: 0;
+  transform: translate3d(0, 34px, 0) scale(0.972);
+  transform-origin: center center;
+  will-change: transform, opacity;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M18.5 18.5L3.5 3.5M3.5 3.5H14M3.5 3.5V14' stroke='%23ffffff' stroke-width='4.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M18.5 18.5L3.5 3.5M3.5 3.5H14M3.5 3.5V14' stroke='%23111111' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 3 3, pointer;
+}
+
+.writing-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.writing-card--1 {
+  left: 1%;
+  top: 9%;
+  width: 32.5%;
+  aspect-ratio: 1 / 1;
+}
+
+.writing-card--2 {
+  left: 25.5%;
+  top: 1%;
+  width: 29.5%;
+  aspect-ratio: 4 / 3;
+}
+
+.writing-card--3 {
+  left: 23.5%;
+  top: 28%;
+  width: 32.5%;
+  aspect-ratio: 1 / 1;
+}
+
+.writing-card--4 {
+  left: 51%;
+  top: 14%;
+  width: 17.8%;
+  aspect-ratio: 2 / 3;
+}
+
+.writing-card--5 {
+  right: 1%;
+  top: 7%;
+  width: 33%;
+  aspect-ratio: 4 / 3;
+}
+
+.writing-card--6 {
+  right: 7.5%;
+  top: 41%;
+  width: 32.5%;
+  aspect-ratio: 1 / 1;
+}
+
+.writing-collage__tape {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(210, 190, 159, 0.74) 0%,
+    rgba(191, 169, 134, 0.64) 100%
+  );
+  box-shadow: 0 1px 3px rgba(17, 15, 12, 0.08);
+  transition: opacity 720ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.writing-collage__tape--top {
+  top: -11px;
+  left: 26%;
+  width: 74px;
+  height: 22px;
+  transform: rotate(14deg);
+}
+
+.writing-collage__tape--head {
+  top: -11px;
+  left: 30%;
+  width: 68px;
+  height: 21px;
+  transform: rotate(-3deg);
+}
+
+.writing-collage__tape--foot {
+  bottom: -10px;
+  left: -12px;
+  width: 62px;
+  height: 20px;
+  transform: rotate(-4deg);
+}
+
+.space--writing.is-entered .writing-card {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  transition:
+    transform 880ms cubic-bezier(0.16, 1, 0.3, 1) calc(340ms + var(--card-i, 0) * 60ms),
+    opacity 680ms ease calc(340ms + var(--card-i, 0) * 60ms),
+    box-shadow 920ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.space--writing.is-entered .writing-collage.is-collage-ready .writing-card {
+  transition:
+    transform 920ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 920ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 680ms ease;
+}
+
+.space--writing.is-entered .writing-card.is-settling {
+  z-index: 18;
+}
+
+.space--writing.is-entered .writing-card:hover,
+.space--writing.is-entered .writing-card:focus-visible {
+  z-index: 24;
+  transform: translate3d(0, -16px, 0) scale(1.048);
+  box-shadow:
+    0 32px 68px rgba(17, 15, 12, 0.24),
+    0 12px 24px rgba(17, 15, 12, 0.12);
+  transition:
+    transform 920ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 920ms cubic-bezier(0.22, 1, 0.36, 1);
+  outline: none;
+}
+
+.space--writing.is-entered .writing-card:hover .writing-collage__tape,
+.space--writing.is-entered .writing-card:focus-visible .writing-collage__tape {
+  opacity: 0.92;
+}
+
+.writing-card:focus-visible,
+.space--writing.is-entered .writing-card:focus-visible {
+  outline: 2px solid #111111;
+  outline-offset: 4px;
 }
 
 .illustration-masonry-section {
@@ -731,12 +897,18 @@ button *,
   transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.writing-about,
 .illustration-about {
   width: 100%;
   max-width: 1380px;
   margin: 0 auto;
   padding: 0 28px;
   scroll-margin-top: calc(var(--header-height) + 24px);
+}
+
+.space--writing .writing-about {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .space--illustration .about-roles {
@@ -1420,6 +1592,16 @@ button *,
 
 .space--illustration .contact-status.is-error {
   color: #ff9b9b;
+}
+
+.space--writing .contact-submit {
+  background-color: var(--color-space-writing);
+}
+
+.space--writing .contact-submit:hover:not(:disabled),
+.space--writing .contact-submit:focus-visible:not(:disabled) {
+  background-color: var(--color-space-writing);
+  color: #111111;
 }
 
 /* Footer & Editorial Legal Modal
@@ -2514,7 +2696,7 @@ button *,
   }
 
   .writing-content {
-    padding: clamp(24px, 4vh, 40px) 20px 56px;
+    padding: clamp(44px, 7vh, 72px) 20px clamp(64px, 9vh, 96px);
   }
 
   .illustration-content {
@@ -2525,6 +2707,7 @@ button *,
     padding: 0 20px;
   }
 
+  .writing-collage-section,
   .illustration-masonry-section {
     margin-bottom: clamp(80px, 12vh, 128px);
   }
@@ -2688,10 +2871,6 @@ button *,
     background-color: var(--color-ink);
   }
 
-  .site-shell:has(.spaces-track[data-active-space="writing"]) .mobile-drawer__link[data-anchor-target] {
-    color: rgba(20, 20, 20, 0.76);
-  }
-
   .site-shell:has(.spaces-track[data-active-space="illustration"]) .mobile-drawer {
     background-color: rgba(16, 18, 27, 0.84);
   }
@@ -2709,10 +2888,6 @@ button *,
 
   .site-shell:has(.spaces-track[data-active-space="illustration"]) .mobile-drawer__link.is-active::after {
     background-color: #ffffff;
-  }
-
-  .site-shell:has(.spaces-track[data-active-space="writing"]) .mobile-drawer__link[data-anchor-target]::after {
-    display: none;
   }
 
   .site-nav__link:not(.site-nav__brand) {
@@ -2776,7 +2951,7 @@ button *,
   }
 
   .writing-content {
-    padding: 20px 0 48px;
+    padding: 36px 0 64px;
   }
 
   .illustration-content {
@@ -2787,8 +2962,72 @@ button *,
     padding: 0 12px;
   }
 
+  .writing-collage-section,
   .illustration-masonry-section {
     margin-bottom: 84px;
+  }
+
+  .writing-collage {
+    aspect-ratio: 390 / 520;
+  }
+
+  .writing-card--1 {
+    left: 0;
+    top: 4%;
+    width: 48%;
+  }
+
+  .writing-card--2 {
+    left: auto;
+    right: 1%;
+    top: 0;
+    width: 47%;
+  }
+
+  .writing-card--3 {
+    left: 11%;
+    top: 26%;
+    width: 52%;
+  }
+
+  .writing-card--4 {
+    left: auto;
+    right: 4%;
+    top: 21%;
+    width: 31%;
+  }
+
+  .writing-card--5 {
+    left: 1%;
+    right: auto;
+    top: 57%;
+    width: 49%;
+  }
+
+  .writing-card--6 {
+    left: auto;
+    right: 1%;
+    top: 52%;
+    width: 48%;
+  }
+
+  .writing-collage__tape--top {
+    top: -8px;
+    width: 50px;
+    height: 15px;
+  }
+
+  .writing-collage__tape--head {
+    top: -8px;
+    width: 46px;
+    height: 14px;
+  }
+
+  .writing-collage__tape--foot {
+    bottom: -7px;
+    left: -8px;
+    width: 44px;
+    height: 14px;
   }
 
   .illustration-masonry {
@@ -3083,6 +3322,8 @@ button *,
   .hero-word,
   .hero-card,
   .hero-card img,
+  .writing-card,
+  .writing-collage__tape,
   .illustration-card,
   .illustration-card img,
   .hero-lightbox,
@@ -3097,6 +3338,7 @@ button *,
   .hero-word,
   .hero-card,
   .hero-card img,
+  .writing-card,
   .illustration-card,
   .illustration-card img,
   .hero-halftone,

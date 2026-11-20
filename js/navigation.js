@@ -113,7 +113,9 @@ export function initNavigation() {
     const scrollTop = activeSpaceEl ? activeSpaceEl.scrollTop : 0;
     const hasBg = scrollTop > 24;
     const isScrollMenuSpace =
-      activeSpace === SPACES.HOME || activeSpace === SPACES.ILLUSTRATION;
+      activeSpace === SPACES.HOME ||
+      activeSpace === SPACES.ILLUSTRATION ||
+      activeSpace === SPACES.WRITING;
     const isScrolled = isScrollMenuSpace && scrollTop > 48;
 
     siteHeader.classList.toggle('has-bg', hasBg);
@@ -124,8 +126,11 @@ export function initNavigation() {
     }
   }
 
-  const contextNavSlots = Array.from(
+  const illusContextNavSlots = Array.from(
     document.querySelectorAll('[data-nav-context-slot="illustration-home"]')
+  );
+  const writingContextNavSlots = Array.from(
+    document.querySelectorAll('[data-nav-context-slot="writing-home"]')
   );
 
   /**
@@ -141,7 +146,7 @@ export function initNavigation() {
       element.setAttribute('aria-hidden', String(!isCurrent));
     });
 
-    contextNavSlots.forEach((button) => {
+    illusContextNavSlots.forEach((button) => {
       if (targetSpace === SPACES.ILLUSTRATION) {
         button.textContent = 'Dev & Design';
         button.setAttribute('data-nav-space', SPACES.HOME);
@@ -153,11 +158,24 @@ export function initNavigation() {
       }
     });
 
+    writingContextNavSlots.forEach((button) => {
+      if (targetSpace === SPACES.WRITING) {
+        button.textContent = 'Dev & Design';
+        button.setAttribute('data-nav-space', SPACES.HOME);
+        button.setAttribute('aria-controls', 'space-home');
+      } else {
+        button.textContent = 'Writing';
+        button.setAttribute('data-nav-space', SPACES.WRITING);
+        button.setAttribute('aria-controls', 'space-writing');
+      }
+    });
+
     spaceButtons.forEach((button) => {
       const buttonSpace = button.getAttribute('data-nav-space');
       const isCurrent =
         buttonSpace === targetSpace &&
-        !(targetSpace === SPACES.ILLUSTRATION && button.hasAttribute('data-nav-context-slot'));
+        !(targetSpace === SPACES.ILLUSTRATION && button.hasAttribute('data-nav-context-slot')) &&
+        !(targetSpace === SPACES.WRITING && button.hasAttribute('data-nav-context-slot'));
       button.classList.toggle('is-active', isCurrent);
       if (isCurrent) {
         button.setAttribute('aria-current', 'page');
@@ -184,6 +202,8 @@ export function initNavigation() {
       syncAnchorState(activeSection);
     } else if (targetSpace === SPACES.ILLUSTRATION) {
       syncAnchorState(activeIllustrationSection);
+    } else if (targetSpace === SPACES.WRITING) {
+      syncAnchorState(activeWritingSection);
     } else {
       syncAnchorState('');
     }
@@ -196,6 +216,7 @@ export function initNavigation() {
   }
 
   let activeIllustrationSection = '';
+  let activeWritingSection = '';
 
   /**
    * Highlights the active vertical anchor link (About me / Contact).
@@ -205,6 +226,8 @@ export function initNavigation() {
       activeSection = sectionId;
     } else if (activeSpace === SPACES.ILLUSTRATION) {
       activeIllustrationSection = sectionId;
+    } else if (activeSpace === SPACES.WRITING) {
+      activeWritingSection = sectionId;
     }
 
     anchorLinks.forEach((link) => {
@@ -333,6 +356,26 @@ export function initNavigation() {
     });
   }
 
+  function goToWritingSection(sectionKey, { smooth = true } = {}) {
+    const writingSpace = spaceElements[SPACES.WRITING];
+    const sectionMap = {
+      about: 'writing-about',
+      contact: 'writing-contact',
+    };
+    const targetId = sectionMap[sectionKey];
+    const targetElement = targetId ? document.getElementById(targetId) : null;
+    if (!writingSpace || !targetElement) {
+      goToHomeSection(sectionKey, { smooth });
+      return;
+    }
+
+    syncAnchorState(sectionKey);
+    targetElement.scrollIntoView({
+      behavior: smooth ? 'smooth' : 'auto',
+      block: 'start',
+    });
+  }
+
   /**
    * Handles clicks on header navigation items and in-space return buttons.
    */
@@ -364,6 +407,17 @@ export function initNavigation() {
         }
         return;
       }
+      if (
+        targetSpace === SPACES.WRITING &&
+        activeSpace === SPACES.WRITING
+      ) {
+        const writingSpace = spaceElements[SPACES.WRITING];
+        if (writingSpace) {
+          writingSpace.scrollTo({ top: 0, behavior: 'smooth' });
+          syncAnchorState('');
+        }
+        return;
+      }
       goToSpace(targetSpace);
     });
   });
@@ -378,6 +432,10 @@ export function initNavigation() {
       const targetSection = link.getAttribute('data-anchor-target');
       if (activeSpace === SPACES.ILLUSTRATION) {
         goToIllustrationSection(targetSection);
+        return;
+      }
+      if (activeSpace === SPACES.WRITING) {
+        goToWritingSection(targetSection);
         return;
       }
       goToHomeSection(targetSection);
@@ -445,6 +503,42 @@ export function initNavigation() {
     }
   }
 
+  const writingSpace = spaceElements[SPACES.WRITING];
+  if ('IntersectionObserver' in window && writingSpace) {
+    const writingTargets = [
+      document.getElementById('writing-collage-section'),
+      document.getElementById('writing-about'),
+      document.getElementById('writing-contact'),
+    ].filter(Boolean);
+
+    if (writingTargets.length > 0) {
+      const writingObserver = new IntersectionObserver(
+        (entries) => {
+          if (activeSpace !== SPACES.WRITING) return;
+          const visibleEntry = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+          if (!visibleEntry) return;
+          if (visibleEntry.target.id === 'writing-about') {
+            syncAnchorState('about');
+          } else if (visibleEntry.target.id === 'writing-contact') {
+            syncAnchorState('contact');
+          } else {
+            syncAnchorState('');
+          }
+        },
+        {
+          root: writingSpace,
+          rootMargin: '-20% 0px -50% 0px',
+          threshold: [0.1, 0.35, 0.65],
+        }
+      );
+
+      writingTargets.forEach((el) => writingObserver.observe(el));
+    }
+  }
+
   /**
    * Resolves an initial, popstate, or hash URL to the corresponding space or section.
    */
@@ -454,9 +548,15 @@ export function initNavigation() {
 
     if (cleanPath.endsWith('/writing') || cleanPath.endsWith('/writing.html')) {
       goToSpace(SPACES.WRITING, { updateUrl: false });
-      const canonical = buildSpaceUrl(SPACES.WRITING);
-      if (!fromPopState && `${window.location.pathname}${window.location.hash}` !== canonical) {
-        history.replaceState(null, '', canonical);
+      if (rawHash === 'about' || rawHash === 'writing-about') {
+        goToWritingSection('about', { smooth });
+      } else if (rawHash === 'contact' || rawHash === 'writing-contact') {
+        goToWritingSection('contact', { smooth });
+      } else {
+        const canonical = buildSpaceUrl(SPACES.WRITING);
+        if (!fromPopState && `${window.location.pathname}${window.location.hash}` !== canonical) {
+          history.replaceState(null, '', canonical);
+        }
       }
       return;
     }
